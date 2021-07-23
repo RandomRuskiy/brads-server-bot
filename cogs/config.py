@@ -1,0 +1,115 @@
+import discord
+from discord.ext import commands
+import os
+import asyncio
+import traceback
+import random
+from discord.ext.commands import cooldown, BucketType
+
+
+
+class Config(commands.Cog):
+  def __init__(self, bot):
+    self.bot = bot
+
+  @commands.Cog.listener()
+  async def on_ready(self):
+    print(f'{self.__class__.__name__} Cog has been loaded\n-----')
+
+  @commands.command(
+    name='reload',
+    description='Reloads command modules. Either can be specified which one or all if no input'
+  )
+  @commands.is_owner()
+  async def reload(self, ctx, cog=None):
+    if not cog:
+      #if nothing specified, it realoads evrything
+      async with ctx.typing():
+        embed = discord.Embed(
+          title='Reloading all command modules',
+          color=0x808080,
+          timestamp=ctx.message.created_at
+        )
+        for ext in os.listdir('./cogs/'):
+          if ext.endswith('.py') and not ext.startswith('_'):
+            try:
+              self.bot.unload_extension(f'cogs.{ext[:-3]}')
+              self.bot.load_extension(f'cogs.{ext[:-3]}')
+              embed.add_field(
+                name=f'Reloaded: `{ext}`',
+                value='\uFEFF',
+                inline=False
+              )
+            except Exception as e:
+              embed.add_field(
+                name=f'Failed to reload: `{ext}`',
+                value=e,
+                inline=False
+              )
+          await asyncio.sleep(0.5)
+        await ctx.send(embed=embed)
+    else:
+        #reload specified cog
+      async with ctx.typing():
+        embed = discord.Embed(
+          title='Reloading all command modules',
+          color=0x808080,
+          timestamp=ctx.message.created_at
+        )
+        ext = f'{cog.lower()}.py'
+        if not os.path.exists(f'./cogs/{ext}'):
+          #if file doesnt exist
+          embed.add_field(
+            name=f'Failed to reload `{ext}`',
+            value='You must be dreaming of that files existance or something'
+            )
+
+        elif ext.endswith('.py') and not ext.startswith('_'):
+          try:
+            self.bot.unload_extension(f'cogs.{ext[:-3]}')
+            self.bot.load_extension(f'cogs.{ext[:-3]}')
+            embed.add_field(
+              name=f'Reloaded: `{ext}`',
+              value='\uFEFF',
+              inline=False
+            )
+          except Exception:
+            desired_trace = traceback.format_exc()
+            embed.add_field(
+              name='Failed to reload: `{ext}`',
+              value=desired_trace,
+              inline=False
+            )
+          await ctx.send(embed=embed)
+
+  @commands.command(
+    name='setstatus',
+    description='Set the bots playing status.'
+  )
+  @cooldown(rate=1, per=30)
+  @commands.is_owner()
+  async def setstatus(self, ctx, *, text: str):
+    activity = discord.Game(name=text)
+    await client.change_presence(status=discord.Status.online, activity=activity)
+
+  @commands.command(
+    name='ping',
+    description='Test the current latency of the bot.'
+  )
+  @cooldown(rate=1, per=30)
+  async def ping(ctx):
+    await ctx.send(f"There is a round time of {str(round(client.latency, 2))}")
+
+  @setstatus.error
+  async def setstatus_error(self, ctx, error):
+    print(error)
+    if isinstance(error, commands.CommandOnCooldown):
+      await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+    
+    elif isinstance(error, commands.MissingRequiredArgument):
+      await ctx.send("Missing a required argument: You might want to specify the status")
+
+
+
+def setup(bot):
+  bot.add_cog(Config(bot))

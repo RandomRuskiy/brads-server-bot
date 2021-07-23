@@ -1,14 +1,25 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands import cooldown, BucketType, bot
+from discord.ext.commands import cooldown, BucketType
 import os
-import requests
-import json
+import logging
+from pathlib import Path
+
+logger = logging.getLogger('discord')
+logger.setLevel(logging.DEBUG)
+handler = logging.FileHandler(filename='discord.log', encoding='utf-8', mode='w')
+handler.setFormatter(logging.Formatter('%(asctime)s:%(levelname)s:%(name)s: %(message)s'))
+logger.addHandler(handler)
+
+
+cwd = Path(__file__).parents[0]
+cwd = str(cwd)
+print(f"{cwd}\n-----")
 
 client = commands.Bot(command_prefix='£')
 TOKEN = os.getenv('TOKEN')
 
-sad_words = ["sad", "depressed", ]
+extentions = ['cogs.Embeds', 'cogs.Config', 'cogs.Help']
 
 # dump commmand errors to console for debug
 @client.event
@@ -18,28 +29,49 @@ async def on_command_error(ctx, error):
 #console status event
 @client.event
 async def on_ready():
-  await client.change_presence(status = discord.Status.online, activity = discord.Game('yo'))
-  print('yo the bot is on now')
+  #await client.change_presence(status = discord.Status.online)
+  print('yo the bot is on now\n-----')
+
+client.remove_command('help')
 
 
-def getquote():
-  response = requests.get('https://zenquotes.io/api/random')
-  json_data = json.loads(resonse.text)  
-  quote = json_data[0]["q"] + " -"+ json_data[0]["a"]
-  return(quote)
 
-@client.command()
-async def ping(ctx):
-  await ctx.send(f"There is a round time of {str(round(client.latency, 2))}")
+'''@client.event
+async def on_message(message):
+  if message.author == client.user:
+    return
 
-@client.command()
-async def donate(ctx):
-  embed=discord.Embed(title="Donate", description="This is the link to donate to the YoungMinds charity to aid in the support for mental health. Please donate if you can. Thanks!")
-  embed.set_thumbnail(url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsocialsolihull.org.uk%2Flocaloffer%2Fwp-content%2Fuploads%2Fsites%2F21%2F2016%2F02%2FYoungMinds.png&f=1&nofb=1")
-  embed.add_field(name="Donate Here:", value="https://youngminds.org.uk/donate/", inline=False)
-  embed.add_field(name="If you want to know more about the charity, read here:", value="https://youngminds.org.uk/about-us/who-we-are/", inline=True)
-  await ctx.send(embed=embed)
+  msg = message.content
+
+  if msg.startswith("meaning of O_O"):
+    await message.channel.send('Brad is shocked or ran out of things to say lmao')
+  
+  if msg.startswith('Hi'):
+      ctx = await client.get_context(message)
+      await message.channel.send(f'Hey {ctx.author.mention} hope your day is going great'
+  
+  await client.process_commands(message)'''
+
+#error loops for commands
+'''@support.error
+async def clear_error(ctx, error):
+  if isinstance(error, commands.CommandOnCooldown):
+    await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')'''
+
+'''@setstatus.error
+async def clear_error(ctx, error):
+  print(error)
+  if isinstance(error, commands.CommandOnCooldown):
+    await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')'''
 
 
 #keep this at bottom
+
+if __name__ == "__main__":
+    # When running this file, if it is the 'main' file
+    # I.E its not being imported from another python file run this
+    for file in os.listdir(cwd + "/cogs"):
+        if file.endswith(".py") and not file.startswith("_"):
+            client.load_extension(f"cogs.{file[:-3]}")
+
 client.run(TOKEN)
