@@ -109,7 +109,7 @@ class Config(commands.Cog):
   @commands.is_owner()
   @cooldown(rate=1, per=30)
   async def update(self, ctx):
-    run = subprocess.run(['git', 'pull'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    run = subprocess.run(['git', 'pull', 'https://github.com/RandomRuskiy/brads-server-bot', 'master'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
     print(run.stdout)
     await ctx.send(run.stdout)
 
