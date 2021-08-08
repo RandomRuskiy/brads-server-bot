@@ -6,7 +6,7 @@ import traceback
 import random
 from discord.ext.commands import cooldown, BucketType
 
-
+client = commands.Bot(command_prefix='£')
 
 class Config(commands.Cog):
   def __init__(self, bot):
@@ -90,15 +90,23 @@ class Config(commands.Cog):
   @commands.is_owner()
   async def setstatus(self, ctx, *, text: str):
     activity = discord.Game(name=text)
-    await client.change_presence(status=discord.Status.online, activity=activity)
+    await self.bot.change_presence(status=discord.Status.online, activity=activity)
+    await ctx.send(f'yo my status is now **"{text}"**')
 
   @commands.command(
     name='ping',
     description='Test the current latency of the bot.'
   )
   @cooldown(rate=1, per=30)
-  async def ping(ctx):
-    await ctx.send(f"There is a round time of {str(round(client.latency, 2))}")
+  async def ping(self, ctx):
+    await ctx.send(f"There is a round time of {str(round(self.bot.latency, 2))} secconds")
+
+  @commands.command(
+    name='run',
+    description='Run commands in bash'
+  )
+  @commands.is_owner()
+
 
   @setstatus.error
   async def setstatus_error(self, ctx, error):

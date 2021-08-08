@@ -4,6 +4,7 @@ from discord.ext.commands import cooldown, BucketType
 import os
 import logging
 from pathlib import Path
+from keep_alive import keep_alive
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -19,7 +20,7 @@ print(f"{cwd}\n-----")
 client = commands.Bot(command_prefix='£')
 TOKEN = os.getenv('TOKEN')
 
-extentions = ['cogs.Embeds', 'cogs.Config', 'cogs.Help']
+extentions = ['cogs.Embeds', 'cogs.Config', 'cogs.Help', 'cogs.Events']
 
 # dump commmand errors to console for debug
 @client.event
@@ -74,4 +75,5 @@ if __name__ == "__main__":
         if file.endswith(".py") and not file.startswith("_"):
             client.load_extension(f"cogs.{file[:-3]}")
 
+keep_alive()
 client.run(TOKEN)

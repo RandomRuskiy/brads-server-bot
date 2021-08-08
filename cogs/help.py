@@ -43,7 +43,7 @@ class Help(commands.Cog):
         pass
     
     for cog in neededCogs:
-      commandList = ''
+      commandList = '\uFEFF'
       for command in self.bot.get_cog(cog).walk_commands():
         if command.hidden:
           continue
@@ -57,14 +57,17 @@ class Help(commands.Cog):
       helpEmbed.add_field(
         name=cog,
         value=commandList,
+        #value='yo this test to see if this da problem',
         inline=False
       )
 
     await ctx.send(embed=helpEmbed)
+    
 
   @help.error
   async def clear_error(self, ctx, error):
     print(error)
+    await ctx.send(error)
 
 
 
