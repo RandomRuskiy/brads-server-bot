@@ -7,4 +7,4 @@ If you just have any ideas or suggestions you would like added, then make an iss
 
 If your wanting to contribute code to the bot, clone the repo, do what you want to it, then make a pull request. If we then see it as all good, then we will merge it to the master branch and it will then go to run on the bot.
 
-**If you have any questions, either make an issue thread, or if you really need too, DM either RandomRuskiy or Brad**
+**If you have any questions, either make an issue thread, or if you really need too, DM either RandomRuskiy or Brad.**
