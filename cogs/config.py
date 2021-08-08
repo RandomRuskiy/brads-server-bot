@@ -5,6 +5,7 @@ import asyncio
 import traceback
 import random
 from discord.ext.commands import cooldown, BucketType
+import subprocess
 
 client = commands.Bot(command_prefix='£')
 
@@ -102,10 +103,16 @@ class Config(commands.Cog):
     await ctx.send(f"There is a round time of {str(round(self.bot.latency, 2))} secconds")
 
   @commands.command(
-    name='run',
-    description='Run commands in bash'
+    name='update',
+    description='pull recently commited stuff from the repo'
   )
   @commands.is_owner()
+  @cooldown(rate=1, per=30)
+  async def update(self, ctx):
+    run = subprocess.run(['git', 'pull'], stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    print(run.stdout)
+    await ctx.send(run.stdout)
+
 
 
   @setstatus.error
