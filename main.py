@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord.ext.commands import cooldown, BucketType
+from discord_slash import SlashCommand. SlashContext
 import os
 import logging
 from pathlib import Path
@@ -18,9 +19,10 @@ cwd = str(cwd)
 print(f"{cwd}\n-----")
 
 client = commands.Bot(command_prefix='£')
+slash = SlashCommand(client)
 TOKEN = os.getenv('TOKEN')
 
-extentions = ['cogs.Embeds', 'cogs.Config', 'cogs.Help', 'cogs.Events']
+extentions = ['cogs.Embeds', 'cogs.Config', 'cogs.Help', 'cogs.Events', 'cogs.Slash']
 
 # dump commmand errors to console for debug
 @client.event
@@ -46,11 +48,11 @@ async def on_message(message):
 
   if msg.startswith("meaning of O_O"):
     await message.channel.send('Brad is shocked or ran out of things to say lmao')
-  
+
   if msg.startswith('Hi'):
       ctx = await client.get_context(message)
       await message.channel.send(f'Hey {ctx.author.mention} hope your day is going great'
-  
+
   await client.process_commands(message)'''
 
 #error loops for commands
