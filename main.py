@@ -1,3 +1,4 @@
+## INDENTS ARE SET TO 2 SPACES ON THIS FILE ##
 import discord
 from discord.ext import commands
 from discord.ext.commands import cooldown, BucketType
