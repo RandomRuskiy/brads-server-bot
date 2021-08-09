@@ -32,7 +32,8 @@ class Slash(commands.Cog):
   description='Set the bots status but with a slash command',
   guild_ids=guild_ids
   )
-  async def setstatus(self, ctx: SlashContext, *, text: str):
+  @commands.is_owner()
+  async def setstatusslash(self, ctx: SlashContext, *, text: str):
     activity = discord.Game(name=text)
     await self.bot.change_presence(status=discord.Status.online, activity=activity)
     await ctx.send(f'yo my status is now **"{text}"**')
