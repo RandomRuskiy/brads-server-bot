@@ -42,7 +42,7 @@ class Slash(commands.Cog):
     await ctx.send(f'yo my status is now **"{text}"**')
 
   @commands.command(
-  name='setstatuslash',
+  name='/setstatuslash',
   description='Set the bots status but with a slash command!'
   )
   @commands.is_owner()
