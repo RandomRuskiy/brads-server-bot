@@ -17,7 +17,7 @@ class Events(commands.Cog):
     if message.author == self.bot.user:
       return
 
-    elif message.author == discord.Member.bot:
+    elif message.author == discord.User.bot:
       return
 
     elif message.content == '.test respond':
