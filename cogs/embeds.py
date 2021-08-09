@@ -56,5 +56,15 @@ class Embeds(commands.Cog):
     embed.add_field(name="This link takes you to the list", value="https://www.therapyroute.com/article/helplines-suicide-hotlines-and-crisis-lines-from-around-the-world", inline=False)
     await ctx.send(embed=embed)
 
+  @commands.command(
+  name='github'
+  description='The link to the bots github repository.'
+  )
+  @commands.cooldown(rate=1, per=30)
+  async def github(self, ctx):
+    embed=discord.Embed(title="The bots git repo")
+    embed.add_field(name="Want to contribute code to the bot?", value="Go to the github repo and read the README for more info\n https://github.com/RandomRuskiy/brads-server-bot", inline=False)
+    await ctx.send(embed=embed)
+
 def setup(bot):
   bot.add_cog(Embeds(bot))
