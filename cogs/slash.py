@@ -41,6 +41,9 @@ class Slash(commands.Cog):
     await self.bot.change_presence(status=discord.Status.online, activity=activity)
     await ctx.send(f'yo my status is now **"{text}"**')
 
+    #Put empty commands for the slash commands to have them appear in the help page.
+    #If you know a better way of doing this go ahead and change it bc theres prob a better way that i just dont know lol
+
   @commands.command(
   name='/setstatuslash',
   description='Set the bots status but with a slash command!'

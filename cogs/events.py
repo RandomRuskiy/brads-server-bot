@@ -11,7 +11,7 @@ class Events(commands.Cog):
   @commands.Cog.listener()
   async def on_ready(self):
     print(f'{self.__class__.__name__} Cog has been loaded\n-----')
-  
+
   @commands.Cog.listener()
   async def on_message(self, message):
     if message.author == self.bot.user:
@@ -34,8 +34,37 @@ class Events(commands.Cog):
       ctx = await self.bot.get_context(message)
       await message.channel.send(f'yo {ctx.author.mention}')
 
+    #list events as empty commands so people can see what auto-responses exist which will be shown in the help page
+    @client.command(
+    name='Auto-Responses',
+    description='Everything listed within the `Events` section are the words that the bot will respond to.'
+    )
+    @command.is_owner()
+    async def responseplaceholder():
+        return
+
+    @client.command(
+    name='meaning of O_O'
+        )
+    @command.is_owner()
+    async def meaningplaceholder():
+        return
+
+    @client.command(
+    name='yo'
+        )
+    @command.is_owner()
+    async def meaningplaceholder():
+        return
+
+    @client.command(
+    name='Yo'
+        )
+    @command.is_owner()
+    async def meaningplaceholder():
+        return
     #await self.bot.process_commands(message)
-  
+
 
 
 
