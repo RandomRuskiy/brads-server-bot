@@ -1,11 +1,14 @@
 import discord
 from discord.ext import commands
-from discord_slash import cog_ext, SlashContext
+from discord_slash import cog_ext, SlashContext, SlashCommand
 import os
 import asyncio
 import traceback
 
 client = commands.Bot(command_prefix='£')
+slash = SlashCommand(client, sync_commands=True)
+guild_ids = ['834037980883582996']
+
 
 
 class Slash(commands.Cog):
@@ -19,7 +22,7 @@ class Slash(commands.Cog):
   @cog_ext.cog_slash(
   name='slashtest',
   description='test slash command',
-  guild_ids='834037980883582996'
+  guild_ids=guild_idss
   )
   async def _slashtest(self, ctx: SlashContext):
     await ctx.send('yo this is a test slash command')
