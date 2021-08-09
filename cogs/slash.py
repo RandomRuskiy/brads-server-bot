@@ -7,7 +7,7 @@ import traceback
 
 client = commands.Bot(command_prefix='£')
 slash = SlashCommand(client, sync_commands=True)
-guild_ids = ['834037980883582996']
+guild_ids = [834037980883582996]
 
 
 
