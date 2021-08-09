@@ -44,21 +44,24 @@ class Events(commands.Cog):
         return
 
     @client.command(
-    name='meaning of O_O'
+    name='meaning of O_O',
+    description='\uFEFF'
         )
     @command.is_owner()
     async def meaningplaceholder(self, ctx):
         return
 
     @client.command(
-    name='yo'
+    name='yo',
+    description='\uFEFF'
         )
     @command.is_owner()
     async def yo1placeholder(self, ctx):
         return
 
     @client.command(
-    name='Yo'
+    name='Yo',
+    description='\uFEFF'
         )
     @command.is_owner()
     async def yo2placeholder(self, ctx):
