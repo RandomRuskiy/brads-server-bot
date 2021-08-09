@@ -38,6 +38,14 @@ class Slash(commands.Cog):
     await self.bot.change_presence(status=discord.Status.online, activity=activity)
     await ctx.send(f'yo my status is now **"{text}"**')
 
+  @setstatusslash.error
+  async def setstatusslash_error(self, ctx, error):
+    print(error)
+    if isinstance(error, commands.CommandOnCooldown):
+      await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+
+    elif isinstance(error, commands.MissingRequiredArgument):
+      await ctx.send("Missing a required argument: You might want to specify the status")
 
 
 # keep at bottom
