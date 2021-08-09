@@ -1,3 +1,4 @@
+## INDENTS ARE SET TO 2 SPACES ON THIS FILE ##
 import discord
 from discord.ext import commands
 import discord_slash
@@ -10,7 +11,7 @@ client = commands.Bot(command_prefix='£')
 slash = SlashCommand(client, sync_commands=True)
 guild_ids = [834037980883582996] # brads server id
 #guild_ids = [720743461959237722] # my test server id, change if your testing elsewhere
-admin_ids = 835960034331590666, 849692224060784720, 868107974655238185, 842689593052889098, 846730005924151318 #unused atm 
+admin_ids = 835960034331590666, 849692224060784720, 868107974655238185, 842689593052889098, 846730005924151318 #unused atm
 
 
 
