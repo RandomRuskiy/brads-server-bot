@@ -22,7 +22,7 @@ class Slash(commands.Cog):
   @cog_ext.cog_slash(
   name='slashtest',
   description='test slash command',
-  guild_ids=guild_idss
+  guild_ids=guild_ids
   )
   async def _slashtest(self, ctx: SlashContext):
     await ctx.send('yo this is a test slash command')
