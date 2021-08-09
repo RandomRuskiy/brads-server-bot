@@ -121,6 +121,48 @@ class Config(commands.Cog):
   async def testgit(self, ctx):
     await ctx.send('yo this command was made on my local pc, pushed to the repo and then pulled to the remote server to see if the whole chain worked :)')
 
+  @commands.command(
+  name='load',
+  description='Load specified cog'
+  )
+  @commands.is_owner()
+  async def load(self, ctx, cog=None):
+    if not cog:
+      await ctx.send('You need to specify a cog to reload!')
+
+    else:
+      async with ctx.typing():
+        embed = discord.Embed(
+          title='Loading command module',
+          color=0x808080,
+          timestamp=ctx.message.created_at
+        )
+        ext = f'{cog.lower()}.py'
+        if not os.path.exists(f'./cogs/{ext}'):
+          #if file doesnt exist
+          embed.add_field(
+            name=f'Failed to reload `{ext}`',
+            value='You must be dreaming of that files existance or something'
+            )
+
+        elif ext.endswith('.py') and not ext.startswith('_'):
+          try:
+            self.bot.load_extension(f'cogs.{ext[:-3]}')
+            embed.add_field(
+              name=f'Loaded: `{ext}`',
+              value='\uFEFF',
+              inline=False
+            )
+          except Exception:
+            desired_trace = traceback.format_exc()
+            embed.add_field(
+              name='Failed to reload: `{ext}`',
+              value=desired_trace,
+              inline=False
+            )
+          await ctx.send(embed=embed)
+
+  #errors go here
 
   @setstatus.error
   async def setstatus_error(self, ctx, error):
@@ -130,6 +172,18 @@ class Config(commands.Cog):
 
     elif isinstance(error, commands.MissingRequiredArgument):
       await ctx.send("Missing a required argument: You might want to specify the status")
+
+  @load.error
+  async def load_error(self, ctx, error):
+    embed = discord.Embed(
+    title='Failed to load cog!'
+    )
+    embed.add_field(
+    name='Reason:',
+    value=error,
+    inline=False
+    )
+    await ctx.send(embed=embed)
 
 
 
