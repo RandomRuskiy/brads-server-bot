@@ -48,6 +48,9 @@ class Slash(commands.Cog):
     elif isinstance(error, commands.MissingRequiredArgument):
       await ctx.send("Missing a required argument: You might want to specify the status")
 
+    elif isinstance(error, commands.MissingPermissions):
+      await ctx.send("Missing permissions: yo you arent part of the bot team to run this command")
+
 
 # keep at bottom
 def setup(bot):
