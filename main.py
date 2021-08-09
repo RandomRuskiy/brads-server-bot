@@ -19,7 +19,7 @@ cwd = str(cwd)
 print(f"{cwd}\n-----")
 
 client = commands.Bot(command_prefix='£')
-slash = SlashCommand(client)
+slash = SlashCommand(client, sync_commands=True)
 TOKEN = os.getenv('TOKEN')
 
 extentions = ['cogs.Embeds', 'cogs.Config', 'cogs.Help', 'cogs.Events', 'cogs.Slash']

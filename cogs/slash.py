@@ -18,7 +18,8 @@ class Slash(commands.Cog):
 
   @cog_ext.cog_slash(
   name='slashtest',
-  description='test slash command'
+  description='test slash command',
+  guild_ids='834037980883582996'
   )
   async def _slashtest(self, ctx: SlashContext):
     await ctx.send('yo this is a test slash command')
