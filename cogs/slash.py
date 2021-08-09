@@ -33,6 +33,7 @@ class Slash(commands.Cog):
   guild_ids=guild_ids
   )
   @commands.is_owner()
+  @commands.cooldown(rate=1, per=30)
   async def setstatusslash(self, ctx: SlashContext, *, text: str):
     activity = discord.Game(name=text)
     await self.bot.change_presence(status=discord.Status.online, activity=activity)
