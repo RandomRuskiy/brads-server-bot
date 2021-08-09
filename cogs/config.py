@@ -113,6 +113,14 @@ class Config(commands.Cog):
     print(run.stdout)
     await ctx.send(run.stdout)
 
+  @commands.command(
+  name='test-git',
+  description='just a test to see if pushing from local works'
+  )
+  @commands.is_owner()
+  async def testgit(self, ctx):
+    await ctx.send('yo this command was made on my local pc, pushed to the repo and then pulled to the remote server to see if the whole chain worked :)')
+
 
 
   @setstatus.error
@@ -120,7 +128,7 @@ class Config(commands.Cog):
     print(error)
     if isinstance(error, commands.CommandOnCooldown):
       await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
-    
+
     elif isinstance(error, commands.MissingRequiredArgument):
       await ctx.send("Missing a required argument: You might want to specify the status")
 
