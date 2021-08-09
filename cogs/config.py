@@ -122,7 +122,6 @@ class Config(commands.Cog):
     await ctx.send('yo this command was made on my local pc, pushed to the repo and then pulled to the remote server to see if the whole chain worked :)')
 
 
-
   @setstatus.error
   async def setstatus_error(self, ctx, error):
     print(error)
