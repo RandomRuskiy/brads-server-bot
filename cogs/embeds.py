@@ -66,5 +66,14 @@ class Embeds(commands.Cog):
     embed.add_field(name="Want to contribute code to the bot?", value="Go to the github repo and read the README for more info\n https://github.com/RandomRuskiy/brads-server-bot", inline=False)
     await ctx.send(embed=embed)
 
+  #errors go Here
+
+  @github.error
+  async def github_error(self, ctx, error):
+    print(error)
+    if isinstance(error, commands.CommandOnCooldown):
+      await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+
+
 def setup(bot):
   bot.add_cog(Embeds(bot))
