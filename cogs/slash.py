@@ -41,11 +41,13 @@ class Slash(commands.Cog):
     await self.bot.change_presence(status=discord.Status.online, activity=activity)
     await ctx.send(f'yo my status is now **"{text}"**')
 
-  @commands.command()
+  @commands.command(
+  name='setstatuslash',
+  description='Set the bots status but with a slash command!'
+  )
   @commands.is_owner()
-  async def print(self, ctx):
-    print(admin_ids)
-    await ctx.send(admin_ids)
+  async def placeholdersetstatus(self, ctx):
+    return
 
 
   # errors go here
