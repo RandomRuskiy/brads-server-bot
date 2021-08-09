@@ -44,7 +44,7 @@ class Events(commands.Cog):
       return
 
   @commands.command(
-    name='meaning of O_O',
+    name='meaning of O_O'
     #description='\uFEFF'
         )
   @commands.is_owner()
@@ -52,7 +52,7 @@ class Events(commands.Cog):
       return
 
   @commands.command(
-    name='yo',
+    name='yo'
     #description='\uFEFF'
         )
   @commands.is_owner()
@@ -60,7 +60,7 @@ class Events(commands.Cog):
       return
 
   @commands.command(
-    name='Yo',
+    name='Yo'
     #description='\uFEFF'
         )
   @commands.is_owner()
