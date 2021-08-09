@@ -114,7 +114,7 @@ class Config(commands.Cog):
     await ctx.send(run.stdout)
 
   @commands.command(
-  name='test-git',
+  name='testgit',
   description='just a test to see if pushing from local works'
   )
   @commands.is_owner()
