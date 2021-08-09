@@ -40,28 +40,28 @@ class Events(commands.Cog):
     description='Everything listed within the `Events` section are the words that the bot will respond to.'
     )
     @command.is_owner()
-    async def responseplaceholder():
+    async def responseplaceholder(self, ctx):
         return
 
     @client.command(
     name='meaning of O_O'
         )
     @command.is_owner()
-    async def meaningplaceholder():
+    async def meaningplaceholder(self, ctx):
         return
 
     @client.command(
     name='yo'
         )
     @command.is_owner()
-    async def yo1placeholder():
+    async def yo1placeholder(self, ctx):
         return
 
     @client.command(
     name='Yo'
         )
     @command.is_owner()
-    async def yo2placeholder():
+    async def yo2placeholder(self, ctx):
         return
     #await self.bot.process_commands(message)
 
