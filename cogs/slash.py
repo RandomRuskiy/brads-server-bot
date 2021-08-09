@@ -34,7 +34,7 @@ class Slash(commands.Cog):
   description='Set the bots status but with a slash command',
   guild_ids=guild_ids
   )
-  @commands.has_any_role(admin_ids)
+  @commands.is_owner()
   @commands.cooldown(rate=1, per=30)
   async def setstatusslash(self, ctx: SlashContext, *, text: str):
     activity = discord.Game(name=text)
@@ -49,7 +49,7 @@ class Slash(commands.Cog):
 
 
   # errors go here
-  
+
   @setstatusslash.error
   async def setstatusslash_error(self, ctx, error):
     print(error)
