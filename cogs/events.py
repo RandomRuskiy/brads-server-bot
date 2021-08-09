@@ -54,14 +54,14 @@ class Events(commands.Cog):
     name='yo'
         )
     @command.is_owner()
-    async def meaningplaceholder():
+    async def yo1placeholder():
         return
 
     @client.command(
     name='Yo'
         )
     @command.is_owner()
-    async def meaningplaceholder():
+    async def yo2placeholder():
         return
     #await self.bot.process_commands(message)
 
