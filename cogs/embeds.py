@@ -57,7 +57,7 @@ class Embeds(commands.Cog):
     await ctx.send(embed=embed)
 
   @commands.command(
-  name='github'
+  name='github',
   description='The link to the bots github repository.'
   )
   @commands.cooldown(rate=1, per=30)
