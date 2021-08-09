@@ -37,6 +37,9 @@ class Events(commands.Cog):
       ctx = await self.bot.get_context(message)
       await message.channel.send(f'yo {ctx.author.mention}')
 
+    elif message.content == 'L':
+      await message.channel.send('L')
+
     #list events as empty commands so people can see what auto-responses exist which will be shown in the help page
   @commands.command(
     name='Auto-Responses',
@@ -68,6 +71,14 @@ class Events(commands.Cog):
         )
   @commands.is_owner()
   async def yo2placeholder(self, ctx):
+      return
+
+  @commands.command(
+    name='L',
+    description='\uFEFF'
+        )
+  @commands.is_owner()
+  async def lplaceholder(self, ctx):
       return
 
     #await self.bot.process_commands(message)
