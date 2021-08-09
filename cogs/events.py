@@ -13,11 +13,11 @@ class Events(commands.Cog):
     print(f'{self.__class__.__name__} Cog has been loaded\n-----')
 
   @commands.Cog.listener()
-  async def on_message(self, message, user: discord.Member):
+  async def on_message(self, message):
     if message.author == self.bot.user:
       return
 
-    elif message.author == user.bot:
+    elif message.author == discord.Member.bot:
       return
 
     elif message.content == '.test respond':
