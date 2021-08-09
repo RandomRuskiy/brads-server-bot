@@ -41,17 +41,17 @@ class Help(commands.Cog):
         neededCogs.append(cogs[x])
       except IndexError:
         pass
-    
+
     for cog in neededCogs:
       commandList = '\uFEFF'
       for command in self.bot.get_cog(cog).walk_commands():
         if command.hidden:
           continue
-        
+
         elif command.parent != None:
           continue
 
-        commandList += f'**{command.name}** - *{command.description}*\n'
+        commandList += f'**{command.name}** - *{command.description}*\n\n'
       commandList += '\n'
 
       helpEmbed.add_field(
@@ -62,7 +62,7 @@ class Help(commands.Cog):
       )
 
     await ctx.send(embed=helpEmbed)
-    
+
 
   @help.error
   async def clear_error(self, ctx, error):
