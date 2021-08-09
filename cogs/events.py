@@ -39,7 +39,7 @@ class Events(commands.Cog):
     name='Auto-Responses',
     description='Everything listed within the `Events` section are the words that the bot will respond to.'
     )
-  @command.is_owner()
+  @commands.is_owner()
   async def responseplaceholder(self, ctx):
       return
 
@@ -47,7 +47,7 @@ class Events(commands.Cog):
     name='meaning of O_O',
     description='\uFEFF'
         )
-  @command.is_owner()
+  @commands.is_owner()
   async def meaningplaceholder(self, ctx):
       return
 
@@ -55,7 +55,7 @@ class Events(commands.Cog):
     name='yo',
     description='\uFEFF'
         )
-  @command.is_owner()
+  @commands.is_owner()
   async def yo1placeholder(self, ctx):
       return
 
@@ -63,7 +63,7 @@ class Events(commands.Cog):
     name='Yo',
     description='\uFEFF'
         )
-  @command.is_owner()
+  @commands.is_owner()
   async def yo2placeholder(self, ctx):
       return
 
