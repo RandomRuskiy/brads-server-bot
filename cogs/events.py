@@ -35,7 +35,7 @@ class Events(commands.Cog):
       await message.channel.send(f'yo {ctx.author.mention}')
 
     #list events as empty commands so people can see what auto-responses exist which will be shown in the help page
-    @client.command(
+    @commands.command(
     name='Auto-Responses',
     description='Everything listed within the `Events` section are the words that the bot will respond to.'
     )
@@ -43,7 +43,7 @@ class Events(commands.Cog):
     async def responseplaceholder(self, ctx):
         return
 
-    @client.command(
+    @commands.command(
     name='meaning of O_O',
     description='\uFEFF'
         )
@@ -51,7 +51,7 @@ class Events(commands.Cog):
     async def meaningplaceholder(self, ctx):
         return
 
-    @client.command(
+    @commands.command(
     name='yo',
     description='\uFEFF'
         )
@@ -59,13 +59,14 @@ class Events(commands.Cog):
     async def yo1placeholder(self, ctx):
         return
 
-    @client.command(
+    @commands.command(
     name='Yo',
     description='\uFEFF'
         )
     @command.is_owner()
     async def yo2placeholder(self, ctx):
         return
+
     #await self.bot.process_commands(message)
 
 
