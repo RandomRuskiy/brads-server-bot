@@ -20,7 +20,7 @@ class Slash(commands.Cog):
   name='slashtest',
   description='test slash command'
   )
-  async def slashtest(self, ctx: SlashContext):
+  async def _slashtest(self, ctx: SlashContext):
     await ctx.send('yo this is a test slash command')
 
 
