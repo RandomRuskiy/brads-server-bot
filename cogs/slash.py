@@ -72,6 +72,14 @@ class Slash(commands.Cog):
   async def placeholdersetstatus(self, ctx):
     return
 
+  @commands.command(
+  name='mentalhealthquote',
+  description='Get a random quote thats on the mental health topic!'
+  )
+  @commands.is_owner()
+  async def placeholdermhq(self, ctx):
+    return
+
 
   # errors go here
 
