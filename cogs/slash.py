@@ -73,7 +73,7 @@ class Slash(commands.Cog):
     return
 
   @commands.command(
-  name='mentalhealthquote',
+  name='/mentalhealthquote',
   description='Get a random quote thats on the mental health topic!'
   )
   @commands.is_owner()
