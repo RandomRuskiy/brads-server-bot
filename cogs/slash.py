@@ -50,7 +50,7 @@ class Slash(commands.Cog):
   description='Get a random quote thats on the mental health topic!',
   guild_ids=guild_ids
   )
-  #@commands.cooldown(rate=1, per=30)
+  @commands.cooldown(rate=1, per=15)
   async def mentalhealthquote(self, ctx: SlashContext):
     with open('data/quotes.dat', newline='') as csvfile:
       spamreader = csv.reader(csvfile, delimiter=';')
