@@ -7,6 +7,8 @@ If you just have any ideas or suggestions you would like added, then make an iss
 
 If your wanting to contribute code to the bot, clone the repo, do what you want to it, then make a pull request. If we then see it as all good, then we will merge it to the master branch and it will then go to run on the bot.
 
-P.S. If you just want to add a quote to the `/mentalhealthquote` command, then just open a pull request with the data/quotes.dat edited file where you pasted the quote on a new line, and then added a semi-colon (`;`) to the end of the line.
+P.S. If you just want to add a quote to the `/mentalhealthquote` command, then just open a pull request with the data/quotes.dat edited file where you pasted the quote on a new line, and then added a semi-colon (`;`) to the end of the line. Refer to the example below:
+
+![data/quotes.dat](/data/res/quotes-example.png)
 
 **If you have any questions, either make an issue thread, or if you really need too, DM either RandomRuskiy or Brad.**
