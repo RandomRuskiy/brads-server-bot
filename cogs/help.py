@@ -20,6 +20,7 @@ class Help(commands.Cog):
     aliases=['h', 'commands', 'cmds'],
     description='The command to show commands'
   )
+  @commands.cooldown(rate=1, per=30)
   async def help(self, ctx, cog='1'):
     helpEmbed = discord.Embed(
       title='Help Command',
@@ -68,7 +69,9 @@ class Help(commands.Cog):
   @help.error
   async def clear_error(self, ctx, error):
     print(error)
-    await ctx.send(error)
+    if isinstance(error, commands.CommandOnCooldown):
+      await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+
 
 
 
