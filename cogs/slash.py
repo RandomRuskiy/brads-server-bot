@@ -8,6 +8,7 @@ import asyncio
 import traceback
 import csv
 import random
+import subprocess
 
 client = commands.Bot(command_prefix='£')
 slash = SlashCommand(client, sync_commands=True)
@@ -61,6 +62,31 @@ class Slash(commands.Cog):
       res_quote = sec_str.replace(']', '')
       await ctx.send(res_quote)
 
+  @cog_ext.cog_slash(
+  name='bash',
+  description='Run a command in bash',
+  guild_ids=guild_ids
+  )
+  @commands.is_owner()
+  async def bash(self, ctx: SlashContext, *, input: str):
+    #err = cmd.stderr
+    cmd = subprocess.run(['bash','-c', input], capture_output=True)
+    out = cmd.stdout.decode()
+    err = cmd.stderr.decode()
+    exit = print('exit status:', cmd.returncode)
+    if input == 'cat':
+      await ctx.send('The command you tried to run needs a varible otherwise it will crash the bot lmao')
+      pass
+
+    elif cmd.returncode == 0:
+      await ctx.send(f'{input}: `{out}`')
+      pass
+
+    elif cmd.returncode != 0:
+      await ctx.send(f'Error: `{err}`')
+      pass
+
+
     #Put empty commands for the slash commands to have them appear in the help page.
     #If you know a better way of doing this go ahead and change it bc theres prob a better way that i just dont know lol
 
@@ -100,6 +126,11 @@ class Slash(commands.Cog):
     print(error)
     if isinstance(error, commands.CommandOnCooldown):
       await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+
+#  @bash.error
+#  async def bash_error(self, ctx, error):
+#    if isinstance(error, subprocess.CalledProcessError):
+#      await ctx.send(subprocess.CalledProcessError)
 
 
 # keep at bottom

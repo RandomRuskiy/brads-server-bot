@@ -1,6 +1,8 @@
 ## INDENTS ARE SET TO 2 SPACES ON THIS FILE ##
 import discord
 from discord.ext import commands
+#import discord_slash
+#from discord_slash import cog_ext, SlashContext, SlashCommand
 import os
 import asyncio
 import traceback
@@ -9,6 +11,9 @@ from discord.ext.commands import cooldown, BucketType
 import subprocess
 
 client = commands.Bot(command_prefix='£')
+#slash = SlashCommand(client)
+#guild_ids = [834037980883582996] # brads server id
+#guild_ids = [720743461959237722] # my test server id, change if your testing elsewhere
 
 class Config(commands.Cog):
   def __init__(self, bot):
@@ -162,6 +167,8 @@ class Config(commands.Cog):
               inline=False
             )
           await ctx.send(embed=embed)
+
+
 
   #errors go here
 
