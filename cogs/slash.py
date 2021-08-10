@@ -6,11 +6,13 @@ from discord_slash import cog_ext, SlashContext, SlashCommand
 import os
 import asyncio
 import traceback
+import csv
+import random
 
 client = commands.Bot(command_prefix='£')
 slash = SlashCommand(client, sync_commands=True)
-guild_ids = [834037980883582996] # brads server id
-#guild_ids = [720743461959237722] # my test server id, change if your testing elsewhere
+#guild_ids = [834037980883582996] # brads server id
+guild_ids = [720743461959237722] # my test server id, change if your testing elsewhere
 admin_ids = 835960034331590666, 849692224060784720, 868107974655238185, 842689593052889098, 846730005924151318 #unused atm
 
 
@@ -42,6 +44,22 @@ class Slash(commands.Cog):
     activity = discord.Game(name=text)
     await self.bot.change_presence(status=discord.Status.online, activity=activity)
     await ctx.send(f'yo my status is now **"{text}"**')
+
+  @cog_ext.cog_slash(
+  name='mentalhealthquote',
+  description='Get a random quote thats on the mental health topic!',
+  guild_ids=guild_ids
+  )
+  #@commands.cooldown(rate=1, per=30)
+  async def mentalhealthquote(self, ctx: SlashContext):
+    with open('data/quotes.dat', newline='') as csvfile:
+      spamreader = csv.reader(csvfile, delimiter=';')
+      random_row = random.choice(list(spamreader))
+      lis_str = ' '.join(random_row)
+      res_str = lis_str.replace('"', '')
+      sec_str = res_str.replace('[', '')
+      res_quote = sec_str.replace(']', '')
+      await ctx.send(res_quote)
 
     #Put empty commands for the slash commands to have them appear in the help page.
     #If you know a better way of doing this go ahead and change it bc theres prob a better way that i just dont know lol
