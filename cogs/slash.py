@@ -87,6 +87,12 @@ class Slash(commands.Cog):
     elif isinstance(error, commands.MissingPermissions):
       await ctx.send("Missing permissions: yo you arent part of the bot team to run this command")
 
+  @mentalhealthquote.error
+  async def mentalhealthquote_error(self, ctx, error):
+    print(error)
+    if isinstance(error, commands.CommandOnCooldown):
+      await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+
 
 # keep at bottom
 def setup(bot):
