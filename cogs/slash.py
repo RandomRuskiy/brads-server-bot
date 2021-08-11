@@ -31,8 +31,9 @@ class Slash(commands.Cog):
         description='test slash command',
         guild_ids=guild_ids
     )
-    async def _slashtest(self, ctx: SlashContext):
-        await ctx.send('yo this is a test slash command')
+    @commands.is_owner
+    async def _slashtest(self, ctx: SlashContext, *, text: str):
+        await ctx.send(text)
 
     @cog_ext.cog_slash(
         name='setstatuslash',
