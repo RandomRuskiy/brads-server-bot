@@ -86,6 +86,15 @@ class Slash(commands.Cog):
       await ctx.send(f'Error: `{err}`')
       pass
 
+  @cog_ext.cog_slash(
+  name='file',
+  description='Upload a file from the bots source!',
+  guild_ids=guild_ids
+  )
+  @commands.is_owner()
+  async def file(self, ctx: SlashContext, *, filename: str):
+    await ctx.send(file=discord.File(rf'./{filename}'))
+
 
     #Put empty commands for the slash commands to have them appear in the help page.
     #If you know a better way of doing this go ahead and change it bc theres prob a better way that i just dont know lol
