@@ -9,11 +9,12 @@ import traceback
 import csv
 import random
 import subprocess
+import time
 
 client = commands.Bot(command_prefix='£')
 slash = SlashCommand(client, sync_commands=True)
-guild_ids = [834037980883582996] # brads server id
-#guild_ids = [720743461959237722] # my test server id, change if your testing elsewhere
+#guild_ids = [834037980883582996] # brads server id
+guild_ids = [720743461959237722] # my test server id, change if your testing elsewhere
 admin_ids = 835960034331590666, 849692224060784720, 868107974655238185, 842689593052889098, 846730005924151318 #unused atm
 
 
@@ -69,21 +70,24 @@ class Slash(commands.Cog):
   )
   @commands.is_owner()
   async def bash(self, ctx: SlashContext, *, input: str):
+    print(input)
     #err = cmd.stderr
-    cmd = subprocess.run(['bash','-c', input], capture_output=True)
-    out = cmd.stdout.decode()
-    err = cmd.stderr.decode()
-    exit = print('exit status:', cmd.returncode)
-    if input == 'cat':
+    #exit = print('exit status:', cmd.returncode)
+    if input != 'cat':
+      cmd = subprocess.run(['bash','-c', input], capture_output=True)
+      out = cmd.stdout.decode()
+      err = cmd.stderr.decode()
+      if cmd.returncode == 0:
+        await ctx.send(f'{input}: `{out}`')
+        pass
+      #await ctx.send('The command you tried to run needs a varible otherwise it will crash the bot lmao')
+      #pass
+      elif cmd.returncode != 0:
+        await ctx.send(f'Error: `{err}`')
+        pass
+
+    else:
       await ctx.send('The command you tried to run needs a varible otherwise it will crash the bot lmao')
-      pass
-
-    elif cmd.returncode == 0:
-      await ctx.send(f'{input}: `{out}`')
-      pass
-
-    elif cmd.returncode != 0:
-      await ctx.send(f'Error: `{err}`')
       pass
 
   @cog_ext.cog_slash(
