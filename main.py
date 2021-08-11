@@ -1,11 +1,12 @@
-# INDENTS ARE SET TO 2 SPACES ON THIS FILE ##
+import logging
+import os
+from pathlib import Path
+
 import discord
 from discord.ext import commands
-from discord.ext.commands import cooldown, BucketType
+from discord.ext.commands import BucketType, cooldown
 from discord_slash import SlashCommand, SlashContext
-import os
-import logging
-from pathlib import Path
+
 from keep_alive import keep_alive
 
 logger = logging.getLogger('discord')

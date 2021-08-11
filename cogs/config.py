@@ -1,11 +1,12 @@
+import asyncio
+import os
+import random
+import subprocess
+import traceback
+
 import discord
 from discord.ext import commands
-import os
-import asyncio
-import traceback
-import random
-from discord.ext.commands import cooldown, BucketType
-import subprocess
+from discord.ext.commands import BucketType, cooldown
 
 client = commands.Bot(command_prefix='£')
 
