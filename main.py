@@ -10,7 +10,7 @@ from discord_slash import SlashCommand, SlashContext
 from keep_alive import keep_alive
 
 logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 handler = logging.FileHandler(
     filename='discord.log',
     encoding='utf-8', mode='w'
@@ -33,7 +33,8 @@ extentions = ['cogs.Embeds',
               'cogs.Config',
               'cogs.Help',
               'cogs.Events',
-              'cogs.Slash'
+              'cogs.Slash',
+              'cogs.Twitch'
               ]
 
 
