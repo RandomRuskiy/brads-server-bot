@@ -9,6 +9,11 @@ def home():
     return "Hello. I am alive!"
 
 
+@app.route('/webhooks/eventsub')
+def eventsub():
+    return
+
+
 def run():
     app.run(host='0.0.0.0', port=8080)
 
