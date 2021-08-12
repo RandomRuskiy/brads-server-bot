@@ -9,8 +9,8 @@ import json
 
 client = commands.Bot(command_prefix='£')
 slash = SlashCommand(client, sync_commands=True)
-# guild_ids = [834037980883582996]  # << brads server id
-guild_ids = [720743461959237722]
+guild_ids = [834037980883582996]  # << brads server id
+# guild_ids = [720743461959237722]
 # ^^ my test server id. change if your testing elsewhere
 
 
