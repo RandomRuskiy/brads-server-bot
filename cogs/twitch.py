@@ -6,12 +6,11 @@ import discord_slash
 import requests
 from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext, cog_ext
+from cogs.slash import guild_ids
 
 client = commands.Bot(command_prefix='£')
 slash = SlashCommand(client, sync_commands=True)
-guild_ids = [834037980883582996]  # << brads server id
-# guild_ids = [720743461959237722]
-# ^^ my test server id. change if your testing elsewhere
+
 
 TWITCH_CLIENT_ID = os.getenv('TWITCH_CLIENT_ID')
 EVENTSUB_TOKEN = os.getenv('EVENTSUB_TOKEN')

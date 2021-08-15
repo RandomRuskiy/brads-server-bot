@@ -14,7 +14,7 @@ from discord_slash import SlashCommand, SlashContext, cog_ext
 client = commands.Bot(command_prefix='£')
 slash = SlashCommand(client, sync_commands=True)
 guild_ids = [834037980883582996]  # << brads server id
-# guild_ids = [720743461959237722]
+# guild_ids = [720743461959237722, 875804519605370911]
 # ^^ my test server id. change if your testing elsewhere
 
 
@@ -98,8 +98,8 @@ class Slash(commands.Cog):
     async def file(self, ctx: SlashContext, *, filename: str):
         await ctx.send(file=discord.File(rf'./{filename}'))
 
-        # empty commands for slash commands they appear in the help page.
-        # If you know a better way of doing this go ahead and change it
+    # empty commands for slash commands they appear in the help page.
+    # If you know a better way of doing this go ahead and change it
 
     @commands.command(
         name='/setstatuslash',

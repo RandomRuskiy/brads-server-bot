@@ -34,7 +34,8 @@ extentions = ['cogs.Embeds',
               'cogs.Help',
               'cogs.Events',
               'cogs.Slash',
-              'cogs.Twitch'
+              'cogs.Twitch',
+              'cogs.Mod'
               ]
 
 

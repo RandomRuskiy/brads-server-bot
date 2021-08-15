@@ -4,6 +4,7 @@ import re
 
 import discord
 from discord.ext import commands
+from lib.colours import BasicColours as colours
 
 
 class Help(commands.Cog):
@@ -23,7 +24,7 @@ class Help(commands.Cog):
     async def help(self, ctx, cog='1'):
         helpEmbed = discord.Embed(
             title='Help Command',
-            color=0x26fff1
+            color=colours["cyan"]
         )
 
         cogs = [c for c in self.bot.cogs.keys()]
