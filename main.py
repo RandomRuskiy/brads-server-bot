@@ -10,7 +10,7 @@ from discord_slash import SlashCommand, SlashContext
 from keep_alive import keep_alive
 
 logger = logging.getLogger('discord')
-logger.setLevel(logging.INFO)
+logger.setLevel(logging.DEBUG)
 handler = logging.FileHandler(
     filename='discord.log',
     encoding='utf-8', mode='w'
