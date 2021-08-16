@@ -21,7 +21,7 @@ class Mod(commands.Cog):
         description='Ban a user.',
         guild_ids=guild_ids
     )
-    @commands.has_permissions(ban_members=True)
+    @commands.is_owner()
     async def ban(self, ctx: SlashContext, user: discord.Member = None, *, reason=None):
         if user is None or user == ctx.author:
             await ctx.send("lol you cant ban yourself")
