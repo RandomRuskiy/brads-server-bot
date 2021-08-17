@@ -11,8 +11,8 @@ from keep_alive import keep_alive
 
 run = True
 
-if run == False:
-  exit()
+if run is False:
+    exit()
 
 logger = logging.getLogger('discord')
 logger.setLevel(logging.DEBUG)
@@ -57,6 +57,7 @@ async def on_ready():
     print('yo the bot is on now\n-----')
 
 client.remove_command('help')
+client.remove_command('unban')
 
 # keep this at bottom
 
@@ -67,5 +68,5 @@ if __name__ == "__main__":
         if file.endswith(".py") and not file.startswith("_"):
             client.load_extension(f"cogs.{file[:-3]}")
 
-keep_alive()
+# keep_alive()
 client.run(TOKEN)
