@@ -48,7 +48,7 @@ class Events(commands.Cog):
         embed = discord.Embed(title="Welcome!", url="https://discord.com/channels/834037980883582996/835126673921409024/851815264064372747",
                               description=f"Welcome to Brads server, {member}! Dont be afraid to send a couple memes, an image of your pet or even a bad pun :)", color=colour["green"])
         embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/867713807291908137/02e63019fc51f3ea2735f2e2d7acc49b.png?size=256")
-        embed.add_field(name="Please make sure to read the rules (you can go to the channel by cliocking the link above)", value="\nApart from all that, make sure to also enjoy yourself!", inline=False)
+        embed.add_field(name="Please make sure to read the rules (you can go to the channel by clicking the link above)", value="\nApart from all that, make sure to also enjoy yourself!", inline=False)
         embed.add_field(name="If you have any questions, you can ask any admin and they should be of help.", value="\uFEFF", inline=True)
         await member.send(embed=embed)
 
