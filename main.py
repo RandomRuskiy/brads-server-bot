@@ -30,7 +30,9 @@ cwd = Path(__file__).parents[0]
 cwd = str(cwd)
 print(f"{cwd}\n-----")
 
-client = commands.Bot(command_prefix='£')
+intents = discord.Intents.default()
+intents.members = True
+client = commands.Bot(command_prefix='£', intents=intents)
 slash = SlashCommand(client, sync_commands=True)
 TOKEN = os.getenv('TOKEN')
 
@@ -68,5 +70,5 @@ if __name__ == "__main__":
         if file.endswith(".py") and not file.startswith("_"):
             client.load_extension(f"cogs.{file[:-3]}")
 
-# keep_alive()
+keep_alive()
 client.run(TOKEN)
