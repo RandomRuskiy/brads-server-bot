@@ -27,8 +27,6 @@ class Logs(commands.Cog):
         log_msg = log_msg_2 + '\n'
         log.write(log_msg)
         log.close
-        channel = self.bot.get_channel(720743462508691639)
-        await channel.send(log_msg)
 
     @commands.Cog.listener()
     async def on_message_edit(self, message_before, message_after):
@@ -39,8 +37,6 @@ class Logs(commands.Cog):
         log_msg = log_msg_2 + '\n'
         log.write(log_msg)
         log.close
-        channel = self.bot.get_channel(720743462508691639)
-        await channel.send(log_msg)
 
 
 def setup(bot):
