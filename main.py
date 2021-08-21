@@ -32,6 +32,7 @@ print(f"{cwd}\n-----")
 
 intents = discord.Intents.default()
 intents.members = True
+intents.messages = True
 client = commands.Bot(command_prefix='£', intents=intents)
 slash = SlashCommand(client, sync_commands=True)
 TOKEN = os.getenv('TOKEN')
@@ -42,6 +43,8 @@ extentions = ['cogs.Embeds',
               'cogs.Events',
               'cogs.Slash',
               'cogs.Twitch',
+              'cogs.Mod',
+              'cogs.Logs'
               ]
 
 
