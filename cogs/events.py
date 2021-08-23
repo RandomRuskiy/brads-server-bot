@@ -65,6 +65,8 @@ class Events(commands.Cog):
                     if message.content == 'am i admin':
                         await message.channel.send('L you are not admin')
                         return
+                else:
+                    return
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
