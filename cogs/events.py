@@ -26,8 +26,8 @@ class Events(commands.Cog):
         if message.author != self.bot.user or message.author != discord.User.bot:  # only respond if user is not self or another bot
 
             admin_role = None
-            for int in admin_ids as ids:
-                admin_role = discord.utils.get(message.author.roles, id=ids)
+            for int in admin_ids:
+                admin_role = discord.utils.get(message.author.roles, id=admin_ids)
 
             if message.channel.name == 'general' or message.channel.name != 'general':
                 if message.content == '.test respond':
