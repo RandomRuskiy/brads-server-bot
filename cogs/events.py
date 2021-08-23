@@ -29,7 +29,7 @@ class Events(commands.Cog):
             for int in admin_ids:
                 admin_role = discord.utils.get(message.author.roles, id=int)
 
-            if message.channel.name == 'general':
+            if message.channel.name == 'general' or message.channel.name != 'general':
                 if message.content == '.test respond':
                     await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {admin_role}')
 
