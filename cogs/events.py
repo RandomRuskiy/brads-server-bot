@@ -26,37 +26,45 @@ class Events(commands.Cog):
         if message.author != self.bot.user or message.author != discord.User.bot:  # only respond if user is not self or another bot
 
             admin_role = None
-            for int in admin_ids:
-                admin_role = discord.utils.get(message.author.roles, id=int)
+            for int in admin_ids as ids:
+                admin_role = discord.utils.get(message.author.roles, id=ids)
 
             if message.channel.name == 'general' or message.channel.name != 'general':
                 if message.content == '.test respond':
                     await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {admin_role}')
+                    return
 
                 elif message.content == 'yo im saying something':
                     await message.channel.send('yo im responding')
+                    return
 
                 elif message.content == 'meaning of O_O':
                     await message.channel.send('Brad is shocked or ran out of things to say lmao')
+                    return
 
                 elif message.content == 'yo':
                     ctx = await self.bot.get_context(message)
                     await message.channel.send(f'yo {ctx.author.mention}')
+                    return
 
                 elif message.content == 'Yo':
                     ctx = await self.bot.get_context(message)
                     await message.channel.send(f'yo {ctx.author.mention}')
+                    return
 
                 elif message.content == 'L':
                     await message.channel.send('L')
+                    return
 
                 elif admin_role is not None:
                     if message.content == 'am i admin':
                         await message.channel.send('yo you are admin')
+                        return
 
                 elif admin_role is None:
                     if message.content == 'am i admin':
                         await message.channel.send('L you are not admin')
+                        return
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
