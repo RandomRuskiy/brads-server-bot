@@ -52,7 +52,7 @@ class Events(commands.Cog):
                     await message.channel.send(f'yo {ctx.author.mention}')
                     return
 
-                elif message.content == 'L':
+                elif message.content == 'L' and message.author != self.bot.user:
                     await message.channel.send('L')
                     return
 
