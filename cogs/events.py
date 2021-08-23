@@ -26,10 +26,10 @@ class Events(commands.Cog):
         if message.author != self.bot.user or message.author != discord.User.bot:  # only respond if user is not self or another bot
 
             admin_role = None
-            for int in admin_ids:
-                admin_role = discord.utils.get(message.author.roles, id=admin_ids)
+            for x in admin_ids:
+                admin_role = discord.utils.get(message.author.roles, id=x)
 
-            if message.channel.name == 'general' or message.channel.name != 'general':
+            if message.channel.name == 'general' or message.channel.name != 'general' or message.author != discord.User.bot:
                 if message.content == '.test respond':
                     await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {admin_role}')
                     return
@@ -65,8 +65,7 @@ class Events(commands.Cog):
                     if message.content == 'am i admin':
                         await message.channel.send('L you are not admin')
                         return
-                else:
-                    return
+                return
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
