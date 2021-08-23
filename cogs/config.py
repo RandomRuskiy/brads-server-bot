@@ -7,8 +7,17 @@ import traceback
 import discord
 from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
+from lib.texthelps import count_chars
 
 client = commands.Bot(command_prefix='£')
+
+
+def cog_traceback(input_string: str):
+    count = count_chars(input_string)
+    if count > 1024:
+        return False
+    else:
+        return True
 
 
 class Config(commands.Cog):
@@ -156,10 +165,17 @@ class Config(commands.Cog):
                             inline=False
                         )
                     except Exception:
-                        desired_trace = traceback.format_exc()
+                        desired_trace = cog_traceback(traceback.format_exc())
+                        if desired_trace is True:
+                            tb = traceback.format_exc()
+                        elif desired_trace is False:
+                            f = open("./data/tb.txt", "w")
+                            f.write(traceback.format_exc())
+                            f.close
+                            tb = 'tb too long, read data/tb.txt/ for traceback'
                         embed.add_field(
                             name='Failed to reload: `{ext}`',
-                            value=desired_trace,
+                            value=tb,
                             inline=False
                         )
                     await ctx.send(embed=embed)

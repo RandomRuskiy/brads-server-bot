@@ -4,3 +4,4 @@ __pycache__
 .vscode
 brads-server-bot.code-workspace
 messages.log
+data/tb.txt
