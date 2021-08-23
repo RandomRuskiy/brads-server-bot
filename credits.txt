@@ -1,2 +1,3 @@
 RandomRuskiy - most the code etc
 Bradley - alot of the ideas, some auto responses
+Evie - The 'Rolecolours' in colours.py
