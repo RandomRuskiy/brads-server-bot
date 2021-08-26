@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from discord_slash import SlashCommand, SlashContext, cog_ext
+import asyncio
 
 from .slash import guild_ids
 
@@ -21,7 +22,7 @@ class Mod(commands.Cog):
         description='Ban a user.',
         guild_ids=guild_ids
     )
-    @commands.is_owner()
+    @commands.has_permissions(ban_members=True)
     async def ban(self, ctx: SlashContext, user: discord.Member = None, *, reason=None):
         if user is None or user == ctx.author:
             await ctx.send("lol you cant ban yourself")
@@ -42,7 +43,7 @@ class Mod(commands.Cog):
         description='Unbans the specified user',
         guild_ids=guild_ids
     )
-    @commands.is_owner()
+    @commands.has_permissions(ban_members=True)
     async def unban(self, ctx: SlashContext, *, member):
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
@@ -60,7 +61,7 @@ class Mod(commands.Cog):
         description='Kicks a user',
         guild_ids=guild_ids
     )
-    @commands.is_owner()
+    @commands.has_permissions(ban_members=True)
     async def kick(self, ctx: SlashContext, user: discord.Member, reason=None):
         if user is None or user == ctx.author:
             await ctx.send('You cant kick yourself lol')
@@ -75,6 +76,72 @@ class Mod(commands.Cog):
 
         await ctx.guild.kick(user, reason=reason)
         await ctx.send(f'**{user}** has been kicked!')
+
+    @cog_ext.cog_slash(
+        name='mute',
+        description='Mutes the specified user',
+        guild_ids=guild_ids
+    )
+    @commands.has_permissions(manage_messages=True)
+    async def mute(self, ctx: SlashContext, user: discord.Member, time=None, reason=None):
+        mute_role = discord.utils.get(user.roles, id=879041072486035506)
+        if user is None or user == ctx.author:
+            await ctx.send('You cant mute yourself')
+            return
+        elif mute_role is true:
+            await ctx.send('That user is already muted')
+
+        elif time is None:
+            await ctx.send('You need to specify a time. e.g. 1s, 1m, 1h, 1d')
+            return
+
+        else:
+            if not reason:
+                'No reason specified'
+
+            try:
+                seconds = time[:-1]
+                duration = time[-1]
+                if duration == 's':
+                    seconds = seconds * 1
+                elif duration == 'm':
+                    seconds = seconds * 60
+                elif duration == 'h':
+                    seconds = seconds * 60 * 60
+                elif duration == 'd':
+                    seconds = seconds * 86400
+
+                else:
+                    ctx.send('put a correct duration smh')
+                    return
+
+            except Exception as e:
+                print(e)
+                await ctx.send('error happened, prob invalid time input or something idk')
+                return
+            await user.add_roles(879041072486035506, reason=reason)
+            await ctx.send(f'Muted {user} for reason: {reason}')
+            await asyncio.sleep(seconds)
+            await user.remove_roles(879041072486035506, reason='Duration of mute over')
+
+    @cog_ext.cog_slash(
+        name='unmute',
+        description='Unmutes the specified user',
+        guild_ids=guild_ids
+    )
+    @commands.has_permissions(manage_messages=True)
+    async def unmute(self, ctx: SlashContext, user: discord.Member, reason=None):
+        mute_role = discord.utils.get(user.roles, id=879041072486035506)
+        if user is None or user == ctx.author:
+            await ctx.send('how')
+            return
+        elif reason is None:
+            reason = 'No reason specified'
+        elif not mute_role:
+            await ctx.send('That user isnt muted smh')
+        else:
+            await user.remove_roles(879041072486035506, reason='Mute manually removed')
+            await ctx.send(f'Unmuted {user}')
 
 
 def setup(bot):
