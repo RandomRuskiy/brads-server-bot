@@ -88,7 +88,7 @@ class Mod(commands.Cog):
         if user is None or user == ctx.author:
             await ctx.send('You cant mute yourself')
             return
-        elif mute_role is true:
+        elif mute_role is True:
             await ctx.send('That user is already muted')
 
         elif time is None:
@@ -119,10 +119,10 @@ class Mod(commands.Cog):
                 print(e)
                 await ctx.send('error happened, prob invalid time input or something idk')
                 return
-            await user.add_roles(879041072486035506, reason=reason)
+            await user.add_roles(mute_role, reason=reason)
             await ctx.send(f'Muted {user} for reason: {reason}')
             await asyncio.sleep(seconds)
-            await user.remove_roles(879041072486035506, reason='Duration of mute over')
+            await user.remove_roles(mute_role, reason='Duration of mute over')
 
     @cog_ext.cog_slash(
         name='unmute',
@@ -140,7 +140,7 @@ class Mod(commands.Cog):
         elif not mute_role:
             await ctx.send('That user isnt muted smh')
         else:
-            await user.remove_roles(879041072486035506, reason='Mute manually removed')
+            await user.remove_roles(mute_role, reason='Mute manually removed')
             await ctx.send(f'Unmuted {user}')
 
 
