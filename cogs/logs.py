@@ -7,7 +7,10 @@ from datetime import datetime
 
 c_time = datetime.now()
 
-client = commands.Bot(command_prefix='£')
+client = commands.Bot(
+    command_prefix='£',
+    debug_guild=875804519605370911
+)
 
 
 class Logs(commands.Cog):

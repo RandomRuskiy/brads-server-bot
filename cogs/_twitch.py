@@ -6,8 +6,10 @@ import requests
 from discord.ext import commands
 from .slash import guild_ids
 
-client = commands.Bot(command_prefix='£')
-slash = SlashCommand(client, sync_commands=True)
+client = commands.Bot(
+    command_prefix='£',
+    debug_guild=875804519605370911
+)
 
 
 TWITCH_CLIENT_ID = os.getenv('TWITCH_CLIENT_ID')

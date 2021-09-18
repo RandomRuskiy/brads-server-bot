@@ -9,7 +9,10 @@ from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
 from lib.texthelps import count_chars
 
-client = commands.Bot(command_prefix='£')
+client = commands.Bot(
+    command_prefix='£',
+    debug_guild=875804519605370911
+)
 
 
 def cog_traceback(input_string: str):

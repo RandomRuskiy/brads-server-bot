@@ -4,8 +4,10 @@ import asyncio
 
 from .slash import guild_ids
 
-client = commands.Bot(command_prefix='£')
-slash = SlashCommand(client, sync_commands=True)
+client = commands.Bot(
+    command_prefix='£',
+    debug_guild=875804519605370911
+)
 
 
 class Mod(commands.Cog):
@@ -16,13 +18,11 @@ class Mod(commands.Cog):
     async def on_ready(self):
         print(f'{self.__class__.__name__} Cog has been loaded\n-----')
 
-    @cog_ext.cog_slash(
-        name='ban',
-        description='Ban a user.',
+    @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.has_permissions(ban_members=True)
-    async def ban(self, ctx: SlashContext, user: discord.Member = None, *, reason=None):
+    async def ban(self, ctx, user: discord.Member = None, *, reason=None):
         if user is None or user == ctx.author:
             await ctx.send("lol you cant ban yourself")
             return
@@ -37,13 +37,11 @@ class Mod(commands.Cog):
         await ctx.guild.ban(user, reason=reason)
         await ctx.send(f"**{user}** has been banned!")
 
-    @cog_ext.cog_slash(
-        name='unban',
-        description='Unbans the specified user',
+    @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.has_permissions(ban_members=True)
-    async def unban(self, ctx: SlashContext, *, member):
+    async def unban(self, ctx, *, member):
         banned_users = await ctx.guild.bans()
         member_name, member_discriminator = member.split('#')
 
@@ -55,13 +53,11 @@ class Mod(commands.Cog):
             await ctx.send(f"**{user}** has been unbanned!")
             return
 
-    @cog_ext.cog_slash(
-        name='kick',
-        description='Kicks a user',
+    @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.has_permissions(ban_members=True)
-    async def kick(self, ctx: SlashContext, user: discord.Member, reason=None):
+    async def kick(self, ctx, user: discord.Member, reason=None):
         if user is None or user == ctx.author:
             await ctx.send('You cant kick yourself lol')
             return
@@ -76,13 +72,11 @@ class Mod(commands.Cog):
         await ctx.guild.kick(user, reason=reason)
         await ctx.send(f'**{user}** has been kicked!')
 
-    @cog_ext.cog_slash(
-        name='mute',
-        description='Mutes the specified user',
+    @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.has_permissions(manage_messages=True)
-    async def mute(self, ctx: SlashContext, user: discord.Member, time=None, reason=None):
+    async def mute(self, ctx, user: discord.Member, time=None, reason=None):
         mute_role = discord.utils.get(user.roles, id=879041072486035506)
         if user is None or user == ctx.author:
             await ctx.send('You cant mute yourself')
@@ -123,13 +117,11 @@ class Mod(commands.Cog):
             await asyncio.sleep(seconds)
             await user.remove_roles(mute_role, reason='Duration of mute over')
 
-    @cog_ext.cog_slash(
-        name='unmute',
-        description='Unmutes the specified user',
+    @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.has_permissions(manage_messages=True)
-    async def unmute(self, ctx: SlashContext, user: discord.Member, reason=None):
+    async def unmute(self, ctx, user: discord.Member, reason=None):
         mute_role = discord.utils.get(user.roles, id=879041072486035506)
         if user is None or user == ctx.author:
             await ctx.send('how')

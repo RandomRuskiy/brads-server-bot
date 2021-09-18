@@ -5,7 +5,10 @@ from lib.colours import BasicColours as colour
 
 # self.spam_control = commands.CooldownMapping.from_cooldown()
 
-client = commands.Bot(command_prefix='£')
+client = commands.Bot(
+    command_prefix='£',
+    debug_guild=875804519605370911
+)
 
 # owner_id = [645647583141822466, 683733441728217098]
 # owner_id = 683733441728217098
@@ -75,47 +78,6 @@ class Events(commands.Cog):
         embed.add_field(name="Please make sure to read the rules (you can go to the channel by clicking the link above)", value="\nApart from all that, make sure to also enjoy yourself!", inline=False)
         embed.add_field(name="If you have any questions, you can ask any admin and they should be of help.", value="\uFEFF", inline=True)
         await member.send(embed=embed)
-
-        # list events as empty commands so people can see what auto-responses exist which will be shown in the help page
-    @commands.command(
-        name='Auto-Responses',
-        description='Everything listed within the `Events` section are the words that the bot will respond to.'
-    )
-    @commands.is_owner()
-    async def responseplaceholder(self, ctx):
-        return
-
-    @commands.command(
-        name='meaning of O_O',
-        description='\uFEFF'
-    )
-    @commands.is_owner()
-    async def meaningplaceholder(self, ctx):
-        return
-
-    @commands.command(
-        name='yo',
-        description='\uFEFF'
-    )
-    @commands.is_owner()
-    async def yo1placeholder(self, ctx):
-        return
-
-    @commands.command(
-        name='Yo',
-        description='\uFEFF'
-    )
-    @commands.is_owner()
-    async def yo2placeholder(self, ctx):
-        return
-
-    @commands.command(
-        name='L',
-        description='\uFEFF'
-    )
-    @commands.is_owner()
-    async def lplaceholder(self, ctx):
-        return
 
 
 def setup(bot):
