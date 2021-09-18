@@ -2,10 +2,8 @@ import json
 import os
 
 import discord
-import discord_slash
 import requests
 from discord.ext import commands
-from discord_slash import SlashCommand, SlashContext, cog_ext
 from .slash import guild_ids
 
 client = commands.Bot(command_prefix='£')
