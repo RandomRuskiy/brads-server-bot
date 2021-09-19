@@ -5,6 +5,12 @@ from pathlib import Path
 import discord
 from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
+import subprocess
+import time
+import traceback
+import random
+import csv
+import asyncio
 
 from keep_alive import keep_alive
 
@@ -34,6 +40,7 @@ intents.members = True
 intents.messages = True
 client = commands.Bot(command_prefix='£', intents=intents)
 TOKEN = os.getenv('TOKEN')
+guild_ids = [720743461959237722, 875804519605370911]
 
 extentions = ['cogs.Embeds',
               'cogs.Config',
@@ -61,6 +68,67 @@ async def on_ready():
 
 client.remove_command('help')
 client.remove_command('unban')
+
+
+class Commands():
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    async def slashtest(text: str):
+        await ctx.send(text)
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    @commands.cooldown(rate=1, per=30)
+    async def setstatus(text: str):
+        activity = discord.Game(name=text)
+        await client.change_presence(
+            status=discord.Status.online,
+            activity=activity
+        )
+        await ctx.send(f'yo my status is now **"{text}"**')
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.cooldown(rate=1, per=15)
+    async def mentalhealthquote(ctx):
+        with open('data/quotes.dat', newline='') as csvfile:
+            spamreader = csv.reader(csvfile, delimiter=';')
+            random_row = random.choice(list(spamreader))
+            lis_str = ' '.join(random_row)
+            res_str = lis_str.replace('"', '')
+            sec_str = res_str.replace('[', '')
+            res_quote = sec_str.replace(']', '')
+            await ctx.send(res_quote)
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    async def bash(ctx, input: str):
+        if input != 'cat':
+            cmd = subprocess.run(['bash', '-c', input], capture_output=True)
+            out = cmd.stdout.decode()
+            err = cmd.stderr.decode()
+            if cmd.returncode == 0:
+                await ctx.send(f'{input}: `{out}`')
+                pass
+
+            elif cmd.returncode != 0:
+                await ctx.send(f'Error: `{err}`')
+                pass
+
+        else:
+            await ctx.send(
+                'The command you tried to run needs a varible otherwise it will crash the bot lmao'
+            )
+            pass
+
 
 # keep this at bottom
 
