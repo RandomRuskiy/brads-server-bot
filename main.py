@@ -11,6 +11,7 @@ import traceback
 import random
 import csv
 import asyncio
+from cogs.slash import guild_ids
 
 from keep_alive import keep_alive
 
@@ -40,7 +41,6 @@ intents.members = True
 intents.messages = True
 client = commands.Bot(command_prefix='£', intents=intents)
 TOKEN = os.getenv('TOKEN')
-guild_ids = [720743461959237722, 875804519605370911]
 
 extentions = ['cogs.Embeds',
               'cogs.Config',
