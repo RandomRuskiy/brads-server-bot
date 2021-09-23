@@ -76,7 +76,7 @@ class Commands():
         guild_ids=guild_ids
     )
     @commands.is_owner()
-    async def slashtest(text: str):
+    async def slashtest(ctx, text: str):
         await ctx.send(text)
 
     @client.slash_command(
@@ -84,7 +84,7 @@ class Commands():
     )
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
-    async def setstatus(text: str):
+    async def setstatus(ctx, text: str):
         activity = discord.Game(name=text)
         await client.change_presence(
             status=discord.Status.online,
