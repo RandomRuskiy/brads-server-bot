@@ -62,13 +62,13 @@ class Events(commands.Cog):
                 elif admin_role is not None:
                     if message.content == 'am i admin':
                         await message.channel.send('yo you are admin')
-                        await message.channel.send(message.author.roles)
+                        #await message.channel.send(message.author.roles)
                         return
 
                 elif admin_role is None:
                     if message.content == 'am i admin':
                         await message.channel.send('L you are not admin')
-                        await message.channel.send(f'Roles: {message.author.roles}')
+                        #await message.channel.send(f'Roles: {message.author.roles}')
                         return
                 return
 
