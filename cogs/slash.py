@@ -5,17 +5,26 @@ import random
 import subprocess
 import time
 import traceback
+import socket
 
 import discord
 from discord.ext import commands
 
-client = commands.Bot(
-    command_prefix='£',
-    debug_guild=875804519605370911
-)
-guild_ids = [834037980883582996]  # << brads server id
+# guild_ids = [834037980883582996]  # << brads server id
 # guild_ids = [720743461959237722, 875804519605370911]
 # ^^ my test server id. change if your testing elsewhere
+
+hostname = socket.gethostname()
+if hostname == 'ruskiy-linux.lan':
+    guild_ids = [720743461959237722, 875804519605370911]
+
+else:
+   guild_ids = [834037980883582996] 
+
+client = commands.Bot(
+        command_prefix='£',
+        debug_guild=guild_ids
+)
 
 
 class Slash(commands.Cog):

@@ -28,7 +28,7 @@ class Events(commands.Cog):
     async def on_message(self, message):
         if message.author != self.bot.user or message.author != discord.User.bot:  # only respond if user is not self or another bot
 
-            admin_role = None
+            admin_perm = None 
             for x in admin_ids:
                 admin_role = discord.utils.get(message.author.roles, id=x)
 
@@ -62,11 +62,13 @@ class Events(commands.Cog):
                 elif admin_role is not None:
                     if message.content == 'am i admin':
                         await message.channel.send('yo you are admin')
+                        await message.channel.send(message.author.roles)
                         return
 
                 elif admin_role is None:
                     if message.content == 'am i admin':
                         await message.channel.send('L you are not admin')
+                        await message.channel.send(f'Roles: {message.author.roles}')
                         return
                 return
 
