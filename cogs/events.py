@@ -27,14 +27,24 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message):
         if message.author != self.bot.user or message.author != discord.User.bot:  # only respond if user is not self or another bot
+            
+            def has_admin_role(message):
+                a1 = discord.utils.get(message.author.roles, id=879381563740147763)
+                a2 = discord.utils.get(message.author.roles, id=868107974655238185)
+                a3 = discord.utils.get(message.author.roles, id=835960034331590666)
+                if a1 or a2 or a3 is True:
+                    return True
+                else:
+                    return False
 
-            admin_perm = None 
-            for x in admin_ids:
-                admin_role = discord.utils.get(message.author.roles, id=x)
+            admin_role = has_admin_role(message)
+
+#            for x in admin_ids:
+#                admin_role = discord.utils.get(message.author.roles, id=x)
 
             if message.channel.name == 'general' or message.channel.name != 'general' or message.author != discord.User.bot:
                 if message.content == '.test respond':
-                    await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {admin_role}')
+                    await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {has_admin_role(message)}')
                     return
 
                 elif message.content == 'yo im saying something':
@@ -59,13 +69,13 @@ class Events(commands.Cog):
                     await message.channel.send('L')
                     return
 
-                elif admin_role is not None:
+                elif admin_role is True:
                     if message.content == 'am i admin':
                         await message.channel.send('yo you are admin')
                         #await message.channel.send(message.author.roles)
                         return
 
-                elif admin_role is None:
+                elif admin_role is False:
                     if message.content == 'am i admin':
                         await message.channel.send('L you are not admin')
                         #await message.channel.send(f'Roles: {message.author.roles}')
