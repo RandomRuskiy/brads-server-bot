@@ -70,7 +70,7 @@ client.remove_command('help')
 client.remove_command('unban')
 
 
-class Commands():
+class Commands():  # having to put all slash commands in main file as py-cord doesnt yet support them in cogs.
 
     @client.slash_command(
         guild_ids=guild_ids
@@ -106,6 +106,10 @@ class Commands():
             res_quote = sec_str.replace(']', '')
             await ctx.send(res_quote)
 
+    ############################
+    # START OF CONFIG COMMANDS #
+    ############################
+
     @client.slash_command(
         guild_ids=guild_ids
     )
@@ -128,6 +132,10 @@ class Commands():
                 'The command you tried to run needs a varible otherwise it will crash the bot lmao'
             )
             pass
+
+    #########################
+    # START OF MOD COMMANDS #
+    #########################
 
     @client.slash_command(
         guild_ids=guild_ids
@@ -245,8 +253,12 @@ class Commands():
             await user.remove_roles(mute_role, reason='Mute manually removed')
             await ctx.send(f'Unmuted {user}')
 
+    #######################
+    # END OF ALL COMMANDS #
+    #######################
 
 # keep this at bottom
+
 
 if __name__ == "__main__":
     # When running this file, if it is the 'main' file
