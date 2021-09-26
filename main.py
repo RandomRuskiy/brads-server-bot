@@ -84,13 +84,28 @@ class Commands():  # having to put all slash commands in main file as py-cord do
     )
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
-    async def setstatus(ctx, text: str):
+    async def setstream(ctx, text: str):
         activity = discord.Streaming(name=text, url="https://www.twitch.tv/brad_04_")
         await client.change_presence(
             status=discord.Status.online,
             activity=activity
         )
         await ctx.send(f'yo my status is now **"{text}"**')
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    @commands.cooldown(rate=1, per=30)
+    async def setgame(ctx, text: str):
+        activity = discord.Game(name=text)
+        await client.change_presence(
+            status=discord.Status.online,
+            activity=activity
+        )
+        await ctx.send(f'yo my status is now **"{text}"**')
+
+
 
     @client.slash_command(
         guild_ids=guild_ids
