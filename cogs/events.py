@@ -51,9 +51,12 @@ class Events(commands.Cog):
                     await message.channel.send('yo im responding')
                     return
 
-                elif message.content == 'meaning of O_O':
-                    await message.channel.send('Brad is shocked or ran out of things to say lmao')
-                    return
+                elif message.content == 'destiny 2':
+                    if admin_role is True:
+                        await message.channel.send('Brad is shocked or ran out of things to say lmao')
+                        return
+                    else:
+                        pass
 
                 elif message.content == 'yo':
                     ctx = await self.bot.get_context(message)
