@@ -90,7 +90,7 @@ class Commands():  # having to put all slash commands in main file as py-cord do
             status=discord.Status.online,
             activity=activity
         )
-        await ctx.send(f'yo my status is now **"{text}"**')
+        await ctx.send(f'yo watching live: **"{text}"**')
 
     @client.slash_command(
         guild_ids=guild_ids
@@ -103,8 +103,33 @@ class Commands():  # having to put all slash commands in main file as py-cord do
             status=discord.Status.online,
             activity=activity
         )
-        await ctx.send(f'yo my status is now **"{text}"**')
+        await ctx.send(f'yo im now playing: **"{text}"**')
 
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    @commands.cooldown(rate=1, per=30)
+    async def setwatching(ctx, text: str):
+        activity = discord.Watching(name=text)
+        await client.change_presence(
+            status=discord.Status.online,
+            activity=activity
+        )
+        await ctx.send(f'yo im now watching: **"{text}"**')
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    @commands.cooldown(rate=1, per=30)
+    async def setlistening(ctx, text: str):
+        activity = discord.Listening(name=text)
+        await client.change_presence(
+            status=discord.Status.online,
+            activity=activity
+        )
+        await ctx.send(f'yo im now Listening to: **"{text}"**')
 
 
     @client.slash_command(
