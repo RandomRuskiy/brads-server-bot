@@ -53,7 +53,7 @@ class Events(commands.Cog):
 
                 elif message.content == 'destiny 2':
                     if admin_role is True:
-                        await message.channel.send('Brad is shocked or ran out of things to say lmao')
+                        await message.channel.send('shit game smh  brad would rather do your mother :troll:')
                         return
                     else:
                         pass
