@@ -111,7 +111,7 @@ class Commands():  # having to put all slash commands in main file as py-cord do
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
     async def setwatching(ctx, text: str):
-        activity = discord.Watching(name=text)
+        activity = discord.Activity(type=discord.ActivityType.watching, name=text))
         await client.change_presence(
             status=discord.Status.online,
             activity=activity
@@ -124,7 +124,7 @@ class Commands():  # having to put all slash commands in main file as py-cord do
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
     async def setlistening(ctx, text: str):
-        activity = discord.Listening(name=text)
+        activity = discord.Activity(type=discord.ActivityType.listening, name=text))
         await client.change_presence(
             status=discord.Status.online,
             activity=activity
