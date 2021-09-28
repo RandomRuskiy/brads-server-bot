@@ -173,6 +173,14 @@ class Commands():  # having to put all slash commands in main file as py-cord do
             )
             pass
 
+    @client.command(
+            name = 'file'
+            )
+    @commands.is_owner()
+    async def file(ctx, filename: str):
+        await ctx.send(file=discord.File(rf'./{filename}'))
+
+
     #########################
     # START OF MOD COMMANDS #
     #########################
