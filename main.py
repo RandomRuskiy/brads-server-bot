@@ -11,7 +11,7 @@ import traceback
 import random
 import csv
 import asyncio
-from cogs.slash import guild_ids
+from cogs.slash import guild_ids, bot_user
 
 from keep_alive import keep_alive
 
@@ -77,7 +77,7 @@ class Commands():  # having to put all slash commands in main file as py-cord do
     )
     @commands.is_owner()
     async def slashtest(ctx, text: str):
-        await ctx.send(text)
+        await ctx.send(f"{ctx.author.id}")
 
     @client.slash_command(
         guild_ids=guild_ids
@@ -161,17 +161,14 @@ class Commands():  # having to put all slash commands in main file as py-cord do
             err = cmd.stderr.decode()
             if cmd.returncode == 0:
                 await ctx.send(f'{input}: `{out}`')
-                pass
 
             elif cmd.returncode != 0:
                 await ctx.send(f'Error: `{err}`')
-                pass
 
         else:
             await ctx.send(
                 'The command you tried to run needs a varible otherwise it will crash the bot lmao'
             )
-            pass
 
     @client.command(
             name = 'file'
@@ -189,12 +186,12 @@ class Commands():  # having to put all slash commands in main file as py-cord do
         guild_ids=guild_ids
     )
     @commands.has_permissions(ban_members=True)
-    async def ban(self, ctx, user: discord.Member = None, *, reason=None):
+    async def ban(ctx, user: discord.Member = None, *, reason=None):
         if user is None or user == ctx.author:
             await ctx.send("lol you cant ban yourself")
             return
 
-        elif user == self.bot.user:
+        elif discord.ClientUser.id == bot_user:
             await ctx.send("why you try ban me :(")
             return
 
@@ -202,6 +199,7 @@ class Commands():  # having to put all slash commands in main file as py-cord do
             reason = "No reson specified"
         message = f"You have been banned from **{ctx.guild.name}** for **{reason}**"
         await ctx.guild.ban(user, reason=reason)
+        print(ctx.author.id)
         await ctx.send(f"**{user}** has been banned!")
 
     @client.slash_command(

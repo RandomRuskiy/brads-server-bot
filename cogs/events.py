@@ -44,7 +44,7 @@ class Events(commands.Cog):
 
             if message.channel.name == 'general' or message.channel.name != 'general' or message.author != discord.User.bot:
                 if message.content == '.test respond':
-                    await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {has_admin_role(message)}')
+                    await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {has_admin_role(message)} and {discord.ClientUser.id}')
                     return
 
                 elif message.content == 'yo im saying something':
