@@ -192,7 +192,7 @@ class Commands():  # having to put all slash commands in main file as py-cord do
             return
 
         elif discord.ClientUser.id == bot_user:
-            await ctx.send("why you try ban me :(")
+            await ctx.send("why you try ban me :( im gonna sue")
             return
 
         elif reason is None:
