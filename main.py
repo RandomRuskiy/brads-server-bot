@@ -309,10 +309,10 @@ client.remove_command('unban')
 if __name__ == "__main__":
     # When running this file, if it is the 'main' file
     # I.E its not being imported from another python file run this
-    #for file in os.listdir(cwd + "/cogs"):
-        #if file.endswith(".py") and not file.startswith("_"):
-           # client.load_extension(f"cogs.{file[:-3]}")
-    client.load_extension("cogs.config")
+    for file in os.listdir(cwd + "/cogs"):
+        if file.endswith(".py") and not file.startswith("_"):
+            client.load_extension(f"cogs.{file[:-3]}")
+    #client.load_extension("cogs.config")
 
 keep_alive()
 client.run(TOKEN)
