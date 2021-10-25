@@ -42,7 +42,7 @@ class Slash(commands.Cog):
         guild_ids=guild_ids
     )
     @commands.is_owner()
-    async def slashtest(ctx, *, text: str):
+    async def slashtest(self, ctx, *, text: str):
         await ctx.send(text)
 
     @client.slash_command(
@@ -50,7 +50,7 @@ class Slash(commands.Cog):
     )
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
-    async def setstatusslash(ctx, *, text: str):
+    async def setstatusslash(self, ctx, *, text: str):
         activity = discord.Game(name=text)
         await self.bot.change_presence(status=discord.Status.online,
                                        activity=activity)
@@ -60,7 +60,7 @@ class Slash(commands.Cog):
         guild_ids=guild_ids
     )
     @commands.cooldown(rate=1, per=15)
-    async def mentalhealthquote(ctx):
+    async def mentalhealthquote(self, ctx):
         with open('data/quotes.dat', newline='') as csvfile:
             spamreader = csv.reader(csvfile, delimiter=';')
             random_row = random.choice(list(spamreader))
@@ -74,7 +74,7 @@ class Slash(commands.Cog):
         guild_ids=guild_ids
     )
     @commands.is_owner()
-    async def bash(ctx, *, input: str):
+    async def bash(self, ctx, *, input: str):
         if input != 'cat':
             cmd = subprocess.run(['bash', '-c', input], capture_output=True)
             out = cmd.stdout.decode()
@@ -97,7 +97,7 @@ class Slash(commands.Cog):
         guild_ids=guild_ids
     )
     @commands.is_owner()
-    async def file(ctx, *, filename: str):
+    async def file(self, ctx, *, filename: str):
         await ctx.send(file=discord.File(rf'./{filename}'))
 
     # errors go here
