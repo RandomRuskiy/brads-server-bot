@@ -70,7 +70,7 @@ client.remove_command('help')
 client.remove_command('unban')
 
 
-class Commands():  # having to put all slash commands in main file as py-cord doesnt yet support them in cogs.
+'''class Commands():  # having to put all slash commands in main file as py-cord doesnt yet support them in cogs.
 
     @client.slash_command(
         guild_ids=guild_ids
@@ -297,7 +297,7 @@ class Commands():  # having to put all slash commands in main file as py-cord do
             await ctx.send('That user isnt muted smh')
         else:
             await user.remove_roles(mute_role, reason='Mute manually removed')
-            await ctx.send(f'Unmuted {user}')
+            await ctx.send(f'Unmuted {user}')'''
 
     #######################
     # END OF ALL COMMANDS #
