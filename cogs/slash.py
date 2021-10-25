@@ -19,7 +19,8 @@ print(hostname)
 if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A':
     guild_ids = [720743461959237722, 875804519605370911]
     bot_user = 854401220537745408
-else:
+
+if hostname == 'raspberrypi':
    guild_ids = [834037980883582996]
    bot_user = 867713807291908137
 
