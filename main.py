@@ -314,5 +314,6 @@ if __name__ == "__main__":
             client.load_extension(f"cogs.{file[:-3]}")
     #client.load_extension("cogs.config")
 
-keep_alive()
+#keep_alive() # replit thing
+print(guild_ids)
 client.run(TOKEN)
