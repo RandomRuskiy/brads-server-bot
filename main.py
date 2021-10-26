@@ -63,9 +63,17 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_ready():
-    f = open("/home/pi/code/brads-server-bot/data/laststatus.dat", "r")
-    status = str(f.readline())
-    await client.change_presence(status = discord.Status.online, activity=discord.Game(name=status))
+    with open("data/laststatus.json") as f:
+        data = json.loads(f)
+    if data["activityType"] == "Game":
+        activity = discord.Game(name=data["activityName"])
+    elif data["activityType"] == "Watching":
+        activity = discord.Activity(type=discord.ActivityType.watching, name=data["activityName"])
+    elif data["activityType"] == "Streaming":
+        activity = discord.Streaming(name=data["activityName"], url="https://www.twitch.tv/brad_04_")
+    elif data["activityType"] == "Listening":
+        activity = discord.Activity(type=discord.ActivityType.listening, name=data["activityName"])
+    await client.change_presence(status=discord.Status.online, activity=activity)
     print('yo the bot is on now\n-----')
 
 client.remove_command('help')

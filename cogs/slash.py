@@ -6,6 +6,7 @@ import subprocess
 import time
 import traceback
 import socket
+import json
 
 import discord
 from discord.ext import commands
@@ -29,6 +30,12 @@ client = commands.Bot(
         debug_guild=guild_ids
 )
 
+def save_status(atype: str, aname: str):
+    with open("data/laststatus.json", "w") as f:
+        data = json.load(f)
+    act_dict = {"activityType": f"{atype}", "activityName": f"{aname}"}
+    json.dump(act_dict, data)
+
 
 class Slash(commands.Cog):
     def __init__(self, bot):
@@ -45,19 +52,17 @@ class Slash(commands.Cog):
     async def slashtest(self, ctx, *, text: str):
         await ctx.send(text)
 
-    '''@client.slash_command(
+    @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
     async def setstatusslash(self, ctx, *, text: str):
         activity = discord.Game(name=text)
-        act = open("data/laststatus.dat", "w")
-        act.write(text)
+        save_status("Game", text)
         await self.bot.change_presence(status=discord.Status.online,
                                        activity=activity)
         await ctx.send(f'yo my status is now **"{text}"**')
-        act.close()'''
 
     @client.slash_command(
         guild_ids=guild_ids
