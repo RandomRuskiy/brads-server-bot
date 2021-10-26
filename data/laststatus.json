@@ -1,8 +1,6 @@
 {
-    "status" : [
-        {
-            "activityType" : "Game",
-            "activityName" : "This Bot is so cool :D"
-        }
-    ]
+    
+    "activityType" : "Game",
+    "activityName" : "This Bot is so cool :D"    
+    
 }
