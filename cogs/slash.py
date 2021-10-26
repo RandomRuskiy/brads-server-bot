@@ -45,7 +45,7 @@ class Slash(commands.Cog):
     async def slashtest(self, ctx, *, text: str):
         await ctx.send(text)
 
-    @client.slash_command(
+    '''@client.slash_command(
         guild_ids=guild_ids
     )
     @commands.is_owner()
@@ -57,6 +57,54 @@ class Slash(commands.Cog):
         await self.bot.change_presence(status=discord.Status.online,
                                        activity=activity)
         await ctx.send(f'yo my status is now **"{text}"**')
+        act.close()'''
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    @commands.cooldown(rate=1, per=30)
+    async def setstream(ctx, text: str):
+        activity = discord.Streaming(name=text, url="https://www.twitch.tv/brad_04_")
+        act = open("data/laststatus.dat", "w")
+        act.write(text)
+        await client.change_presence(
+            status=discord.Status.online,
+            activity=activity
+        )
+        await ctx.respond(f'yo watching live: **"{text}"**')
+        act.close()
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    @commands.cooldown(rate=1, per=30)
+    async def setgame(ctx, text: str):
+        activity = discord.Game(name=text)
+        act = open("data/laststatus.dat", "w")
+        act.write(text)
+        await client.change_presence(
+            status=discord.Status.online,
+            activity=activity
+        )
+        await ctx.respond(f'yo im now playing: **"{text}"**')
+        act.close()
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    @commands.cooldown(rate=1, per=30)
+    async def setwatching(ctx, text: str):
+        activity = discord.Activity(type=discord.ActivityType.watching, name=text)
+        act = open("data/laststatus.dat", "w")
+        act.write(text)
+        await client.change_presence(
+            status=discord.Status.online,
+            activity=activity
+        )
+        await ctx.respond(f'yo im now watching: **"{text}"**')
         act.close()
 
     @client.slash_command(
