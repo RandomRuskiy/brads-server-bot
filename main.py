@@ -63,8 +63,9 @@ async def on_command_error(ctx, error):
 
 @client.event
 async def on_ready():
-    file = open("data.laststatus", "r")
-    await client.change_presence(status = discord.Status.online, activity=f.readline())
+    f = open("/home/pi/code/brads-server-bot/data/laststatus", "r")
+    print(f.readline())
+    await client.change_presence(status = discord.Status.online, activity=discord.Game(name=f"{f.readline()}"))
     print('yo the bot is on now\n-----')
 
 client.remove_command('help')
