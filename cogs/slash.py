@@ -80,7 +80,7 @@ class Slash(commands.Cog):
             out = cmd.stdout.decode()
             err = cmd.stderr.decode()
             if cmd.returncode == 0:
-                await ctx.send(f'{input}: `{out}`')
+                await ctx.send(f'{input}:\n``` {out} ```')
                 pass
 
             elif cmd.returncode != 0:
