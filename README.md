@@ -12,3 +12,9 @@ If your wanting to contribute code to the bot, clone the repo, do what you want 
 ![data/quotes.dat](/data/res/quotes-example.png)
 
 **If you have any questions, either make an issue thread, or if you really need too, DM either RandomRuskiy or Brad.**
+
+## TODO
+
+- [ ] Have the activity type update when saving latest set status
+- [ ] Get more quotes added to the `/mentalhealthquote` command
+- [ ] Overhaul the auto-responses so they can be put into separate channels etc more easily. i.e just section it all out more
