@@ -110,6 +110,22 @@ class Slash(commands.Cog):
     @client.slash_command(
         guild_ids=guild_ids
     )
+    @commands.is_owner()
+    @commands.cooldown(rate=1, per=30)
+    async def setlistening(ctx, text: str):
+        activity = discord.Activity(type=discord.ActivityType.listening, name=text)
+        act = open("data/laststatus.dat", "w")
+        act.write(text)
+        await client.change_presence(
+            status=discord.Status.online,
+            activity=activity
+        )
+        await ctx.send(f'yo im now Listening to: **"{text}"**')
+        act.close()
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
     @commands.cooldown(rate=1, per=15)
     async def mentalhealthquote(self, ctx):
         with open('data/quotes.dat', newline='') as csvfile:
