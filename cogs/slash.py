@@ -31,10 +31,10 @@ client = commands.Bot(
 )
 
 def save_status(atype: str, aname: str):
-    with open("data/laststatus.json", "w") as f:
-        data = json.load(f)
     act_dict = {"activityType": f"{atype}", "activityName": f"{aname}"}
-    json.dump(act_dict, data)
+    with open("data/laststatus.json", "w") as f:
+        json.dump(act_dict, f)
+    f.close()
 
 
 class Slash(commands.Cog):
@@ -62,71 +62,63 @@ class Slash(commands.Cog):
         save_status("Game", text)
         await self.bot.change_presence(status=discord.Status.online,
                                        activity=activity)
-        await ctx.send(f'yo my status is now **"{text}"**')
+        await ctx.respond(f'yo my status is now **"{text}"**')
 
     @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
-    async def setstream(ctx, text: str):
+    async def setstream(self, ctx, *, text: str):
         activity = discord.Streaming(name=text, url="https://www.twitch.tv/brad_04_")
-        act = open("data/laststatus.dat", "w")
-        act.write(text)
-        await client.change_presence(
+        save_status("Streaming", text)
+        await self.bot.change_presence(
             status=discord.Status.online,
             activity=activity
         )
         await ctx.respond(f'yo watching live: **"{text}"**')
-        act.close()
 
     @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
-    async def setgame(ctx, text: str):
+    async def setgame(self, ctx, *, text: str):
         activity = discord.Game(name=text)
-        act = open("data/laststatus.dat", "w")
-        act.write(text)
-        await client.change_presence(
+        save_status("Game", text)
+        await self.bot.change_presence(
             status=discord.Status.online,
             activity=activity
         )
         await ctx.respond(f'yo im now playing: **"{text}"**')
-        act.close()
 
     @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
-    async def setwatching(ctx, text: str):
+    async def setwatching(self, ctx, *, text: str):
         activity = discord.Activity(type=discord.ActivityType.watching, name=text)
-        act = open("data/laststatus.dat", "w")
-        act.write(text)
-        await client.change_presence(
+        save_status("Watching", text)
+        await self.bot.change_presence(
             status=discord.Status.online,
             activity=activity
         )
         await ctx.respond(f'yo im now watching: **"{text}"**')
-        act.close()
 
     @client.slash_command(
         guild_ids=guild_ids
     )
     @commands.is_owner()
     @commands.cooldown(rate=1, per=30)
-    async def setlistening(ctx, text: str):
+    async def setlistening(self, ctx, *, text: str):
         activity = discord.Activity(type=discord.ActivityType.listening, name=text)
-        act = open("data/laststatus.dat", "w")
-        act.write(text)
-        await client.change_presence(
+        save_status("Listening", text)
+        await self.bot.change_presence(
             status=discord.Status.online,
             activity=activity
         )
-        await ctx.send(f'yo im now Listening to: **"{text}"**')
-        act.close()
+        await ctx.respond(f'yo im now Listening to: **"{text}"**')
 
     @client.slash_command(
         guild_ids=guild_ids

@@ -65,7 +65,7 @@ async def on_command_error(ctx, error):
 @client.event
 async def on_ready():
     with open("data/laststatus.json") as f:
-        data = json.loads(f)
+        data = json.load(f)
     if data["activityType"] == "Game":
         activity = discord.Game(name=data["activityName"])
     elif data["activityType"] == "Watching":
@@ -76,6 +76,7 @@ async def on_ready():
         activity = discord.Activity(type=discord.ActivityType.listening, name=data["activityName"])
     await client.change_presence(status=discord.Status.online, activity=activity)
     print('yo the bot is on now\n-----')
+    f.close()
 
 client.remove_command('help')
 client.remove_command('unban')
