@@ -5,3 +5,4 @@ __pycache__
 brads-server-bot.code-workspace
 messages.log
 data/tb.txt
+data/laststatus.json
