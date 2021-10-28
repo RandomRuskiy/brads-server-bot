@@ -19,7 +19,7 @@ admin_ids = [835960034331590666, 842689593052889098, 868107974655238185, 8793815
 def is_bot(message):
     if message.author == bot_user:
         return True
-    elif message.author == discord.User.bot:
+    elif message.author.bot is True:
         return True
     else:
         return False
@@ -87,9 +87,6 @@ class Events(commands.Cog):
                         await message.channel.send('yo you are admin')
                     else:
                         await message.channel.send('L your are not admin')
-
-                elif message.author.bot is True:
-                    print(f'yo a bot just sent a message in {message.channel.name}')
             return
 
     @commands.Cog.listener()
