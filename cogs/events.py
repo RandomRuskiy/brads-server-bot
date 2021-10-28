@@ -88,7 +88,7 @@ class Events(commands.Cog):
                     else:
                         await message.channel.send('L your are not admin')
 
-                elif message.author == discord.User.bot:
+                elif discord.User.bot(message) is True:
                     print(f'yo a bot just sent a message in {message.channel.name}')
                 return
 
