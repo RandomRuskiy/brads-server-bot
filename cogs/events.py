@@ -1,7 +1,10 @@
+import json
+
 import discord
 from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
 from lib.colours import BasicColours as colour
+
 from cogs.slash import bot_user
 
 # self.spam_control = commands.CooldownMapping.from_cooldown()
@@ -20,6 +23,19 @@ def is_bot(message):
     if message.author == bot_user:
         return True
     elif message.author.bot is True:
+        return True
+    else:
+        return False
+
+
+def banned_words(message):
+    with open("data/banned_words.json") as f:
+        words = json.load(f)
+    bad_words = words["banned_words"]
+    res = [ele for ele in bad_words if(ele in message.content.lower())]
+    if bool(res) is True:
+        print(bad_words)
+        print(f"found banned word in {message.content}")
         return True
     else:
         return False
@@ -87,6 +103,10 @@ class Events(commands.Cog):
                         await message.channel.send('yo you are admin')
                     else:
                         await message.channel.send('L your are not admin')
+
+                elif banned_words(message) is True:
+                    await message.delete()
+                    await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
             return
 
     @commands.Cog.listener()

@@ -20,10 +20,12 @@ print(hostname)
 if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A':
     guild_ids = [720743461959237722, 875804519605370911]
     bot_user = 854401220537745408
+    log_channel = 720743462508691639
 
 if hostname == 'raspberrypi':
-    guild_ids = [834037980883582996]
+    guild_ids = [834037980883582996, 795738345745547365]
     bot_user = 867713807291908137
+    log_channel = 851170405356011520
 
 client = commands.Bot(
     command_prefix='£',
