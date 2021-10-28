@@ -22,13 +22,14 @@ if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A':
     bot_user = 854401220537745408
 
 if hostname == 'raspberrypi':
-   guild_ids = [834037980883582996]
-   bot_user = 867713807291908137
+    guild_ids = [834037980883582996]
+    bot_user = 867713807291908137
 
 client = commands.Bot(
-        command_prefix='£',
-        debug_guild=guild_ids
+    command_prefix='£',
+    debug_guild=guild_ids
 )
+
 
 def save_status(atype: str, aname: str):
     act_dict = {"activityType": f"{atype}", "activityName": f"{aname}"}

@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
 from lib.colours import BasicColours as colour
+from cogs.slash import bot_user
 
 # self.spam_control = commands.CooldownMapping.from_cooldown()
 
@@ -15,6 +16,15 @@ client = commands.Bot(
 admin_ids = [835960034331590666, 842689593052889098, 868107974655238185, 879381563740147763]
 
 
+def is_bot(message):
+    if message.author == bot_user:
+        return True
+    elif message.author == discord.User.bot:
+        return True
+    else:
+        return False
+
+
 class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -26,8 +36,8 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if message.author != self.bot.user or message.author != discord.User.bot:  # only respond if user is not self or another bot
-            
+        if is_bot(message) is False:  # only respond if user is not self or another bot
+
             def has_admin_role(message):
                 a1 = discord.utils.get(message.author.roles, id=879381563740147763)
                 a2 = discord.utils.get(message.author.roles, id=868107974655238185)
@@ -53,7 +63,7 @@ class Events(commands.Cog):
 
                 elif message.content == 'destiny 2':
                     if admin_role is True:
-                        await message.channel.send('shit game smh  brad would rather do your mother :troll:')
+                        await message.channel.send('shit game smh brad would rather do your mother :troll:')
                         return
                     else:
                         pass
@@ -72,17 +82,11 @@ class Events(commands.Cog):
                     await message.channel.send('L')
                     return
 
-                elif admin_role is True:
-                    if message.content == 'am i admin':
+                elif message.content == 'am i admin':
+                    if admin_role is True:
                         await message.channel.send('yo you are admin')
-                        #await message.channel.send(message.author.roles)
-                        return
-
-                elif admin_role is False:
-                    if message.content == 'am i admin':
-                        await message.channel.send('L you are not admin')
-                        #await message.channel.send(f'Roles: {message.author.roles}')
-                        return
+                    else:
+                        await message.channel.send('L your are not admin')
                 return
 
     @commands.Cog.listener()
