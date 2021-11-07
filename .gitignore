@@ -6,3 +6,4 @@ brads-server-bot.code-workspace
 messages.log
 data/tb.txt
 data/laststatus.json
+data/banned_words.json
