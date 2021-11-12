@@ -146,19 +146,17 @@ class Slash(commands.Cog):
             cmd = subprocess.run(['bash', '-c', input], capture_output=True)
             out = cmd.stdout.decode()
             err = cmd.stderr.decode()
+            cmd_name = input.split()[0]
             if cmd.returncode == 0:
-                await ctx.respond(f'{input}:\n``` {out} ```')
-                pass
+                await ctx.respond(f'{cmd_name}:\n``` {out} ```')
 
             elif cmd.returncode != 0:
                 await ctx.respond(f'Error: `{err}`')
-                pass
 
         else:
             await ctx.send(
                 'The command you tried to run needs a varible otherwise it will crash the bot lmao'
             )
-            pass
 
     @client.slash_command(
         guild_ids=guild_ids
