@@ -114,7 +114,7 @@ class Events(commands.Cog):
             return
 
     @commands.Cog.listener()
-    async def on_member_join(self, member):
+    async def on_member_join(self, ctx, member):
         embed = discord.Embed(title="Welcome!", url="https://discord.com/channels/834037980883582996/878418546265313310/883713010768691273",
                               description=f"Welcome to Brads server, {member}! Please feel free to send a couple memes, cute pet photo's or intresting facts.", color=colour["green"])
         embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/867713807291908137/02e63019fc51f3ea2735f2e2d7acc49b.png?size=256")
@@ -148,7 +148,7 @@ class Events(commands.Cog):
                     )
             embed.add_field(
                     name="Member Count",
-                    value=discord.Guild.member_count,
+                    value=ctx.guild.member_count,
                     inline=True
                     )
             channel = discord.utils.get(member.guild.channels, id=873869752169271327)
