@@ -129,8 +129,7 @@ class Events(commands.Cog):
                     )
             embed.set_author(
                     name=member,
-                    icon_url=member.display_avatar,
-                    inline=False
+                    icon_url=member.display_avatar
                     )
             embed.add_field(
                     name="Name",
