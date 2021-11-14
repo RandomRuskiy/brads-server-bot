@@ -154,7 +154,7 @@ class Events(commands.Cog):
                     )
             channel = client.get_channel(873869752169271327)
             await channel.send(embed=embed)
-        join_msg(member)
+        await join_msg(member)
 
 
 
