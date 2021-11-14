@@ -151,7 +151,7 @@ class Events(commands.Cog):
                     value=discord.Guild.member_count,
                     inline=True
                     )
-            channel = client.get_channel(873869752169271327)
+            channel = discord.utils.get(member.guild.channels, id=873869752169271327)
             await channel.send(embed=embed)
         await join_msg(member)
 
