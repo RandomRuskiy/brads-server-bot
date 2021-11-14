@@ -1,4 +1,5 @@
 import json
+import time
 
 import discord
 from discord.ext import commands
@@ -17,7 +18,7 @@ client = commands.Bot(
 # owner_id = [645647583141822466, 683733441728217098]
 # owner_id = 683733441728217098
 admin_ids = [835960034331590666, 842689593052889098, 868107974655238185, 879381563740147763]
-msg_ban = 426467132272934912
+msg_ban = [426467132272934912]
 
 
 def is_bot(message):
@@ -120,7 +121,41 @@ class Events(commands.Cog):
         embed.add_field(name="Please make sure to to read and accept the rules to gain access to all other channels open to members", value="\uFEFF", inline=False)
         embed.add_field(name="Please don't promote any Other charity's or ask for us to get server members to go to any other server or website", value="Apart from all that, have fun :D", inline=True)
         await member.send(embed=embed)
-        pass
+        
+        async def join_msg(member):
+            embed = discord.Embed(
+                    colour=colour["green"],
+                    description=f"{member.mention} has joined!"
+                    )
+            embed.set_author(
+                    name=member,
+                    icon_url=member.display_avatar,
+                    inline=False
+                    )
+            embed.add_field(
+                    name="Name",
+                    value=f"{member} ({member.id}) {member.mention}",
+                    inline=False
+                    )
+            embed.add_field(
+                    name="Server Join Date",
+                    value=f"<t:{int(time.time())}>",
+                    inline=False
+                    )
+            embed.add_field(
+                    name="Creation Date",
+                    value=f"{member.created_at} (time in UTC)",
+                    inline=False
+                    )
+            embed.add_field(
+                    name="Member Count",
+                    value=discord.Guild.member_count,
+                    inline=True
+                    )
+            channel = client.get_channel(873869752169271327)
+            await channel.send(embed=embed)
+        join_msg(member)
+
 
 
 def setup(bot):
