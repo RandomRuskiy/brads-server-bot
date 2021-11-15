@@ -156,7 +156,40 @@ class Events(commands.Cog):
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send(embed=embed)
         await join_msg(member)
-
+    
+    @commands.Cog.listener()
+    async def on_member_leave(self, member):
+        async def leave_msg(member):
+            embed = discord.Embed(
+                    colour=colour["red"],
+                    description=f"{member} has left!"
+                    )
+            embed.set_author(
+                    name=member,
+                    icon_url=member.display_avatar
+                    )
+            embed.add_field(
+                    name="User Info",
+                    value= f"{member} ({member.id}) {member.mention}",
+                    inline=False
+                    )
+            embed.add_field(
+                    name="Roles",
+                    value=f"{member.roles[:-1]}",
+                    inline=False
+                    )
+            embed.add_field(
+                    name="Server Join Date",
+                    value=f"<t:{int(member.joined_at.timestamp)}> (<t:{member.joined_at.timestamp}:R>)",
+                    inline=False
+                    )
+            embed.add_field(
+                    name="Creation Date",
+                    value=f"<t:{int(member.created_at.timestamp())}> (<t:{int(member.created_at.timestamp())}:R>)"
+                    )
+            channel = discord.utils.get(member.guild.channels, id=member_channel)
+            await channel.send(embed=embed)
+        await leave_msg(member)
 
 
 def setup(bot):
