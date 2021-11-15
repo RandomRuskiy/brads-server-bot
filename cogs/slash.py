@@ -21,11 +21,13 @@ if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A':
     guild_ids = [720743461959237722, 875804519605370911]
     bot_user = 854401220537745408
     log_channel = 720743462508691639
+    member_channel = 720743462508691639
 
 if hostname == 'raspberrypi':
     guild_ids = [834037980883582996, 795738345745547365]
     bot_user = 867713807291908137
     log_channel = 851170405356011520
+    member_channel = 873869752169271327
 
 client = commands.Bot(
     command_prefix='£',
@@ -38,6 +40,13 @@ def save_status(atype: str, aname: str):
     with open("data/laststatus.json", "w") as f:
         json.dump(act_dict, f)
     f.close()
+
+def crash_cmd(input: str):
+    cmd = ["cat", "cowsay"]
+    if any(w == input for w in cmd):
+        return True
+    else:
+        return False
 
 
 class Slash(commands.Cog):
@@ -142,19 +151,19 @@ class Slash(commands.Cog):
     )
     @commands.is_owner()
     async def bash(self, ctx, *, input: str):
-        if input != 'cat':
+        if crash_cmd(input) is False:
             cmd = subprocess.run(['bash', '-c', input], capture_output=True)
             out = cmd.stdout.decode()
             err = cmd.stderr.decode()
             cmd_name = input.split()[0]
             if cmd.returncode == 0:
-                await ctx.respond(f'{cmd_name}:\n``` {out} ```')
+                await ctx.respond(f'{cmd_name}:\n```{out} ```')
 
             elif cmd.returncode != 0:
                 await ctx.respond(f'Error: `{err}`')
 
         else:
-            await ctx.send(
+            await ctx.respond(
                 'The command you tried to run needs a varible otherwise it will crash the bot lmao'
             )
 

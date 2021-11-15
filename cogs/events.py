@@ -6,7 +6,7 @@ from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
 from lib.colours import BasicColours as colour
 
-from cogs.slash import bot_user
+from cogs.slash import bot_user, member_channel
 
 # self.spam_control = commands.CooldownMapping.from_cooldown()
 
@@ -74,7 +74,8 @@ class Events(commands.Cog):
 
             if message.channel.name == 'general' or message.channel.name != 'general' or message.author != discord.User.bot:
                 if message.content == '.test respond':
-                    await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {has_admin_role(message)} and {discord.ClientUser.id}')
+                    ctx = await self.bot.get_context(message)
+                    await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {has_admin_role(message)} and {discord.ClientUser.id} and {ctx.guild.member_count}')
                     return
 
                 elif message.content == 'yo im saying something':
@@ -114,13 +115,14 @@ class Events(commands.Cog):
             return
 
     @commands.Cog.listener()
-    async def on_member_join(self, ctx, member):
+    async def on_member_join(self, member):
         embed = discord.Embed(title="Welcome!", url="https://discord.com/channels/834037980883582996/878418546265313310/883713010768691273",
                               description=f"Welcome to Brads server, {member}! Please feel free to send a couple memes, cute pet photo's or intresting facts.", color=colour["green"])
         embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/867713807291908137/02e63019fc51f3ea2735f2e2d7acc49b.png?size=256")
         embed.add_field(name="Please make sure to to read and accept the rules to gain access to all other channels open to members", value="\uFEFF", inline=False)
         embed.add_field(name="Please don't promote any Other charity's or ask for us to get server members to go to any other server or website", value="Apart from all that, have fun :D", inline=True)
         await member.send(embed=embed)
+        u = client.get_user(member.id)
         
         async def join_msg(member):
             embed = discord.Embed(
@@ -143,15 +145,15 @@ class Events(commands.Cog):
                     )
             embed.add_field(
                     name="Creation Date",
-                    value=f"{member.created_at} (time in UTC)",
+                    value=f"<t:{int(member.created_at.timestamp())}> (<t:{int(member.created_at.timestamp())}:R>)",
                     inline=False
                     )
             embed.add_field(
                     name="Member Count",
-                    value=ctx.guild.member_count,
+                    value=f"{member.guild.member_count}",
                     inline=True
                     )
-            channel = discord.utils.get(member.guild.channels, id=873869752169271327)
+            channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send(embed=embed)
         await join_msg(member)
 
