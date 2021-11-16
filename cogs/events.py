@@ -158,8 +158,8 @@ class Events(commands.Cog):
         await join_msg(member)
     
     @commands.Cog.listener()
-    async def on_member_leave(self, member):
-        async def leave_msg(member):
+    async def on_member_remove(self, member):
+        def leave_msg(member):
             embed = discord.Embed(
                     colour=colour["red"],
                     description=f"{member} has left!"
@@ -189,7 +189,8 @@ class Events(commands.Cog):
                     )
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send(embed=embed)
-        await leave_msg(member)
+        await leave_msg()
+
 
 
 def setup(bot):
