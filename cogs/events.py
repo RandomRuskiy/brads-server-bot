@@ -159,7 +159,7 @@ class Events(commands.Cog):
     
     @commands.Cog.listener()
     async def on_member_remove(self, member):
-        def leave_msg(member):
+        async def leave_msg(member):
             embed = discord.Embed(
                     colour=colour["red"],
                     description=f"{member} has left!"
