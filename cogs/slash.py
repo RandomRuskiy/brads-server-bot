@@ -22,12 +22,14 @@ if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A':
     bot_user = 854401220537745408
     log_channel = 720743462508691639
     member_channel = 720743462508691639
+    mute_id = 913878775329062982
 
 if hostname == 'raspberrypi':
     guild_ids = [834037980883582996, 795738345745547365]
     bot_user = 867713807291908137
     log_channel = 851170405356011520
     member_channel = 873869752169271327
+    mute_id = 879041072486035506
 
 client = commands.Bot(
     command_prefix='£',
@@ -62,7 +64,7 @@ class Slash(commands.Cog):
     )
     @commands.is_owner()
     async def slashtest(self, ctx, *, text: str):
-        await ctx.send(text)
+        await ctx.respond(text)
 
     @client.slash_command(
         guild_ids=guild_ids
@@ -144,7 +146,7 @@ class Slash(commands.Cog):
             res_str = lis_str.replace('"', '')
             sec_str = res_str.replace('[', '')
             res_quote = sec_str.replace(']', '')
-            await ctx.send(res_quote)
+            await ctx.respond(res_quote)
 
     @client.slash_command(
         guild_ids=guild_ids
@@ -172,7 +174,7 @@ class Slash(commands.Cog):
     )
     @commands.is_owner()
     async def file(self, ctx, *, filename: str):
-        await ctx.send(file=discord.File(rf'./{filename}'))
+        await ctx.respond(file=discord.File(rf'./{filename}'))
 
     # errors go here
 
