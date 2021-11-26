@@ -108,7 +108,7 @@ class Mod(commands.Cog):
 
                 else:
                    await ctx.send('put a correct duration smh')
-                    return
+                   return
 
             except Exception as e:
                 print(e)
