@@ -189,7 +189,7 @@ class Events(commands.Cog):
                     )
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send(embed=embed)
-        await leave_msg()
+        await leave_msg(member)
 
 
 

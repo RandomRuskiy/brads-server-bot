@@ -1,6 +1,8 @@
+import asyncio
+import json
+
 import discord
 from discord.ext import commands
-import asyncio
 
 from .slash import guild_ids
 
@@ -105,7 +107,7 @@ class Mod(commands.Cog):
                     seconds = seconds * 86400
 
                 else:
-                    ctx.send('put a correct duration smh')
+                   await ctx.send('put a correct duration smh')
                     return
 
             except Exception as e:
@@ -133,6 +135,14 @@ class Mod(commands.Cog):
         else:
             await user.remove_roles(mute_role, reason='Mute manually removed')
             await ctx.send(f'Unmuted {user}')
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.has_permissions(manage_messages=True)
+    async def banword(self, ctx, word: str):
+        # [TODO]: command to add a word to the banned words list
+        pass
 
 
 def setup(bot):
