@@ -78,7 +78,7 @@ class Mod(commands.Cog):
         guild_ids=guild_ids
     )
     @commands.has_permissions(manage_messages=True)
-    async def mute(self, ctx, user: discord.Member, time=None, reason=None):
+    async def mute(self, ctx, user: discord.User, time=None, reason=None):
         mute_role = discord.utils.get(user.roles, id=879041072486035506)
         if user is None or user == ctx.author:
             await ctx.send('You cant mute yourself')
