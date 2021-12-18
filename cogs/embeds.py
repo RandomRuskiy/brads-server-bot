@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from .slash import guild_ids
 
 # im seeing how to do cogs which will help make it look neater and so we shouldnt have to restart the bot everytime we make/edit a command
 
@@ -26,7 +27,8 @@ class Embeds(commands.Cog):
 
     @commands.slash_command(
         name='socials',
-        description="The links to all of Brad's social meadia accounts!"
+        description="The links to all of Brad's social meadia accounts!",
+        debug_guilds=guild_ids
     )
     @commands.cooldown(1, 30)
     async def socials(self, ctx):
