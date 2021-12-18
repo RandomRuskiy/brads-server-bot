@@ -24,10 +24,11 @@ class Embeds(commands.Cog):
         embed.add_field(name="If you want to know more about the charity, read here:", value="https://youngminds.org.uk/about-us/who-we-are/", inline=True)
         await ctx.send(embed=embed)
 
-    @commands.command(
-        name='socials',
+    @commands.slash_command(
+        name='Socials',
         description="The links to all of Brad's social meadia accounts!"
     )
+    @commands.cooldown(1, 30)
     async def socials(self, ctx):
         embed = discord.Embed(title="Here are the links for all my socials", color=0x06c4f4)
         embed.add_field(name="Twitch", value="https://www.twitch.tv/brad_04_", inline=False)
@@ -37,7 +38,7 @@ class Embeds(commands.Cog):
         embed.add_field(name="Instagram", value="https://www.instagram.com/brad_l._.l_/", inline=False)
         embed.set_footer(text="To Donate to me or YoungMinds do £support to donate to Brad and £Donate for YoungMinds")
         await ctx.channel.purge(limit=1)
-        await ctx.send(embed=embed)
+        await ctx.respond(f'{ctx.author.mention}', embed=embed)
 
     @commands.command(
         name='support',
@@ -71,9 +72,13 @@ class Embeds(commands.Cog):
 
     @github.error
     async def github_error(self, ctx, error):
-        print(error)
         if isinstance(error, commands.CommandOnCooldown):
-            await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+            await ctx.respond(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+
+    @socials.error
+    async def socials_error(self, ctx, error):
+        if isinstance(error, commands.CommandOnCooldown):
+            await ctx.respond(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry')
 
 
 def setup(bot):
