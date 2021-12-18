@@ -1,5 +1,6 @@
 import logging
 import os
+import sys
 from pathlib import Path
 import json
 
@@ -16,19 +17,21 @@ from cogs.slash import guild_ids, bot_user
 
 from keep_alive import keep_alive
 
-run = True
-
-if run is False:
-    exit()
+DEBUG = False
 
 logger = logging.getLogger('discord')
-logger.setLevel(logging.DEBUG)
+if DEBUG is True:
+    logger.setLevel(logging.DEBUG)
+    debug_handler = logging.StreamHandler(sys.stdout)
+    logger.addHandler(debug_handler)
+else:
+    logger.setLevel(logging.INFO)
 handler = logging.FileHandler(
     filename='discord.log',
     encoding='utf-8', mode='w'
 )
 handler.setFormatter(
-    logging.Formatter('%(asctime)s:%(levelname)s:%(name)s:%(message)s')
+    logging.Formatter('%(asctime)s: %(levelname)s: %(name)s: %(message)s ')
 )
 logger.addHandler(handler)
 
@@ -50,14 +53,15 @@ extentions = ['cogs.Embeds',
               'cogs.Slash',
               'cogs.Twitch',
               'cogs.Mod',
-              'cogs.Logs'
+              'cogs.Logs',
+              'cogs.lofi'
               ]
 
 
 @client.event
 async def on_command_error(ctx, error):
     # dump commmand errors to console for debug
-    pass
+    logger.error(error)
 
 # console status event
 
@@ -77,6 +81,9 @@ async def on_ready():
     await client.change_presence(status=discord.Status.online, activity=activity)
     print('yo the bot is on now\n-----')
     f.close()
+    logger.info(
+        msg="bot is ready"
+    )
 
 client.remove_command('help')
 client.remove_command('unban')
