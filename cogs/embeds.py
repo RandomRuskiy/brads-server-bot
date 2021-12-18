@@ -25,7 +25,7 @@ class Embeds(commands.Cog):
         await ctx.send(embed=embed)
 
     @commands.slash_command(
-        name='Socials',
+        name='socials',
         description="The links to all of Brad's social meadia accounts!"
     )
     @commands.cooldown(1, 30)
