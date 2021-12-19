@@ -23,6 +23,7 @@ if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A':
     log_channel = 720743462508691639
     member_channel = 720743462508691639
     mute_id = 913878775329062982
+    message_channel = 720743462508691639
 
 if hostname == 'raspberrypi':
     guild_ids = [834037980883582996, 795738345745547365]
@@ -30,6 +31,7 @@ if hostname == 'raspberrypi':
     log_channel = 851170405356011520
     member_channel = 873869752169271327
     mute_id = 879041072486035506
+    message_channel = 851170405356011520
 
 client = commands.Bot(
     command_prefix='£',
@@ -42,6 +44,7 @@ def save_status(atype: str, aname: str):
     with open("data/laststatus.json", "w") as f:
         json.dump(act_dict, f)
     f.close()
+
 
 def crash_cmd(input: str):
     cmd = ["cat", "cowsay"]
