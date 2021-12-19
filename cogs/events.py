@@ -118,7 +118,7 @@ class Events(commands.Cog):
     async def on_member_join(self, member):
         try:
             embed = discord.Embed(title="Welcome!", url="https://discord.com/channels/834037980883582996/878418546265313310/883713010768691273",
-                                description=f"Welcome to Brads server, {member}! Please feel free to send a couple memes, cute pet photo's or intresting facts.", color=colour["green"])
+                                  description=f"Welcome to Brads server, {member}! Please feel free to send a couple memes, cute pet photo's or intresting facts.", color=colour["green"])
             embed.set_thumbnail(url="https://cdn.discordapp.com/app-icons/867713807291908137/02e63019fc51f3ea2735f2e2d7acc49b.png?size=256")
             embed.add_field(name="Please make sure to to read and accept the rules to gain access to all other channels open to members", value="\uFEFF", inline=False)
             embed.add_field(name="Please don't promote any Other charity's or ask for us to get server members to go to any other server or website", value="Apart from all that, have fun :D", inline=True)
@@ -128,74 +128,79 @@ class Events(commands.Cog):
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send("Cant DM new member, prob has dms off")
         u = client.get_user(member.id)
-        
+
         async def join_msg(member):
             embed = discord.Embed(
-                    colour=colour["green"],
-                    description=f"{member.mention} has joined!"
-                    )
+                colour=colour["green"],
+                description=f"{member.mention} has joined!"
+            )
             embed.set_author(
-                    name=member,
-                    icon_url=member.display_avatar
-                    )
+                name=member,
+                icon_url=member.display_avatar
+            )
             embed.add_field(
-                    name="Name",
-                    value=f"{member} ({member.id}) {member.mention}",
-                    inline=False
-                    )
+                name="Name",
+                value=f"{member} ({member.id}) {member.mention}",
+                inline=False
+            )
             embed.add_field(
-                    name="Server Join Date",
-                    value=f"<t:{int(time.time())}>",
-                    inline=False
-                    )
+                name="Server Join Date",
+                value=f"<t:{int(time.time())}>",
+                inline=False
+            )
             embed.add_field(
-                    name="Creation Date",
-                    value=f"<t:{int(member.created_at.timestamp())}> (<t:{int(member.created_at.timestamp())}:R>)",
-                    inline=False
-                    )
+                name="Creation Date",
+                value=f"<t:{int(member.created_at.timestamp())}> (<t:{int(member.created_at.timestamp())}:R>)",
+                inline=False
+            )
             embed.add_field(
-                    name="Member Count",
-                    value=f"{member.guild.member_count}",
-                    inline=True
-                    )
+                name="Member Count",
+                value=f"{member.guild.member_count}",
+                inline=True
+            )
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send(embed=embed)
         await join_msg(member)
-    
+
     @commands.Cog.listener()
     async def on_member_remove(self, member):
+        def member_timestamp(member):
+            if int(member.joined_at.timestamp):
+                value = f"<t:{int(member.joined_at.timestamp)}> (<t:{member.joined_at.timestamp}:R>)"
+            else:
+                value = "*Couldn't get member join date info*"
+
         async def leave_msg(member):
             embed = discord.Embed(
-                    colour=colour["red"],
-                    description=f"{member} has left!"
-                    )
+                colour=colour["red"],
+                description=f"{member} has left!"
+            )
             embed.set_author(
-                    name=member,
-                    icon_url=member.display_avatar
-                    )
+                name=member,
+                icon_url=member.display_avatar
+            )
             embed.add_field(
-                    name="User Info",
-                    value= f"{member} ({member.id}) {member.mention}",
-                    inline=False
-                    )
+                name="User Info",
+                value=f"{member} ({member.id}) {member.mention}",
+                inline=False
+            )
             embed.add_field(
-                    name="Roles",
-                    value=f"{member.roles[:-1]}",
-                    inline=False
-                    )
+                name="Roles",
+                value=f"{member.roles[:-1]}",
+                inline=False
+            )
             embed.add_field(
-                    name="Server Join Date",
-                    value=f"<t:{int(member.joined_at.timestamp)}> (<t:{member.joined_at.timestamp}:R>)",
-                    inline=False
-                    )
+                name="Server Join Date",
+                value=value,
+                inline=False
+            )
             embed.add_field(
-                    name="Creation Date",
-                    value=f"<t:{int(member.created_at.timestamp())}> (<t:{int(member.created_at.timestamp())}:R>)"
-                    )
+                name="Creation Date",
+                value=f"<t:{int(member.created_at.timestamp())}> (<t:{int(member.created_at.timestamp())}:R>)"
+            )
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send(embed=embed)
         await leave_msg(member)
-
 
 
 def setup(bot):
