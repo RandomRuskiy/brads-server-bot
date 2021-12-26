@@ -39,7 +39,6 @@ class Embeds(commands.Cog):
         embed.add_field(name="Twitter", value="https://twitter.com/BradD11058775", inline=False)
         embed.add_field(name="Instagram", value="https://www.instagram.com/brad_l._.l_/", inline=False)
         embed.set_footer(text="To Donate to me or YoungMinds do £support to donate to Brad and £Donate for YoungMinds")
-        await ctx.channel.purge(limit=1)
         await ctx.respond(f'{ctx.author.mention}', embed=embed)
 
     @commands.command(
@@ -75,12 +74,12 @@ class Embeds(commands.Cog):
     @github.error
     async def github_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
-            await ctx.respond(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
+            await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.')
 
     @socials.error
     async def socials_error(self, ctx, error):
         if isinstance(error, commands.CommandOnCooldown):
-            await ctx.respond(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry')
+            await ctx.send(f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry')
 
 
 def setup(bot):
