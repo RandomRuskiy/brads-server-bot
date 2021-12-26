@@ -123,7 +123,7 @@ class Events(commands.Cog):
             embed.add_field(name="Please make sure to to read and accept the rules to gain access to all other channels open to members", value="\uFEFF", inline=False)
             embed.add_field(name="Please don't promote any Other charity's or ask for us to get server members to go to any other server or website", value="Apart from all that, have fun :D", inline=True)
             await member.send(embed=embed)
-        except Exception() as e:
+        except Exception as e:
             print(e)
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send("Cant DM new member, prob has dms off")
