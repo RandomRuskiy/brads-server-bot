@@ -83,7 +83,7 @@ class Logs(commands.Cog):
             channel = discord.utils.get(message_before.author.guild.channels, id=message_channel)
             embed = discord.Embed(
                 colour=colours['pink'],
-                description=f'{message_before.author} has updated thir message in {message_before.channel}!'
+                description=f'{message_before.author} has updated their message in {message_before.channel}!'
             )
             embed.add_field(
                 name='Channel',
