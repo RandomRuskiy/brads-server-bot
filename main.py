@@ -60,10 +60,8 @@ extentions = ['cogs.Embeds',
 
 @client.event
 async def on_command_error(ctx, error):
-    # dump commmand errors to console for debug
-    logger.error(error)
+    logger.error(f'Error From Command "{ctx.message.content}": {error}')
 
-# console status event
 
 
 @client.event
