@@ -126,7 +126,7 @@ class Events(commands.Cog):
         except Exception as e:
             print(e)
             channel = discord.utils.get(member.guild.channels, id=member_channel)
-            await channel.send("Cant DM new member, prob has dms off")
+            await channel.send("Cant DM new member {member}, prob has dms off")
         u = client.get_user(member.id)
 
         async def join_msg(member):
