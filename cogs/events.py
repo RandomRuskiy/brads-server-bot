@@ -172,6 +172,7 @@ class Events(commands.Cog):
                 value = "*Couldn't get member join date info*"
 
         async def leave_msg(member):
+            member_timestamp(member)
             embed = discord.Embed(
                 colour=colour["red"],
                 description=f"{member} has left!"
