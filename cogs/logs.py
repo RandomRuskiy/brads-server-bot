@@ -108,7 +108,8 @@ class Logs(commands.Cog):
             embed.set_author(name=message_before.author, icon_url=message_before.author.display_avatar.url)
             await channel.send(embed=embed)
         to_file()
-        await to_discord()
+        if message_before.guild.id != 795738345745547365:
+            await to_discord()
 
 
 
