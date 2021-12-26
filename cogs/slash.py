@@ -17,7 +17,7 @@ from discord.ext import commands
 
 hostname = socket.gethostname()
 print(hostname)
-if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A':
+if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A' or 'LAPTOP-BRGNIO26':
     guild_ids = [720743461959237722, 875804519605370911]
     bot_user = 854401220537745408
     log_channel = 720743462508691639

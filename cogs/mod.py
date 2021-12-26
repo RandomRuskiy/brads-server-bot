@@ -8,7 +8,7 @@ from .slash import guild_ids, mute_id
 
 client = commands.Bot(
     command_prefix='£',
-    debug_guild=875804519605370911
+    debug_guild=guild_ids
 )
 
 

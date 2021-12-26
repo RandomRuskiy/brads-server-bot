@@ -4,11 +4,12 @@ from youtube_dl import YoutubeDL
 from requests import get
 from discord import FFmpegPCMAudio
 from discord.utils import get
+from cogs.slash import guild_ids
 # add imports here
 
 client = commands.Bot(
     command_prefix='£',
-    debug_guild=875804516905370911
+    debug_guild=guild_ids
     )
 
 
@@ -17,7 +18,7 @@ class Lofi(commands.Cog):
         self.bot = bot
 
     @commands.SlashCommand(
-            name=lofijoin,
+            name='lofijoin',
             debug_guild=875804516905370911
             )
     @commands.has_role("Members :D")

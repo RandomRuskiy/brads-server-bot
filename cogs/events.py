@@ -6,13 +6,13 @@ from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
 from lib.colours import BasicColours as colour
 
-from cogs.slash import bot_user, member_channel
+from cogs.slash import bot_user, member_channel, guild_ids
 
 # self.spam_control = commands.CooldownMapping.from_cooldown()
 
 client = commands.Bot(
     command_prefix='£',
-    debug_guild=875804519605370911
+    debug_guild=guild_ids
 )
 
 # owner_id = [645647583141822466, 683733441728217098]
@@ -164,6 +164,7 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
+        value = ''
         def member_timestamp(member):
             if int(member.joined_at.timestamp):
                 value = f"<t:{int(member.joined_at.timestamp)}> (<t:{member.joined_at.timestamp}:R>)"

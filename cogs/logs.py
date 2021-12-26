@@ -1,11 +1,13 @@
 import os
 
 import discord
+from discord import guild
 from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
 from datetime import datetime
 from lib.colours import RoleColours as colours
 import cogs.slash as slash_ids
+from cogs.slash import guild_ids
 
 message_channel_id = slash_ids.message_channel
 
@@ -13,7 +15,7 @@ c_time = datetime.now()
 
 client = commands.Bot(
     command_prefix='£',
-    debug_guild=875804519605370911
+    debug_guild=guild_ids
 )
 
 
