@@ -7,7 +7,7 @@ from discord.ext.commands import BucketType, cooldown
 from datetime import datetime
 from lib.colours import RoleColours as colours
 import cogs.slash as slash_ids
-from cogs.slash import guild_ids
+from cogs.slash import guild_ids, message_channel
 
 message_channel_id = slash_ids.message_channel
 
@@ -71,13 +71,45 @@ class Logs(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message_edit(self, message_before, message_after):
-        log = open("messages.log", "a")
-        dt_str = c_time.strftime("%d/%m/%Y %H:%M:%S")
-        log_msg_1 = f"{dt_str}: MESSAGE EDITED: author: '{message_before.author}', msg_before: '{message_before.content}', msg_after: '{message_after.content}' channel: '{message_before.channel}'"
-        log_msg_2 = log_msg_1.replace("\n", "(+)")
-        log_msg = log_msg_2 + '\n'
-        log.write(log_msg)
-        log.close
+        def to_file():
+            log = open("messages.log", "a")
+            dt_str = c_time.strftime("%d/%m/%Y %H:%M:%S")
+            log_msg_1 = f"{dt_str}: MESSAGE EDITED: author: '{message_before.author}', msg_before: '{message_before.content}', msg_after: '{message_after.content}' channel: '{message_before.channel}'"
+            log_msg_2 = log_msg_1.replace("\n", "(+)")
+            log_msg = log_msg_2 + '\n'
+            log.write(log_msg)
+            log.close
+        async def to_discord():
+            channel = discord.utils.get(message_before.author.guild.channels, id=message_channel)
+            embed = discord.Embed(
+                colour=colours['pink'],
+                description=f'{message_before.author} has updated thir message in {message_before.channel}!'
+            )
+            embed.add_field(
+                name='Channel',
+                value=f'{message_before.channel.mention}\n{message_before.jump_url}',
+                inline=False
+            )
+            embed.add_field(
+                name='Now',
+                value=message_after.content,
+                inline=False
+            )
+            embed.add_field(
+                name='Before',
+                value=message_before.content,
+                inline=False
+            )
+            embed.add_field(
+                name='ID',
+                value=f'```ini\nUserID = {message_before.author.id}\nMessageID = {message_before.id}```',
+                inline=False
+            )
+            embed.set_author(name=message_before.author, icon_url=message_before.author.display_avatar.url)
+            await channel.send(embed=embed)
+        to_file()
+        await to_discord()
+
 
 
 def setup(bot):
