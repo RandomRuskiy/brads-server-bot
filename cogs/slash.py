@@ -11,6 +11,8 @@ import json
 import discord
 from discord.ext import commands
 
+from discord import voice_client
+
 # guild_ids = [834037980883582996]  # << brads server id
 # guild_ids = [720743461959237722, 875804519605370911]
 # ^^ my test server id. change if your testing elsewhere
@@ -24,6 +26,7 @@ if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A' or 'LAPTOP-BRGNIO26':
     member_channel = 720743462508691639
     mute_id = 913878775329062982
     message_channel = 720743462508691639
+    voice_channel = 720743462508691639
 
 if hostname == 'raspberrypi':
     guild_ids = [834037980883582996, 795738345745547365]
@@ -32,6 +35,7 @@ if hostname == 'raspberrypi':
     member_channel = 873869752169271327
     mute_id = 879041072486035506
     message_channel = 851170405356011520
+    voice_channel = 851170790367559720
 
 client = commands.Bot(
     command_prefix='£',
