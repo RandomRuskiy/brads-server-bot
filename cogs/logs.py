@@ -3,6 +3,7 @@ import os
 import discord
 from discord import guild
 from discord.ext import commands
+from discord.embeds import Embed
 from discord.ext.commands import BucketType, cooldown
 from datetime import datetime
 from lib.colours import RoleColours as colours
@@ -148,10 +149,31 @@ class Logs(commands.Cog):
                 value=f'```ini\nUserID = {member.id}\nChannelID = {before.channel.id}```'
             )
             await channel.send(embed=embed)
+        async def move_log(member, before, after):
+            if before.channel is not None and after.channel is not None:
+                embed = discord.Embed(colour=0x59515E, description=f'{member} has moved to {after.channel}')
+                embed.set_author(name=member, icon_url=member.display_avatar.url)
+                embed.add_field(
+                    name='Channel Before',
+                    value=f'{before.channel.mention} ({before.channel})',
+                    inline=False
+                )
+                embed.add_field(
+                    name='Channel After',
+                    value=f'{after.channel.mention} ({after.channel})',
+                    inline=False
+                )
+                embed.add_field(
+                    name='ID',
+                    value=f'```ini\nUserID = {member.id}\nChannelID = {after.channel.id}```'
+                )
+                await channel.send(embed=embed)
         if voice_join(before, after) is True:
             await join_log(member, after)
         elif voice_join(before, after) is False:
             await leave_log(member, before, after)
+        else:
+            await move_log(member, before, after)
         
 
 
