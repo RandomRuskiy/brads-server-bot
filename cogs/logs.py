@@ -124,7 +124,7 @@ class Logs(commands.Cog):
                 return False
         logger.debug(f'Member Joined: {voice_join(before, after)}')
         async def join_log(member, after):
-            embed = discord.Embed(colour=0x59515E, description=f'{member} has joined {after.channel}')
+            embed = discord.Embed(colour=colours['green'], description=f'{member} has joined {after.channel}')
             embed.set_author(name=member, icon_url=member.display_avatar.url)
             embed.add_field(
                 name='Channel',
@@ -137,7 +137,7 @@ class Logs(commands.Cog):
             )
             await channel.send(embed=embed)
         async def leave_log(member, before, after):
-            embed = discord.Embed(colour=0x59515E, description=f'{member} has left {before.channel}')
+            embed = discord.Embed(colour=colours['red'], description=f'{member} has left {before.channel}')
             embed.set_author(name=member, icon_url=member.display_avatar.url)
             embed.add_field(
                 name='Channel',
