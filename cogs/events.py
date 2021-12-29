@@ -67,14 +67,14 @@ class Events(commands.Cog):
             a4 = discord.utils.get(message.author.roles, id=868107974655238185)
             print(f'{a1}\n{a2}\n{a3}\n{bool(a4)}')
             if a1 or a2 or a3 is True:
-                return True
                 print('1')
-            elif a4 is True:
                 return True
+            elif a4 is True:
                 print('2')
+                return True
             else:
-                return False
                 print('3')
+                return False
 
         def cooldown_role(message):
             admin_role = has_admin_role(message)
