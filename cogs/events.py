@@ -19,7 +19,7 @@ client = commands.Bot(
 # owner_id = [645647583141822466, 683733441728217098]
 # owner_id = 683733441728217098
 admin_ids = [835960034331590666, 842689593052889098, 868107974655238185, 879381563740147763] # admin/mod etc roles
-msg_ban = [426467132272934912, 603662161209982998]
+msg_ban = [426467132272934912, 603662161209982998, 475671397457461258]
 
 
 def is_bot(message):
@@ -64,7 +64,8 @@ class Events(commands.Cog):
             a1 = discord.utils.get(message.author.roles, id=879381563740147763)
             a2 = discord.utils.get(message.author.roles, id=868107974655238185)
             a3 = discord.utils.get(message.author.roles, id=835960034331590666)
-            if a1 or a2 or a3 is True:
+            a4 = discord.utils.get(message.author.roles, id=842689593052889098)
+            if a1 or a2 or a3 or a4 is True:
                 return True
             else:
                 return False
