@@ -68,10 +68,13 @@ class Events(commands.Cog):
             print(f'{a1}\n{a2}\n{a3}\n{bool(a4)}')
             if a1 or a2 or a3 is True:
                 return True
+                print('1')
             elif a4 is True:
                 return True
+                print('2')
             else:
                 return False
+                print('3')
 
         def cooldown_role(message):
             admin_role = has_admin_role(message)
