@@ -36,7 +36,7 @@ class Logs(commands.Cog):
         def to_file(message):
             log = open("messages.log", "a")
             dt_str = c_time.strftime("%d/%m/%Y %H:%M:%S")
-            log_msg_1 = f"{dt_str}: MESSAGE DELETED: author: '{message.author}', msg_content: '{message.content}' channel: '{message.channel}'"
+            log_msg_1 = f"{dt_str}: MESSAGE DELETED: author: '{message.author}', msg_content: '{message.content}' channel: '{message.channel}' link: {message.jump_url}"
             log_msg_2 = log_msg_1.replace("\n", "(+)")
             log_msg = log_msg_2 + '\n'
             log.write(log_msg)
