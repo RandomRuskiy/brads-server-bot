@@ -79,6 +79,7 @@ class Embeds(commands.Cog):
         embed.add_field(name="What is this link?", value="This Link will take you to a page which tells you all about Brads Discord Server such as: How to get onto the Minecraft Server, The Server Roles...", inline=True)
         embed.set_footer(text="Thank You for Joining The Server <3")
         await ctx.channel.purge(limit=1)
+        await ctx.send('@everyone')
         await ctx.send(embed=embed)
 
     # errors go Here
