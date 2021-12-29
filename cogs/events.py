@@ -1,5 +1,6 @@
 import json
 import time
+import datetime
 
 import discord
 from discord.ext import commands
@@ -17,7 +18,7 @@ client = commands.Bot(
 
 # owner_id = [645647583141822466, 683733441728217098]
 # owner_id = 683733441728217098
-admin_ids = [835960034331590666, 842689593052889098, 868107974655238185, 879381563740147763]
+admin_ids = [835960034331590666, 842689593052889098, 868107974655238185, 879381563740147763] # admin/mod etc roles
 msg_ban = [426467132272934912, 603662161209982998]
 
 
@@ -49,6 +50,7 @@ class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self._last_member = None
+        self.last_timestamp = datetime.datetime.utcfromtimestamp(0)
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -56,21 +58,28 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if is_bot(message) is False:  # only respond if user is not self or another bot
+        time_difference = (datetime.datetime.utcnow() - self.last_timestamp).total_seconds()
 
-            def has_admin_role(message):
-                a1 = discord.utils.get(message.author.roles, id=879381563740147763)
-                a2 = discord.utils.get(message.author.roles, id=868107974655238185)
-                a3 = discord.utils.get(message.author.roles, id=835960034331590666)
-                if a1 or a2 or a3 is True:
-                    return True
-                else:
-                    return False
+        def has_admin_role(message):
+            a1 = discord.utils.get(message.author.roles, id=879381563740147763)
+            a2 = discord.utils.get(message.author.roles, id=868107974655238185)
+            a3 = discord.utils.get(message.author.roles, id=835960034331590666)
+            if a1 or a2 or a3 is True:
+                return True
+            else:
+                return False
 
+        def cooldown_role(message):
             admin_role = has_admin_role(message)
+            if admin_role is True:
+                return False
+            elif time_difference < 60:
+                return True
+            else:
+                self.last_timestamp = datetime.datetime.utcnow()
+                return False
 
-#            for x in admin_ids:
-#                admin_role = discord.utils.get(message.author.roles, id=x)
+        if is_bot(message) is False and cooldown_role(message) is False:  # only respond if user is not self or another bot
 
             if message.channel.name == 'general' or message.channel.name != 'general' or message.author != discord.User.bot:
                 if message.content == '.test respond':
@@ -165,6 +174,7 @@ class Events(commands.Cog):
     @commands.Cog.listener()
     async def on_member_remove(self, member):
         value = ''
+
         def member_timestamp(member):
             if int(member.joined_at.timestamp):
                 value = f"<t:{int(member.joined_at.timestamp)}> (<t:{member.joined_at.timestamp}:R>)"
