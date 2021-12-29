@@ -64,8 +64,10 @@ class Events(commands.Cog):
             a1 = discord.utils.get(message.author.roles, id=879381563740147763)
             a2 = discord.utils.get(message.author.roles, id=842689593052889098)
             a3 = discord.utils.get(message.author.roles, id=835960034331590666)
-            a4 = discord.utils.get(message.author.roles, id=868107974655238185) 
-            if a1 or a2 or a3 or a4 is True:
+            a4 = discord.utils.get(message.author.roles, id=868107974655238185)
+            if a1 or a2 or a3 is True:
+                return True
+            elif a4 is True:
                 return True
             else:
                 return False
