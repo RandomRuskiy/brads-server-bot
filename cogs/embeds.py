@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from .slash import guild_ids
+import asyncio
 
 # im seeing how to do cogs which will help make it look neater and so we shouldnt have to restart the bot everytime we make/edit a command
 
@@ -79,6 +80,7 @@ class Embeds(commands.Cog):
         embed.add_field(name="What is this link?", value="This Link will take you to a page which tells you all about Brads Discord Server such as: How to get onto the Minecraft Server, The Server Roles...", inline=True)
         embed.set_footer(text="Thank You for Joining The Server <3")
         await ctx.channel.purge(limit=1)
+        asyncio.sleep(1)
         await ctx.send('@everyone')
         await ctx.send(embed=embed)
 
