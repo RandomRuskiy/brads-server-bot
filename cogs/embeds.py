@@ -68,6 +68,18 @@ class Embeds(commands.Cog):
         embed = discord.Embed(title="The bots git repo")
         embed.add_field(name="Want to contribute code to the bot?", value="Go to the github repo and read the README for more info\n https://github.com/RandomRuskiy/brads-server-bot", inline=False)
         await ctx.send(embed=embed)
+    
+    @commands.command(
+        name='info-embed',
+    )
+    @commands.is_owner()
+    async def info_embed(self, ctx):
+        embed=discord.Embed(title="Read About & Info", url='https://docs.google.com/document/d/1YVRzTlDcg4wVyWQuPRpFSu2PwK47N1jIclz2YDRlVP8/edit?usp=sharing', description='This is the About and Info Section On Brads Discord Click "Read About & Info" for more.', color=0x54ec0e)
+        embed.set_author(name="About & Info", url="https://www.twitch.tv/brad_04_", icon_url="https://cdn.discordapp.com/avatars/867713807291908137/30924e309d80df585dd5b8368c02c6d6.webp?size=128")
+        embed.add_field(name="What is this link?", value="This Link will take you to a page which tells you all about Brads Discord Server such as: How to get onto the Minecraft Server, The Server Roles...", inline=True)
+        embed.set_footer(text="Thank You for Joining The Server <3")
+        await ctx.channel.purge(limit=1)
+        await ctx.send(embed=embed)
 
     # errors go Here
 
