@@ -150,7 +150,7 @@ class Logs(commands.Cog):
             )
             await channel.send(embed=embed)
         async def move_log(member, before, after):
-            if before.channel is not None and after.channel is not None:
+            if (before.channel is not None and after.channel is not None) and (before.channel != after.channel):
                 embed = discord.Embed(colour=0x59515E, description=f'{member} has moved to {after.channel}')
                 embed.set_author(name=member, icon_url=member.display_avatar.url)
                 embed.add_field(
