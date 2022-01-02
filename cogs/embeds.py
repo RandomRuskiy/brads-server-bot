@@ -84,6 +84,18 @@ class Embeds(commands.Cog):
         await ctx.send('@everyone')
         await ctx.send(embed=embed)
 
+    @commands.command(
+        name='mod-app'
+    )
+    @commands.is_owner()
+    async def mod_app(self, ctx):
+        embed = discord.Embed(title='Moderator and Admin Application', url='https://forms.gle/N8qdmHmadhfxU2C87', description='^ Click Here to Apply for staff Role on Brads Server ^', colour=0x11ff00)
+        embed.set_author(name='Click Below for Mod and Admin Applications', url='https://www.twitch.tv/brad_04_', icon_url='https://cdn.discordapp.com/avatars/867713807291908137/30924e309d80df585dd5b8368c02c6d6.webp?size=128')
+        embed.add_field(name='Click the blue text to apply for:', value='Admin or Moderator', inline=True)
+        embed.set_footer(text='Please Note: You can only apply to become an Admin or Mod if you have The "Active Members" role, This doesn\'t guarantee you get the role but is required. also applying for Admin you have to have been a Moderator first.')
+        await ctx.send('<@&912755564755419157>')
+        await ctx.send(embed=embed)
+
     # errors go Here
 
     @github.error
