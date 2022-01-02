@@ -102,7 +102,7 @@ class Mod(commands.Cog):
                     seconds = seconds * 86400
 
                 else:
-                   await ctx.respond('put a correct duration smh')
+                    await ctx.respond('put a correct duration smh')
 
             except Exception as e:
                 print(e)
@@ -134,7 +134,18 @@ class Mod(commands.Cog):
     @commands.has_permissions(manage_messages=True)
     async def banword(self, ctx, word: str):
         # [TODO]: command to add a word to the banned words list
-        pass
+        fr = open('data/banned_words.json', 'r')
+        word_list = json.load(fr)
+        fr.close()
+        current = word_list["banned_words"]
+        current.append(word)
+        new_dict = {"banned_words": current}
+        nd_str = str(new_dict)
+        w = nd_str.replace("\'", "\"")
+        fw = open('data/banned_words.json', 'w')
+        fw.write(w)
+        fw.close()
+        await ctx.respond(f'Added **{word}** to the banned words list.')
 
 
 def setup(bot):
