@@ -178,7 +178,7 @@ class Config(commands.Cog):
                             f.close
                             tb = 'tb too long, read data/tb.txt/ for traceback'
                         embed.add_field(
-                            name='Failed to reload: `{ext}`',
+                            name=f'Failed to reload: `{ext}`',
                             value=tb,
                             inline=False
                         )
