@@ -20,3 +20,8 @@ If your wanting to contribute code to the bot, clone the repo, do what you want 
 - [x] Overhaul the auto-responses so they can be put into separate channels etc more easily. i.e just section it all out more
 - [ ] Add proper logging to console
 - [ ] Re-section out commands to better organise them all again
+- [ ] Add support tickets
+- [ ] Fully support all logging points
+- [ ] Server stats (member count etc)
+- [ ] Giveaways
+- [ ] Notifications for YT upload and Twitch
