@@ -54,7 +54,7 @@ class Logs(commands.Cog):
                 )
                 embed.add_field(
                     name="Date",
-                    value=f"<t:{int(datetime.now().timestamp)}>",
+                    value=f"<t:{int(datetime.timestamp(datetime.now()))}>",
                     inline=False
                 )
                 embed.add_field(
