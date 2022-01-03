@@ -54,7 +54,7 @@ class Logs(commands.Cog):
                 )
                 embed.add_field(
                     name="Date",
-                    value=f"<t:{int(datetime.now().strftime('%d/%m/%Y %H:%M:%S'))}>",
+                    value=f"<t:{int(datetime.now().timestamp)}>",
                     inline=False
                 )
                 embed.add_field(
