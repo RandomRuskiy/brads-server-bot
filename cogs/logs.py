@@ -13,7 +13,6 @@ from __main__ import logger
 
 message_channel_id = slash_ids.message_channel
 
-c_time = datetime.now()
 
 client = commands.Bot(
     command_prefix='£',
@@ -35,8 +34,7 @@ class Logs(commands.Cog):
 
         def to_file(message):
             log = open("messages.log", "a")
-            dt_str = c_time.strftime("%d/%m/%Y %H:%M:%S")
-            log_msg_1 = f"{dt_str}: MESSAGE DELETED: author: '{message.author}', msg_content: '{message.content}' channel: '{message.channel}' link: {message.jump_url}"
+            log_msg_1 = f"{datetime.now().strftime('%d/%m/%Y %H:%M:%S')}: MESSAGE DELETED: author: '{message.author}', msg_content: '{message.content}' channel: '{message.channel}' link: {message.jump_url}"
             log_msg_2 = log_msg_1.replace("\n", "(+)")
             log_msg = log_msg_2 + '\n'
             log.write(log_msg)
@@ -56,7 +54,7 @@ class Logs(commands.Cog):
                 )
                 embed.add_field(
                     name="Date",
-                    value=f"<t:{int(c_time.timestamp())}>",
+                    value=f"<t:{int(datetime.now().strftime('%d/%m/%Y %H:%M:%S'))}>",
                     inline=False
                 )
                 embed.add_field(
@@ -75,8 +73,7 @@ class Logs(commands.Cog):
     async def on_message_edit(self, message_before, message_after):
         def to_file():
             log = open("messages.log", "a")
-            dt_str = c_time.strftime("%d/%m/%Y %H:%M:%S")
-            log_msg_1 = f"{dt_str}: MESSAGE EDITED: author: '{message_before.author}', msg_before: '{message_before.content}', msg_after: '{message_after.content}' channel: '{message_before.channel}'"
+            log_msg_1 = f"{datetime.now().strftime('%d/%m/%Y %H:%M:%S')}: MESSAGE EDITED: author: '{message_before.author}', msg_before: '{message_before.content}', msg_after: '{message_after.content}' channel: '{message_before.channel}'"
             log_msg_2 = log_msg_1.replace("\n", "(+)")
             log_msg = log_msg_2 + '\n'
             log.write(log_msg)
