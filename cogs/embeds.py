@@ -16,16 +16,18 @@ class Embeds(commands.Cog):
     async def on_ready(self):
         print(f'{self.__class__.__name__} Cog has been loaded\n-----')
 
-    @commands.command(
+    @commands.slash_command(
         name='donate',
-        description='Donate to the YoungMinds Charity!'
+        description="Donate to YoungMinds!",
+        debug_guilds=guild_ids
     )
+    @commands.cooldown(1, 30)
     async def donate(self, ctx):
         embed = discord.Embed(title="Donate", description="This is the link to donate to the YoungMinds charity to aid in the support for mental health. Please donate if you can. Thanks!")
         embed.set_thumbnail(url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsocialsolihull.org.uk%2Flocaloffer%2Fwp-content%2Fuploads%2Fsites%2F21%2F2016%2F02%2FYoungMinds.png&f=1&nofb=1")
         embed.add_field(name="Donate Here:", value="https://youngminds.org.uk/donate/", inline=False)
         embed.add_field(name="If you want to know more about the charity, read here:", value="https://youngminds.org.uk/about-us/who-we-are/", inline=True)
-        await ctx.send(embed=embed)
+        await ctx.respond(embed=embed)
 
     @commands.slash_command(
         name='socials',
@@ -52,25 +54,27 @@ class Embeds(commands.Cog):
     async def support(self, ctx):
         await ctx.respond(f'Hey {ctx.author.mention} before you consider supporting me you can put your money towards YoungMinds by doing £donate however if you are still considering supporting me i appreciate it SOOO much here is where you can support me at: \n \n https://www.buymeacoffee.com/Brad04')
 
-    @commands.command(
+    @commands.slash_command(
         name='hotlines',
-        description='A link to where you can find hotlines for your country if you ever need help.'
+        description="Hotline numbers for those in need.",
+        debug_guilds=guild_ids
     )
     async def hotlines(self, ctx):
         embed = discord.Embed(title="Suicide hotlines", description="Here is a list of hotlines if you ever need someone to talk to.")
         embed.set_thumbnail(url="https://res.cloudinary.com/dywkbcfp5/image/upload/w_200,h_200,c_thumb,z_0.65,g_face,e_improve,f_auto/f_auto/v1580072134/therapyRoutePublicImages/avatar.png")
         embed.add_field(name="This link takes you to the list", value="https://www.therapyroute.com/article/helplines-suicide-hotlines-and-crisis-lines-from-around-the-world", inline=False)
-        await ctx.send(embed=embed)
+        await ctx.respond(embed=embed)
 
-    @commands.command(
+    @commands.slash_command(
         name='github',
-        description='The link to the bots github repository.'
+        description='The link to the bots github repository.',
+        debug_guilds=guild_ids
     )
     @commands.cooldown(rate=1, per=30)
     async def github(self, ctx):
         embed = discord.Embed(title="The bots git repo")
         embed.add_field(name="Want to contribute code to the bot?", value="Go to the github repo and read the README for more info\n https://github.com/RandomRuskiy/brads-server-bot", inline=False)
-        await ctx.send(embed=embed)
+        await ctx.respond(embed=embed)
     
     @commands.command(
         name='info-embed',
