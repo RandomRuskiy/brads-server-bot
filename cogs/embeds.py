@@ -1,3 +1,4 @@
+from logging import debug
 import discord
 from discord.ext import commands
 from .slash import guild_ids
@@ -42,13 +43,14 @@ class Embeds(commands.Cog):
         embed.set_footer(text="To Donate to me or YoungMinds do £support to donate to Brad and £Donate for YoungMinds")
         await ctx.respond(f'{ctx.author.mention}', embed=embed)
 
-    @commands.command(
+    @commands.slash_command(
         name='support',
-        description='Donate to Brad'
+        description="Help support Brad!",
+        debug_guilds=guild_ids
     )
     @commands.cooldown(rate=1, per=30)
     async def support(self, ctx):
-        await ctx.send(f'Hey {ctx.author.mention} before you consider supporting me you can put your money towards YoungMinds by doing £donate however if you are still considering supporting me i appreciate it SOOO much here is where you can support me at: \n \n https://www.buymeacoffee.com/Brad04')
+        await ctx.respond(f'Hey {ctx.author.mention} before you consider supporting me you can put your money towards YoungMinds by doing £donate however if you are still considering supporting me i appreciate it SOOO much here is where you can support me at: \n \n https://www.buymeacoffee.com/Brad04')
 
     @commands.command(
         name='hotlines',
