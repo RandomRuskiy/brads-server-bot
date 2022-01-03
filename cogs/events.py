@@ -6,6 +6,7 @@ import discord
 from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
 from lib.colours import BasicColours as colour
+from __main__ import logger
 
 from cogs.slash import bot_user, member_channel, guild_ids
 
@@ -39,8 +40,7 @@ def banned_words(message):
     bad_words = words["banned_words"]
     res = [ele for ele in bad_words if(ele in message.content.lower())]
     if bool(res) is True:
-        print(bad_words)
-        print(f"found banned word in {message.content}")
+        logger.warn(f'{message.author} has said a banned word! ({res})')
         return True
     else:
         return False
@@ -61,19 +61,13 @@ class Events(commands.Cog):
         time_difference = (datetime.datetime.utcnow() - self.last_timestamp).total_seconds()
 
         def has_admin_role(message):
-            a1 = discord.utils.get(message.author.roles, id=879381563740147763)
+            a1 = discord.utils.get(message.author.roles, id=868107974655238185)
             a2 = discord.utils.get(message.author.roles, id=842689593052889098)
             a3 = discord.utils.get(message.author.roles, id=835960034331590666)
-            a4 = discord.utils.get(message.author.roles, id=868107974655238185)
-            print(f'{bool(a1)}\n{bool(a2)}\n{bool(a3)}\n{bool(a4)}')
-            if a1 or a2 or a3 is True:
-                print('1')
-                return True
-            elif a4 is True:
-                print('2')
+            a4 = discord.utils.get(message.author.roles, id=879381563740147763)
+            if (a1 or a2 or a3 or a4):
                 return True
             else:
-                print('3')
                 return False
 
         def cooldown_role(message):
@@ -142,7 +136,7 @@ class Events(commands.Cog):
         except Exception as e:
             print(e)
             channel = discord.utils.get(member.guild.channels, id=member_channel)
-            await channel.send("Cant DM new member {member}, prob has dms off")
+            await channel.send(f"Cant DM new member {member}, prob has dms off")
         u = client.get_user(member.id)
 
         async def join_msg(member):
