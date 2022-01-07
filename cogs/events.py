@@ -72,13 +72,19 @@ class Events(commands.Cog):
 
         def cooldown_role(message):
             admin_role = has_admin_role(message)
-            if admin_role is True:
-                return False
-            elif time_difference < 60:
-                return True
+            if message.guild.id == 834037980883582996:
+                if admin_role is True:
+                    return False
+                elif int(time_difference) < 10:
+                    return True
+                else:
+                    return False
             else:
-                self.last_timestamp = datetime.datetime.utcnow()
                 return False
+
+        def call_cooldown(message):
+            if has_admin_role(message) is not True:
+                self.last_timestamp = datetime.datetime.utcnow()
 
         if is_bot(message) is False and cooldown_role(message) is False:  # only respond if user is not self or another bot
 
@@ -111,6 +117,7 @@ class Events(commands.Cog):
 
                 elif message.content == 'L' and message.author != self.bot.user:
                     await message.channel.send('L')
+                    call_cooldown(message)
                     return
 
                 elif message.content == 'am i admin':
@@ -119,10 +126,11 @@ class Events(commands.Cog):
                     else:
                         await message.channel.send('L your are not admin')
 
-                elif banned_words(message) is True:
-                    await message.delete()
-                    await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
-            return
+        if is_bot(message) is False:
+
+            if banned_words(message) is True:
+                await message.delete()
+                await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
