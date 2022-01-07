@@ -49,7 +49,7 @@ class Logs(commands.Cog):
                 )
                 embed.add_field(
                     name="Content",
-                    value=message.content,
+                    value=f"{message.content}",
                     inline=False
                 )
                 embed.add_field(
@@ -78,6 +78,7 @@ class Logs(commands.Cog):
             log_msg = log_msg_2 + '\n'
             log.write(log_msg)
             log.close
+
         async def to_discord():
             channel = discord.utils.get(message_before.author.guild.channels, id=message_channel)
             embed = discord.Embed(
@@ -109,17 +110,19 @@ class Logs(commands.Cog):
         to_file()
         if message_before.guild.id != 795738345745547365:
             await to_discord()
-    
+
     @commands.Cog.listener()
     async def on_voice_state_update(self, member, before, after):
         channel = discord.utils.get(member.guild.channels, id=voice_channel)
         logger.debug(f'Member: {member} VoiceStateBefore: {before.channel} VoiceStateAfter: {after.channel}')
+
         def voice_join(before, after):
             if before.channel is None:
                 return True
             elif after.channel is None:
                 return False
         logger.debug(f'Member Joined: {voice_join(before, after)}')
+
         async def join_log(member, after):
             embed = discord.Embed(colour=colours['green'], description=f'{member} has joined {after.channel}')
             embed.set_author(name=member, icon_url=member.display_avatar.url)
@@ -133,6 +136,7 @@ class Logs(commands.Cog):
                 value=f'```ini\nUserID = {member.id}\nChannelID = {after.channel.id}```'
             )
             await channel.send(embed=embed)
+
         async def leave_log(member, before, after):
             embed = discord.Embed(colour=colours['red'], description=f'{member} has left {before.channel}')
             embed.set_author(name=member, icon_url=member.display_avatar.url)
@@ -146,6 +150,7 @@ class Logs(commands.Cog):
                 value=f'```ini\nUserID = {member.id}\nChannelID = {before.channel.id}```'
             )
             await channel.send(embed=embed)
+
         async def move_log(member, before, after):
             if (before.channel is not None and after.channel is not None) and (before.channel != after.channel):
                 embed = discord.Embed(colour=0x59515E, description=f'{member} has moved to {after.channel}')
@@ -165,15 +170,13 @@ class Logs(commands.Cog):
                     value=f'```ini\nUserID = {member.id}\nChannelID = {after.channel.id}```'
                 )
                 await channel.send(embed=embed)
+
         if voice_join(before, after) is True:
             await join_log(member, after)
         elif voice_join(before, after) is False:
             await leave_log(member, before, after)
         else:
             await move_log(member, before, after)
-        
-
-
 
 
 def setup(bot):
