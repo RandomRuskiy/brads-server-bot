@@ -42,7 +42,7 @@ class Logs(commands.Cog):
 
         async def to_discord(message):
             filter_id = 795738345745547365
-            if message.guild.id != filter_id:
+            if message.guild.id != filter_id and mesasge.author.bot is False:
                 embed = discord.Embed(
                     description=f"A message has been deleted in {message.channel.mention}",
                     color=colours["red"]
@@ -108,7 +108,7 @@ class Logs(commands.Cog):
             embed.set_author(name=message_before.author, icon_url=message_before.author.display_avatar.url)
             await channel.send(embed=embed)
         to_file()
-        if message_before.guild.id != 795738345745547365:
+        if message_before.guild.id != 795738345745547365 and message.author.bot is False:
             await to_discord()
 
     @commands.Cog.listener()
