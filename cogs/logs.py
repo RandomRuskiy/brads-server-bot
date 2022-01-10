@@ -108,7 +108,7 @@ class Logs(commands.Cog):
             embed.set_author(name=message_before.author, icon_url=message_before.author.display_avatar.url)
             await channel.send(embed=embed)
         to_file()
-        if message_before.guild.id != 795738345745547365 and message.author.bot is False:
+        if message_before.guild.id != 795738345745547365 and message_before.author.bot is False:
             await to_discord()
 
     @commands.Cog.listener()
