@@ -22,7 +22,7 @@ class Help(commands.Cog):
     )
     @commands.cooldown(rate=1, per=30)
     async def help(self, ctx, cog='1'):
-        helpEmbed = discord.Embed(
+        """helpEmbed = discord.Embed(
             title='Help Command',
             color=colours["cyan"]
         )
@@ -62,7 +62,8 @@ class Help(commands.Cog):
                 inline=False
             )
 
-        await ctx.send(embed=helpEmbed)
+        await ctx.send(embed=helpEmbed)"""
+        await ctx.send("Text commands have been depreciated. Please use the built in way to see all available slash commands\n\n(the old way was better in some ways but oh well)")
 
     @help.error
     async def clear_error(self, ctx, error):
