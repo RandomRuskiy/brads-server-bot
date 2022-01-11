@@ -19,7 +19,7 @@ client = commands.Bot(
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/test')
 def index():
     return 'Test'
 
