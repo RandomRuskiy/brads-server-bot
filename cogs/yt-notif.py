@@ -1,5 +1,5 @@
 import discord
-from discord import Webhook, AsyncWebhookAdapter
+from discord import Webhook
 from discord.ext import commands, tasks
 import xmltodict
 import json
