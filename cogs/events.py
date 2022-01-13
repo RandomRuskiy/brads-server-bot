@@ -210,11 +210,11 @@ class Events(commands.Cog):
                 value=f"{member.roles[:-1]}",
                 inline=False
             )
-            embed.add_field(
-                name="Server Join Date",
-                value=value,
-                inline=False
-            )
+            #embed.add_field(
+            #    name="Server Join Date",
+            #    value=value,
+            #    inline=False
+            #)
             embed.add_field(
                 name="Creation Date",
                 value=f"<t:{int(member.created_at.timestamp())}> (<t:{int(member.created_at.timestamp())}:R>)"
