@@ -7,27 +7,17 @@ import time
 import traceback
 import socket
 import json
+from main import DEBUG, logger
 
 import discord
 from discord.ext import commands
 
 from discord import voice_client
 
-# guild_ids = [834037980883582996]  # << brads server id
-# guild_ids = [720743461959237722, 875804519605370911]
-# ^^ my test server id. change if your testing elsewhere
-
 hostname = socket.gethostname()
-print(hostname)
-if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A' or 'LAPTOP-BRGNIO26':
-    guild_ids = [720743461959237722, 875804519605370911]
-    bot_user = 854401220537745408
-    log_channel = 720743462508691639
-    member_channel = 720743462508691639
-    mute_id = 913878775329062982
-    message_channel = 720743462508691639
-    voice_channel = 720743462508691639
-    yt_notif_channel = 720743462508691639
+if DEBUG:
+    logger.info(hostname)
+
 
 if hostname == 'raspberrypi':
     guild_ids = [834037980883582996, 795738345745547365]
@@ -37,6 +27,15 @@ if hostname == 'raspberrypi':
     mute_id = 879041072486035506
     message_channel = 851170405356011520
     voice_channel = 851170790367559720
+elif hostname != 'raspberrypi':
+    guild_ids = [720743461959237722, 875804519605370911]
+    bot_user = 854401220537745408
+    log_channel = 720743462508691639
+    member_channel = 720743462508691639
+    mute_id = 913878775329062982
+    message_channel = 720743462508691639
+    voice_channel = 720743462508691639
+    yt_notif_channel = 720743462508691639
 
 client = commands.Bot(
     command_prefix='£',

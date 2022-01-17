@@ -13,7 +13,6 @@ import traceback
 import random
 import csv
 import asyncio
-from cogs.slash import guild_ids, bot_user
 
 from keep_alive import keep_alive
 
@@ -22,8 +21,6 @@ DEBUG = False
 logger = logging.getLogger('discord')
 if DEBUG is True:
     logger.setLevel(logging.DEBUG)
-    debug_handler = logging.StreamHandler(sys.stdout)
-    logger.addHandler(debug_handler)
 else:
     logger.setLevel(logging.INFO)
 handler = logging.FileHandler(
@@ -35,10 +32,10 @@ handler.setFormatter(
 )
 logger.addHandler(handler)
 
-
 cwd = Path(__file__).parents[0]
 cwd = str(cwd)
-print(f"{cwd}\n-----")
+if DEBUG:
+    logger.info(cwd)
 
 intents = discord.Intents.default()
 intents.members = True
@@ -61,7 +58,6 @@ extentions = ['cogs.Embeds',
 @client.event
 async def on_command_error(ctx, error):
     logger.error(f'Error From Command "{ctx.message.content}": {error}')
-
 
 
 @client.event
@@ -96,7 +92,6 @@ if __name__ == "__main__":
     for file in os.listdir(cwd + "/cogs"):
         if file.endswith(".py") and not file.startswith("_"):
             client.load_extension(f"cogs.{file[:-3]}")
+    #client.load_extension('cogs.config')
 
-#keep_alive() # replit thing
-print(guild_ids)
-client.run(TOKEN)
+    client.run(TOKEN)
