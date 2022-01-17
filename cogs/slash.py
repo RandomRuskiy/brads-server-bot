@@ -27,6 +27,7 @@ if hostname == 'ruskiy-linux.lan' or 'DESKTOP-87U253A' or 'LAPTOP-BRGNIO26':
     mute_id = 913878775329062982
     message_channel = 720743462508691639
     voice_channel = 720743462508691639
+    yt_notif_channel = 720743462508691639
 
 if hostname == 'raspberrypi':
     guild_ids = [834037980883582996, 795738345745547365]
