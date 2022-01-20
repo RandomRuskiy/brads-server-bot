@@ -4,7 +4,7 @@ import json
 import discord
 from discord.ext import commands
 
-from .slash import guild_ids, mute_id
+from cogs.slash import guild_ids, mute_id
 
 client = commands.Bot(
     command_prefix='£',
