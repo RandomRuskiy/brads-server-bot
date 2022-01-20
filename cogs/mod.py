@@ -21,6 +21,8 @@ class Mod(commands.Cog):
         print(f'{self.__class__.__name__} Cog has been loaded\n-----')
 
     @client.slash_command(
+        name='ban',
+        description='Ban the specified user by mentioning them.',
         guild_ids=guild_ids
     )
     @commands.has_permissions(ban_members=True)
@@ -38,6 +40,8 @@ class Mod(commands.Cog):
         await ctx.respond(f"**{user}** has been banned!")
 
     @client.slash_command(
+        name='unban',
+        description='Unban a user. e.g Bradley#0249',
         guild_ids=guild_ids
     )
     @commands.has_permissions(ban_members=True)
@@ -53,6 +57,8 @@ class Mod(commands.Cog):
             await ctx.respond(f"**{user}** has been unbanned!")
 
     @client.slash_command(
+        name='kick',
+        description='Kick a user by mentioning them.',
         guild_ids=guild_ids
     )
     @commands.has_permissions(ban_members=True)
@@ -70,6 +76,8 @@ class Mod(commands.Cog):
         await ctx.respond(f'**{user}** has been kicked!')
 
     @client.slash_command(
+        name='mute',
+        description='Mute a member by mentioning them.',
         guild_ids=guild_ids
     )
     @commands.has_permissions(manage_messages=True)
@@ -113,6 +121,8 @@ class Mod(commands.Cog):
             await user.remove_roles(mute_role, reason='Duration of mute over')
 
     @client.slash_command(
+        name='unmute',
+        description='Unmute a member by mentioning them',
         guild_ids=guild_ids
     )
     @commands.has_permissions(manage_messages=True)
@@ -129,6 +139,8 @@ class Mod(commands.Cog):
             await ctx.respond(f'Unmuted {user}')
 
     @client.slash_command(
+#        name='banword',
+#        description='Ban a specific word or phrase.',
         guild_ids=guild_ids
     )
     @commands.has_permissions(manage_messages=True)
