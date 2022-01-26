@@ -20,7 +20,7 @@ client = commands.Bot(
 # owner_id = [645647583141822466, 683733441728217098]
 # owner_id = 683733441728217098
 admin_ids = [835960034331590666, 842689593052889098, 868107974655238185, 879381563740147763] # admin/mod etc roles
-msg_ban = [426467132272934912, 603662161209982998, 475671397457461258]
+msg_ban = [426467132272934912, 603662161209982998, 475671397457461258, 587541588763213834]
 
 
 def is_bot(message):
@@ -69,7 +69,7 @@ class Events(commands.Cog):
                 return True
             else:
                 return False
-
+        admin_role = None
         def cooldown_role(message):
             admin_role = has_admin_role(message)
             if message.guild.id == 834037980883582996:
@@ -91,7 +91,7 @@ class Events(commands.Cog):
             if message.channel.name == 'general' or message.channel.name != 'general' or message.author != discord.User.bot:
                 if message.content == '.test respond':
                     ctx = await self.bot.get_context(message)
-                    await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {has_admin_role(message)} and {discord.ClientUser.id} and {ctx.guild.member_count}')
+                    await message.channel.send(f'this message was sent in {message.channel} and admin_roles = {has_admin_role(message)} and {discord.ClientUser.id} and {ctx.guild.member_count} and roles = {ctx.author.roles} and {bool(is_bot(message))}')
                     return
 
                 elif message.content == 'yo im saying something':
@@ -182,16 +182,17 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
-        value = ''
+        value = ' '
 
         def member_timestamp(member):
-            if int(member.joined_at.timestamp):
+            if type(member.joined_at.timestamp) == float:
                 value = f"<t:{int(member.joined_at.timestamp)}> (<t:{member.joined_at.timestamp}:R>)"
             else:
                 value = "*Couldn't get member join date info*"
+            return value
 
         async def leave_msg(member):
-            #member_timestamp(member)
+            member_timestamp(member)
             embed = discord.Embed(
                 colour=colour["red"],
                 description=f"{member} has left!"
@@ -207,14 +208,14 @@ class Events(commands.Cog):
             )
             embed.add_field(
                 name="Roles",
-                value=f"{member.roles[:-1]}",
+                value=f"{member.roles.id[:-1]}.",
                 inline=False
             )
-            #embed.add_field(
-            #    name="Server Join Date",
-            #    value=value,
-            #    inline=False
-            #)
+            embed.add_field(
+                name="Server Join Date",
+                value=member_timestamp(member),
+                inline=False
+            )
             embed.add_field(
                 name="Creation Date",
                 value=f"<t:{int(member.created_at.timestamp())}> (<t:{int(member.created_at.timestamp())}:R>)"
