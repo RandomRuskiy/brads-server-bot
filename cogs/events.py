@@ -46,6 +46,17 @@ def banned_words(message):
         return False
 
 
+async def role_names(member):
+    member_roles_list = member.roles
+    names = []
+    for x in member_roles_list:
+        names.append(x.name)
+    names = f'{names[1:]}'.strip('[')
+    names = f'{names}'.strip(']')
+    names = f'{names}'.strip("'")
+    return names
+
+
 class Events(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
@@ -70,6 +81,7 @@ class Events(commands.Cog):
             else:
                 return False
         admin_role = None
+
         def cooldown_role(message):
             admin_role = has_admin_role(message)
             if message.guild.id == 834037980883582996:
@@ -208,7 +220,7 @@ class Events(commands.Cog):
             )
             embed.add_field(
                 name="Roles",
-                value=f"{member.roles.id[:-1]}.",
+                value=role_names(member),
                 inline=False
             )
             embed.add_field(
