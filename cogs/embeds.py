@@ -76,6 +76,18 @@ class Embeds(commands.Cog):
         embed.add_field(name="Want to contribute code to the bot?", value="Go to the github repo and read the README for more info\n https://github.com/RandomRuskiy/brads-server-bot", inline=False)
         await ctx.respond(embed=embed)
 
+    @commands.slash_command(
+        name='twitchemotes',
+        description="Infomation on how to see the additional emotes in brad's twitch chat!",
+        debug_guilds=guild_ids
+    )
+    @commands.cooldown(1, 30)
+    async def twitchemotes(self, ctx):
+        embed = discord.Embed(title="Can't see these emotes in Brad's twitch chat?", url="https://imgur.com/a/NsYNY6P", description="Then go-to https://www.frankerfacez.com/ and download the browser extention. To see the additional emotes, click on the icon next to your profile icon on twitch (its in the top-right), go to the add-ons tab and enable the Better TTV and 7tv add-ons!")
+        embed.add_field(name="On Mobile?", value="Go to your phones app-store and download the 'Chatsen' app so you can watch the stream and chat with all the additional emotes!", inline=False)
+        embed.set_footer(text="Need help? Feel free to ping RandomRuskiy for help")
+        await ctx.respond(embed=embed)
+
     @commands.command(
         name='info-embed',
     )
