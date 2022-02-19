@@ -9,6 +9,8 @@ from lib.colours import BasicColours as colour
 from __main__ import logger
 
 from cogs.slash import bot_user, member_channel, guild_ids
+import cogs.db
+from cogs.db import cluster, db, collection
 
 # self.spam_control = commands.CooldownMapping.from_cooldown()
 
@@ -80,10 +82,10 @@ class Events(commands.Cog):
                 return True
             else:
                 return False
-        admin_role = None
+
+        admin_role = has_admin_role(message)
 
         def cooldown_role(message):
-            admin_role = has_admin_role(message)
             if message.guild.id == 834037980883582996:
                 if admin_role is True:
                     return False
@@ -137,6 +139,24 @@ class Events(commands.Cog):
                         await message.channel.send('yo you are admin')
                     else:
                         await message.channel.send('L your are not admin')
+
+                elif message.content == 'test.db':
+                    if admin_role is True:
+                        post = {"_id": message.author.id, "score": 1, 'is_admin': admin_role, 'current_username': message.author}
+                        id_filter = {"_id": message.author.id}
+                        if (collection.count_documents(id_filter) == 0):
+                            collection.insert_one(post_data)
+                        else:
+                            user = collection.find(id_filter)
+                            for r in user:
+                                score = r['score']
+                                is_admin = r['is_admin']
+                            score = score + 1
+                            if is_admin != admin_role:
+                                collection.update_one(id_filter, {"$set": {"is_admin": admin_role}})
+                            collection.update_one(id_filter, {"$set": {"score": score}})
+                        logger.info('Posted data to DB!')
+                        await message.reply('sent')
 
         if is_bot(message) is False:
 
@@ -202,6 +222,13 @@ class Events(commands.Cog):
             else:
                 value = "*Couldn't get member join date info*"
             return value
+
+        def to_file(member):
+            log = open("messages.log", "a")
+            log_msg = f"{datetime.now().strftime('%d/%m/%Y %H:%M:%S')}: MEMBER LEAVE: member: '{member}', member_id: {member.id,} roles: '{role_names(member)}'"
+            log_msg = log_msg + '\n'
+            log.write(log_msg)
+            log.close
 
         async def leave_msg(member):
             member_timestamp(member)
