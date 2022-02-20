@@ -177,9 +177,14 @@ class Events(commands.Cog):
                 logger.info(f'New member ({member}) has joined and has been added to DB')
             else:
                 user = collection.find(q)
-                for r in user:
-                    name = r['username']
-                    date = r['server_join_date']
+                try:
+                    for r in user:
+                        name = r['username']
+                        date = r['server_join_date']
+                except KeyError:
+                    for r in user:
+                        name = r['username']
+                        date = None
                 if name != member:
                     collection.update_one(q, {"$set": {"username": member.name + '#' + member.discriminator}})
                 collection.update_one(q, {"$set": {"server_join_date": int(ts)}})
@@ -236,8 +241,15 @@ class Events(commands.Cog):
         value = ' '
 
         def member_timestamp(member):
-            if type(member.joined_at.timestamp) == float:
-                value = f"<t:{int(member.joined_at.timestamp)}> (<t:{member.joined_at.timestamp}:R>)"
+            q = {"_id": member.id}
+            if (collection.count_documents(q) != 0):
+                user = collection.find(q)
+                try:
+                    for r in user:
+                        date = r['server_join_date']
+                    value = f'<t:{date}>'
+                except KeyError:
+                    value = "*Couldn't get member join date info*"
             else:
                 value = "*Couldn't get member join date info*"
             return value
