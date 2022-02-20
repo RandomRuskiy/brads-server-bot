@@ -167,6 +167,23 @@ class Events(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
+        def to_db(member):
+            q = {"_id": member.id}
+            dt = datetime.datetime.now()
+            ts = datetime.datetime.timestamp(dt)
+            if (collection.count_documents(q) == 0):
+                post = {"_id": member.id, "username": member.name + member.discriminator, "server_join_date": int(ts)}
+                collection.insert_one(post)
+                logger.info(f'New member ({member}) has joined and has been added to DB')
+            else:
+                user = collection.find(q)
+                for r in user:
+                    name = r['username']
+                    date = r['server_join_date']
+                if name != member:
+                    collection.update_one(q, {"$set": {"username": member.name + '#' + member.discriminator}})
+                collection.update_one(q, {"$set": {"server_join_date": int(ts)}})
+                logger.info(f'Member ({member}) has joined the server before and join date info has been updated')
         try:
             embed = discord.Embed(title="Welcome!", url="https://discord.com/channels/834037980883582996/878418546265313310/883713010768691273",
                                   description=f"Welcome to Brads server, {member}! Please feel free to send a couple memes, cute pet photo's or intresting facts.", color=colour["green"])
@@ -175,7 +192,7 @@ class Events(commands.Cog):
             embed.add_field(name="Please don't promote any Other charity's or ask for us to get server members to go to any other server or website", value="Apart from all that, have fun :D", inline=True)
             await member.send(embed=embed)
         except Exception as e:
-            print(e)
+            logger.info(e)
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send(f"Cant DM new member {member}, prob has dms off")
         u = client.get_user(member.id)
@@ -212,6 +229,7 @@ class Events(commands.Cog):
             channel = discord.utils.get(member.guild.channels, id=member_channel)
             await channel.send(embed=embed)
         await join_msg(member)
+        to_db(member)
 
     @commands.Cog.listener()
     async def on_member_remove(self, member):
@@ -248,7 +266,7 @@ class Events(commands.Cog):
             )
             embed.add_field(
                 name="Roles",
-                value=role_names(member),
+                value=await role_names(member),
                 inline=False
             )
             embed.add_field(
