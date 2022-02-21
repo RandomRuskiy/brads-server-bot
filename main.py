@@ -3,6 +3,7 @@ import os
 import sys
 from pathlib import Path
 import json
+from datetime import datetime
 
 import discord
 from discord.ext import commands
@@ -24,7 +25,7 @@ if DEBUG is True:
 else:
     logger.setLevel(logging.INFO)
 handler = logging.FileHandler(
-    filename='discord.log',
+    filename=f'logs/{datetime.now().strftime("%d/%m/%Y-%H:%M")}-discord.log',
     encoding='utf-8', mode='w'
 )
 handler.setFormatter(
