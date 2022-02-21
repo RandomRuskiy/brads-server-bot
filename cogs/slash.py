@@ -8,6 +8,8 @@ import traceback
 import socket
 import json
 from main import DEBUG, logger
+from datetime import datetime
+from cogs.db import collection
 
 import discord
 from discord.ext import commands
@@ -182,6 +184,36 @@ class Slash(commands.Cog):
     @commands.is_owner()
     async def file(self, ctx, *, filename: str):
         await ctx.respond(file=discord.File(rf'./{filename}'))
+
+    @client.slash_command(
+        name='db',
+        description='Add a user to the DB',
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    async def db_add(self, ctx, *, member: discord.Member):
+        q = {"_id": member.id}
+        join_date = int(member.joined_at.timestamp())
+        if (collection.count_documents(q) == 0):
+            post = {"_id": member.id, "username": member.name + member.discriminator, "server_join_date": join_date}
+            collection.insert_one(post)
+            logger.info(f'New member ({member}) has been added to DB')
+            await ctx.respond(f'New member ({member}) has been added to DB')
+        else:
+            user = collection.find(q)
+            try:
+                for r in user:
+                    name = r['username']
+                    date = r['server_join_date']
+            except KeyError:
+                for r in user:
+                    name = r['username']
+                    date = None
+            if name != member:
+                collection.update_one(q, {"$set": {"username": member.name + '#' + member.discriminator}})
+            collection.update_one(q, {"$set": {"server_join_date": join_date}})
+            logger.info(f'Member ({member}) has DB entries already, join date info has been updated')
+            await ctx.respond(f'Member ({member}) has DB entries already, join date info has been updated')
 
     # errors go here
 
