@@ -12,8 +12,6 @@ from cogs.slash import bot_user, member_channel, guild_ids
 import cogs.db
 from cogs.db import cluster, db, collection
 
-# self.spam_control = commands.CooldownMapping.from_cooldown()
-
 client = commands.Bot(
     command_prefix='£',
     debug_guild=guild_ids
@@ -58,6 +56,8 @@ async def role_names(member):
     names = f'{names}'.strip("'")
     return names
 
+async def anti_gnbot():
+    pass
 
 class Events(commands.Cog):
     def __init__(self, bot):
@@ -146,7 +146,7 @@ class Events(commands.Cog):
                         post = {"_id": message.author.id, "score": 1, 'is_admin': admin_role, 'current_username': message.author}
                         id_filter = {"_id": message.author.id}
                         if (collection.count_documents(id_filter) == 0):
-                            collection.insert_one(post_data)
+                            collection.insert_one(post)
                         else:
                             user = collection.find(id_filter)
                             for r in user:
