@@ -25,7 +25,7 @@ if DEBUG is True:
 else:
     logger.setLevel(logging.INFO)
 handler = logging.FileHandler(
-    filename=f'logs/{datetime.now().strftime("%d/%m/%Y-%H:%M")}-discord.log',
+    filename=f'logs/{datetime.now().strftime("%d-%m-%Y-%H:%M")}-discord.log',
     encoding='utf-8', mode='w'
 )
 handler.setFormatter(
