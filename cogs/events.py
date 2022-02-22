@@ -7,6 +7,7 @@ from discord.ext import commands
 from discord.ext.commands import BucketType, cooldown
 from lib.colours import BasicColours as colour
 from __main__ import logger
+import asyncio
 
 from cogs.slash import bot_user, member_channel, guild_ids
 import cogs.db
@@ -163,6 +164,12 @@ class Events(commands.Cog):
 
                 elif message.content.lower() == 'joe':
                     await message.channel.send('(real)')
+
+                elif message.content.lower() == 'mama':
+                    message.channel.respond('yo mama large hahahahahhahahahahahahahhahah got you there!!!!lolololololo')
+                    asyncio.sleep(5)
+                    message.channel.respond('lolololololololololo stll laughing at that joke i made about your mother hahahhahahahahahhahahahahahahha')
+                    message.channel.respond('https://tenor.com/view/ronaldo-gif-24433817')
 
         if is_bot(message) is False:
 
