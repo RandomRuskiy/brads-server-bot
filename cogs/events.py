@@ -56,8 +56,10 @@ async def role_names(member):
     names = f'{names}'.strip("'")
     return names
 
+
 async def anti_gnbot():
     pass
+
 
 class Events(commands.Cog):
     def __init__(self, bot):
@@ -158,6 +160,9 @@ class Events(commands.Cog):
                             collection.update_one(id_filter, {"$set": {"score": score}})
                         logger.info('Posted data to DB!')
                         await message.reply('sent')
+
+                elif message.content.lower() == 'joe':
+                    await message.channel.send('(real)')
 
         if is_bot(message) is False:
 
