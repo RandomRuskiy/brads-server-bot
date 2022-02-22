@@ -167,7 +167,7 @@ class Events(commands.Cog):
 
                 elif message.content.lower() == 'mama':
                     await message.channel.send('yo mama large hahahahahhahahahahahahahhahah got you there!!!!lolololololo')
-                    asyncio.sleep(5)
+                    await asyncio.sleep(5)
                     await message.channel.send('lolololololololololo stll laughing at that joke i made about your mother hahahhahahahahahhahahahahahahha')
                     await message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
 
