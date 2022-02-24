@@ -52,9 +52,10 @@ async def role_names(member):
     names = []
     for x in member_roles_list:
         names.append(x.name)
-    names = f'{names[1:]}'.strip('[')
+    names = str(names[1:])
+    names = f'{names}'.strip("[")
     names = f'{names}'.strip(']')
-    names = f'{names}'.strip("'")
+    names = names.replace("'", "")
     return names
 
 
