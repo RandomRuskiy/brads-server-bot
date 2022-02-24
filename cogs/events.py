@@ -90,6 +90,13 @@ class Events(commands.Cog):
 
         admin_role = has_admin_role(message)
 
+        async def boost_only(member):
+            is_boosted = member.premium_since
+            if admin_role is True or is_boosted is not None:
+                return True
+            else:
+                return False
+
         def cooldown_role(message):
             if message.guild.id == 834037980883582996:
                 if admin_role is True:
@@ -164,13 +171,15 @@ class Events(commands.Cog):
                         await message.reply('sent')
 
                 elif message.content.lower() == 'joe':
-                    await message.channel.send('(real)')
+                    if await boost_only(member=message.author) is True:
+                        await message.channel.send('(real)')
 
                 elif message.content.lower() == 'mama':
-                    await message.channel.send('yo mama large hahahahahhahahahahahahahhahah got you there!!!!lolololololo')
-                    await asyncio.sleep(5)
-                    await message.channel.send('lolololololololololo stll laughing at that joke i made about your mother hahahhahahahahahhahahahahahahha')
-                    await message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
+                    if await boost_only(member=message.author) is True:
+                        await message.channel.send('yo mama large hahahahahhahahahahahahahhahah got you there!!!!lolololololo')
+                        await asyncio.sleep(5)
+                        await message.channel.send('lolololololololololo stll laughing at that joke i made about your mother hahahhahahahahahhahahahahahahha')
+                        await message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
 
         if is_bot(message) is False:
 
