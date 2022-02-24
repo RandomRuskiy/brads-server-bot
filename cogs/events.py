@@ -173,9 +173,10 @@ class Events(commands.Cog):
 
         if is_bot(message) is False:
 
-            if banned_words(message) is True:
-                await message.delete()
-                await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
+            if admin_role is False:
+                if banned_words(message) is True:
+                    await message.delete()
+                    await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
