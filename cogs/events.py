@@ -187,7 +187,7 @@ class Events(commands.Cog):
 
                 elif message.content == 'https://tenor.com/view/ronaldo-gif-24433817':
                     if admin_role is True:
-                        message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
+                        await message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
 
         if is_bot(message) is False:
 
