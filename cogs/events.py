@@ -85,6 +85,8 @@ class Events(commands.Cog):
             a5 = discord.utils.get(message.author.roles, id=937415739147681852)
             if (a1 or a2 or a3 or a4 or a5):
                 return True
+            elif message.author.guild.id == 795738345745547365:
+                return True
             else:
                 return False
 
@@ -182,6 +184,10 @@ class Events(commands.Cog):
                         await asyncio.sleep(5)
                         await message.channel.send('lolololololololololo stll laughing at that joke i made about your mother hahahhahahahahahhahahahahahahha')
                         await message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
+
+                elif message.content == 'https://tenor.com/view/ronaldo-gif-24433817':
+                    if admin_role is True:
+                        message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
 
         if is_bot(message) is False:
 
