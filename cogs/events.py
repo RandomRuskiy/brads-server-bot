@@ -94,6 +94,8 @@ class Events(commands.Cog):
             is_boosted = member.premium_since
             if admin_role is True or is_boosted is not None:
                 return True
+            elif member.guild.id == 795738345745547365:
+                return True
             else:
                 return False
 
