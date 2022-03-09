@@ -1,5 +1,6 @@
 import logging
 import os
+from socket import socket
 import sys
 from pathlib import Path
 import json
@@ -14,10 +15,15 @@ import traceback
 import random
 import csv
 import asyncio
+import socket
 
 from keep_alive import keep_alive
 
 DEBUG = False
+
+if socket.gethostname == "raspberrypi":
+    work_dir = "/home/pi/code/brads-server-bot/"
+    os.chdir(work_dir)
 
 logger = logging.getLogger('discord')
 if DEBUG is True:
