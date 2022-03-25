@@ -38,9 +38,15 @@ def is_bot(message):
 def banned_words(message):
     with open("data/banned_words.json") as f:
         words = json.load(f)
+    with open("data/bypass_words.json") as b:
+        bypass = json.load(b)
     bad_words = words["banned_words"]
+    bypass_words = bypass["bypassed_words"]
     res = [ele for ele in bad_words if(ele in message.content.lower())]
-    if bool(res) is True:
+    byp = [ele for ele in bypass_words if(ele in message.content.lower())]
+    if bool(byp) is True:
+        return False
+    elif bool(res) is True:
         logger.warn(f'{message.author} has said a banned word! ({res})')
         return True
     else:
