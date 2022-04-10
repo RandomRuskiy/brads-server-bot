@@ -1,5 +1,6 @@
 import asyncio
 import csv
+from doctest import debug_script
 import os
 import random
 import subprocess
@@ -214,6 +215,16 @@ class Slash(commands.Cog):
             collection.update_one(q, {"$set": {"server_join_date": join_date}})
             logger.info(f'Member ({member}) has DB entries already, join date info has been updated')
             await ctx.respond(f'Member ({member}) has DB entries already, join date info has been updated')
+
+    @client.slash_command(
+        name='whereis',
+        description='List all channels that you can see.',
+        guild_ids=guild_ids
+    )
+    async def whereis(self):
+        #[TODO]: https://canary.discord.com/channels/834037980883582996/904884707781652511/956744159899840592   
+        pass
+
 
     # errors go here
 
