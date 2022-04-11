@@ -80,8 +80,6 @@ class Logs(commands.Cog):
             log.close
 
         async def to_discord():
-            if str(message_after) == str(message_before):
-                return
             channel = discord.utils.get(message_before.author.guild.channels, id=message_channel)
             embed = discord.Embed(
                 colour=colours['pink'],
