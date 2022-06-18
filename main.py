@@ -17,7 +17,6 @@ import csv
 import asyncio
 import socket
 
-from keep_alive import keep_alive
 
 DEBUG = False
 
