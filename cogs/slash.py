@@ -225,6 +225,14 @@ class Slash(commands.Cog):
         #[TODO]: https://canary.discord.com/channels/834037980883582996/904884707781652511/956744159899840592   
         pass
 
+    @client.slash_command(
+        name='invite',
+        description='Invite the bot',
+        guild_ids=guild_ids
+    )
+    async def invite(self, ctx):
+        ctx.respond('How about you invite your mother hahahahahahahahahahahahahahahaahahahaha')
+
 
     # errors go here
 
