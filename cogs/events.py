@@ -195,6 +195,9 @@ class Events(commands.Cog):
                     if admin_role is True:
                         await message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
 
+                elif message.content.lower() == 'tj':
+                    await message.channel.send('i did your mother last night. it was quite enjoyable actually, had a blast! haha get it? blast hahahahhahahahahahhahahhahaha')
+
         if is_bot(message) is False:
 
             if admin_role is False:
