@@ -233,6 +233,14 @@ class Slash(commands.Cog):
     async def invite(self, ctx):
         ctx.respond('How about you invite your mother hahahahahahahahahahahahahahahaahahahaha')
 
+    @client.slash_command(
+        name='echo',
+        guild_ids=guild_ids
+    )
+    @commands.is_owner()
+    async def echo(self, ctx, message: str):
+        ctx.interaction.response.defer()
+        ctx.send(message)
 
     # errors go here
 
