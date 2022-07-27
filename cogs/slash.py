@@ -217,15 +217,6 @@ class Slash(commands.Cog):
             await ctx.respond(f'Member ({member}) has DB entries already, join date info has been updated')
 
     @client.slash_command(
-        name='whereis',
-        description='List all channels that you can see.',
-        guild_ids=guild_ids
-    )
-    async def whereis(self):
-        #[TODO]: https://canary.discord.com/channels/834037980883582996/904884707781652511/956744159899840592   
-        pass
-
-    @client.slash_command(
         name='invite',
         description='Invite the bot',
         guild_ids=guild_ids
