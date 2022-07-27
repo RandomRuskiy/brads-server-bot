@@ -25,8 +25,8 @@ class Embeds(commands.Cog):
     async def donate(self, ctx):
         embed = discord.Embed(title="Donate", description="This is the link to donate to the YoungMinds charity to aid in the support for mental health. Please donate if you can. Thanks!")
         embed.set_thumbnail(url="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fsocialsolihull.org.uk%2Flocaloffer%2Fwp-content%2Fuploads%2Fsites%2F21%2F2016%2F02%2FYoungMinds.png&f=1&nofb=1")
-        embed.add_field(name="Donate Here:", value="https://youngminds.org.uk/donate/", inline=False)
-        embed.add_field(name="If you want to know more about the charity, read here:", value="https://youngminds.org.uk/about-us/who-we-are/", inline=True)
+        embed.add_field(name="Donate Here:", value="https://www.youngminds.org.uk/support-us/donate/", inline=False)
+        embed.add_field(name="If you want to know more about the charity, read here:", value="https://www.youngminds.org.uk/", inline=True)
         await ctx.respond(embed=embed)
 
     @commands.slash_command(
@@ -42,7 +42,7 @@ class Embeds(commands.Cog):
         embed.add_field(name="Tiktok", value="https://www.tiktok.com/@brad_l._.l_?lang=en", inline=False)
         embed.add_field(name="Twitter", value="https://twitter.com/BradD11058775", inline=False)
         embed.add_field(name="Instagram", value="https://www.instagram.com/brad_l._.l_/", inline=False)
-        embed.set_footer(text="To Donate to me or YoungMinds do £support to donate to Brad and £Donate for YoungMinds")
+        embed.set_footer(text="To Donate to me or YoungMinds do /support to donate to Brad and /Donate for YoungMinds")
         await ctx.respond(f'{ctx.author.mention}', embed=embed)
 
     @commands.slash_command(
@@ -52,7 +52,7 @@ class Embeds(commands.Cog):
     )
     @commands.cooldown(rate=1, per=30)
     async def support(self, ctx):
-        await ctx.respond(f'Hey {ctx.author.mention} before you consider supporting me you can put your money towards YoungMinds by doing £donate however if you are still considering supporting me i appreciate it SOOO much here is where you can support me at: \n \n https://www.buymeacoffee.com/Brad04')
+        await ctx.respond(f'Hey {ctx.author.mention} before you consider supporting me you can put your money towards YoungMinds by doing `/donate`, however if you are still considering supporting me I appreciate it SOOO much here is where you can support me at: \n \n https://streamelements.com/brad_04_/tip')
 
     @commands.slash_command(
         name='hotlines',
