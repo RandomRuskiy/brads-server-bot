@@ -196,7 +196,7 @@ class Events(commands.Cog):
                         await message.channel.send('https://tenor.com/view/ronaldo-gif-24433817')
 
                 elif message.content.lower() == 'tj':
-                    await message.channel.send('i did your mother last night. it was quite enjoyable actually, had a blast! haha get it? blast hahahahhahahahahahhahahhahaha')
+                    await message.channel.send('> Tj is cool \n     -TJ himself, definatly not a large rgo or anything <:TF:876591056735567952>')
 
         if is_bot(message) is False:
 
