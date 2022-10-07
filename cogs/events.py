@@ -198,6 +198,9 @@ class Events(commands.Cog):
                 elif message.content.lower() == 'tj':
                     await message.channel.send('> Tj is cool \n     -TJ himself, definatly not a large rgo or anything <:TF:876591056735567952>')
 
+                elif message.content.lower() == 'im on mobile':
+                    await message.channel.send('wow!!!!!!!!!!!!11 no way!!!!!!!! unreal :smiley: :smiley: :smiley: :smiley: :smiley: ')
+
         if is_bot(message) is False:
 
             if admin_role is False:
