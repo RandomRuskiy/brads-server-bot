@@ -22,6 +22,7 @@ client = commands.Bot(
 # owner_id = 683733441728217098
 admin_ids = [835960034331590666, 842689593052889098, 868107974655238185, 879381563740147763] # admin/mod etc roles
 msg_ban = [426467132272934912, 603662161209982998, 475671397457461258, 587541588763213834]
+owner_ids = [645647583141822466, 683733441728217098]
 
 
 def is_bot(message):
@@ -90,6 +91,16 @@ class Events(commands.Cog):
             a4 = discord.utils.get(message.author.roles, id=879381563740147763)
             a5 = discord.utils.get(message.author.roles, id=937415739147681852)
             if (a1 or a2 or a3 or a4 or a5):
+                return True
+            elif message.author.guild.id == 795738345745547365:
+                return True
+            else:
+                return False
+
+        def has_owner(message):
+            o1 = discord.utils.get(message.author.roles, id=645647583141822466)
+            o2 = discord.utils.get(message.author.roles, id=683733441728217098)
+            if (o1 or o2):
                 return True
             elif message.author.guild.id == 795738345745547365:
                 return True
@@ -203,7 +214,7 @@ class Events(commands.Cog):
 
         if is_bot(message) is False:
 
-            if admin_role is False:
+            if has_owner(message) is False:
                 if banned_words(message) is True:
                     await message.delete()
                     await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
