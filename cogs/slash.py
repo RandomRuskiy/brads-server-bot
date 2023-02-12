@@ -242,6 +242,7 @@ class Slash(commands.Cog):
         #await ctx.interaction.response.defer()
         id = int(userid)
         user = await client.get_user(id)
+        print("joejoejoe " + user)
         try:
             await user.send(message)
             await ctx.respond("done")
