@@ -238,9 +238,10 @@ class Slash(commands.Cog):
         guild_ids=guild_ids
     )
     @commands.is_owner()
-    async def dmuser(self, ctx, userid: int, message: str):
+    async def dmuser(self, ctx, userid: str, message: str):
         #await ctx.interaction.response.defer()
-        user = await client.get_user(userid)
+        id = int(userid)
+        user = await client.get_user(id)
         try:
             await user.send(message)
             await ctx.respond("done")
