@@ -238,13 +238,13 @@ class Slash(commands.Cog):
         guild_ids=guild_ids
     )
     @commands.is_owner()
-    async def dmuser(self, ctx, userid: str, message: str):
+    async def dmuser(self, ctx, userid: discord.User, message: str):
         #await ctx.interaction.response.defer()
-        id = int(userid)
-        user = await client.get_user(id)
-        print("joejoejoe " + user)
+        #id = int(userid)
+        #user = await client.get_user(id)
+        print("joejoejoe " + userid)
         try:
-            await user.send(message)
+            await userid.send(message)
             await ctx.respond("done")
         except Exception as e:
             logger.info(e)
