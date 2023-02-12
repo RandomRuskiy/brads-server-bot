@@ -239,13 +239,13 @@ class Slash(commands.Cog):
     )
     @commands.is_owner()
     async def dmuser(self, ctx, userid: str, message: str):
-        ctx.interaction.response.defer()
+        await ctx.interaction.response.defer()
         user = await client.get_user(userid)
         try:
             await user.send(message)
         except Exception as e:
             logger.info(e)
-            ctx.respond("Cannot dm member because they are off or something idk")
+            await ctx.respond("Cannot dm member because they are off or something idk")
 
     # errors go here
 
