@@ -107,7 +107,8 @@ class Events(commands.Cog):
             else:
                 return False
 
-        admin_role = has_admin_role(message)
+        if message.guild is not None:
+            admin_role = has_admin_role(message)
 
         async def boost_only(member):
             is_boosted = member.premium_since
@@ -133,7 +134,7 @@ class Events(commands.Cog):
             if has_admin_role(message) is not True:
                 self.last_timestamp = datetime.datetime.utcnow()
 
-        if is_bot(message) is False and cooldown_role(message) is False:  # only respond if user is not self or another bot
+        if message.guild is not None and is_bot(message) is False and cooldown_role(message) is False:  # only respond if user is not self or another bot
 
             if message.channel.name == 'general' or message.channel.name != 'general' or message.author != discord.User.bot:
                 if message.content == '.test respond':
@@ -212,7 +213,7 @@ class Events(commands.Cog):
                 elif message.content.lower() == 'im on mobile':
                     await message.channel.send('wow!!!!!!!!!!!!11 no way!!!!!!!! unreal :smiley: :smiley: :smiley: :smiley: :smiley: ')
 
-        if is_bot(message) is False:
+        if is_bot(message) is False and message.guild is not None:
 
             if has_owner(message) is False:
                 if banned_words(message) is True:
@@ -220,6 +221,9 @@ class Events(commands.Cog):
                     await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
 
         dm_channel = client.get_channel(856098979259351051)
+        print("v")
+        print(message.guild)
+        print("^")
 
         if message.guild is None and message.author != self.bot:
             await dm_channel.send("yo i just got a new dm\n" + message.content)
