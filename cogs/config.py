@@ -10,6 +10,7 @@ from discord.ext.commands import BucketType, cooldown
 from lib.texthelps import count_chars
 from cogs.slash import guild_ids
 
+
 client = commands.Bot(
     command_prefix='£',
     debug_guild=guild_ids
