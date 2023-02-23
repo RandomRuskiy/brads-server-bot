@@ -219,6 +219,11 @@ class Events(commands.Cog):
                     await message.delete()
                     await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
 
+        dm_channel = client.get_channel(856098979259351051)
+
+        if message.server is None and message.author != self.bot:
+            await dm_channel.send("yo i just got a new dm\n" + message.content)
+
     @commands.Cog.listener()
     async def on_member_join(self, member):
         def to_db(member):
