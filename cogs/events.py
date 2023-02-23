@@ -220,7 +220,8 @@ class Events(commands.Cog):
                     await message.delete()
                     await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
 
-        dm_channel = client.get_channel('856098979259351051')
+        mguild = client.get_guild(834037980883582996)
+        dm_channel = discord.utils.get(mguild.channels, 856098979259351051)
 
         if message.guild is None and message.author != self.bot:
             await dm_channel.send("yo i just got a new dm\n" + message.content)
