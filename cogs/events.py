@@ -223,10 +223,10 @@ class Events(commands.Cog):
                     await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
 
         #tguild = await client.fetch_guild(720743461959237722)
-        nguild = client.get_guild(834037980883582996)
-        dm_channel = discord.utils.get(nguild.channels, id=856098979259351051)
 
         if message.guild is None and is_bot(message) is False:
+            nguild = client.get_guild(834037980883582996)
+            dm_channel = discord.utils.get(nguild.channels, id=856098979259351051)
             await dm_channel.send(f"**yo i just got a new dm from {message.author}:**\n> " + message.content)
 
     @commands.Cog.listener()
