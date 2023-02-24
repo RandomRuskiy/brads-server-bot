@@ -227,7 +227,7 @@ class Events(commands.Cog):
         dm_channel = discord.utils.get(nguild.channels, id=856098979259351051)
 
         if message.guild is None and is_bot(message) is False:
-            await dm_channel.send("**yo i just got a new dm:**\n> " + message.content)
+            await dm_channel.send(f"**yo i just got a new dm from {message.author}:**\n> " + message.content)
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
