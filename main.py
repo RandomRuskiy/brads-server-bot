@@ -18,7 +18,7 @@ import asyncio
 import socket
 
 
-DEBUG = False
+DEBUG = True
 
 if socket.gethostname == "raspberrypi":
     work_dir = "/home/pi/code/brads-server-bot/"
@@ -48,6 +48,9 @@ intents.members = True
 intents.message_content = True
 client = commands.Bot(command_prefix='£', intents=intents)
 TOKEN = os.getenv('TOKEN')
+
+global brad_guild
+brad_guild = None
 
 extentions = ['cogs.Embeds',
               'cogs.Config',
@@ -84,6 +87,8 @@ async def on_ready():
     logger.info(
         msg="bot is ready"
     )
+    brad_guild = await client.fetch_guild(834037980883582996)
+
 
 client.remove_command('help')
 client.remove_command('unban')
@@ -98,6 +103,5 @@ if __name__ == "__main__":
     for file in os.listdir(cwd + "/cogs"):
         if file.endswith(".py") and not file.startswith("_"):
             client.load_extension(f"cogs.{file[:-3]}")
-    #client.load_extension('cogs.config')
 
     client.run(TOKEN)

@@ -12,11 +12,13 @@ import asyncio
 from cogs.slash import bot_user, member_channel, guild_ids
 import cogs.db
 from cogs.db import cluster, db, collection
+from __main__ import brad_guild
+from __main__ import client
 
-client = commands.Bot(
-    command_prefix='£',
-    debug_guild=guild_ids
-)
+#client = commands.Bot(
+#    command_prefix='£',
+#    debug_guild=guild_ids
+#)
 
 # owner_id = [645647583141822466, 683733441728217098]
 # owner_id = 683733441728217098
@@ -220,11 +222,12 @@ class Events(commands.Cog):
                     await message.delete()
                     await message.channel.send(f"smh saying bad words {message.author.mention}", delete_after=5.0)
 
-        mguild = client.get_guild(834037980883582996)
-        dm_channel = discord.utils.get(mguild.channels, 856098979259351051)
+        #tguild = await client.fetch_guild(720743461959237722)
+        nguild = client.get_guild(834037980883582996)
+        dm_channel = discord.utils.get(nguild.channels, id=856098979259351051)
 
-        if message.guild is None and message.author != self.bot:
-            await dm_channel.send("yo i just got a new dm\n" + message.content)
+        if message.guild is None and is_bot(message) is False:
+            await dm_channel.send("**yo i just got a new dm:**\n> " + message.content)
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
