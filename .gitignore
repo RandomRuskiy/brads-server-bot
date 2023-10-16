@@ -11,3 +11,15 @@ logs
 lib/python3.11
 lib64/
 pyenv.config
+bin/activate
+bin/activate.csh
+bin/activate.fish
+bin/Activate.ps1
+bin/pip
+bin/pip3
+bin/pip3.11
+bin/python
+bin/python3
+bin/python3.11
+lib64
+pyvenv.cfg
