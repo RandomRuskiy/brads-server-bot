@@ -139,8 +139,8 @@ class Mod(commands.Cog):
             await ctx.respond(f'Unmuted {user}')
 
     @client.slash_command(
-#        name='banword',
-#        description='Ban a specific word or phrase.',
+        #name='banword',
+        #description='Ban a specific word or phrase.',
         guild_ids=guild_ids
     )
     @commands.has_permissions(manage_messages=True)
@@ -158,6 +158,24 @@ class Mod(commands.Cog):
         fw.write(w)
         fw.close()
         await ctx.respond(f'Added **{word}** to the banned words list.')
+
+    @client.slash_command(
+        guild_ids=guild_ids
+    )
+    @commands.has_permissions(manage_messages=True)
+    async def allowword(self, ctx, word: str):
+        file = open('data/bypass_words.json')
+        word_list = json.load(file)
+        file.close()
+        current = word_list["bypassed_words"]
+        current.append(word)
+        ndict = {"banned_words": current}
+        ndict = str(ndict)
+        ndict = ndict.replace("\'", "\"")
+        file = open('data/bypass_words.json', 'w')
+        file.write(ndict)
+        file.close()
+        await ctx.respond(f'Added **{word}** to the bypassed words list.')
 
 
 def setup(bot):

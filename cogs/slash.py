@@ -31,7 +31,7 @@ if hostname == 'raspberrypi':
     message_channel = 851170405356011520
     voice_channel = 851170790367559720
 elif hostname != 'raspberrypi':
-    guild_ids = [720743461959237722, 875804519605370911]
+    guild_ids = [720743461959237722]
     bot_user = 854401220537745408
     log_channel = 720743462508691639
     member_channel = 720743462508691639
