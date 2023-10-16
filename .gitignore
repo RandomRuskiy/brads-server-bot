@@ -8,3 +8,6 @@ data/tb.txt
 data/laststatus.json
 data/banned_words.json
 logs
+lib/python3.11
+lib64/
+pyenv.config
