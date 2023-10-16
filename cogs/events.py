@@ -37,6 +37,8 @@ def is_bot(message):
     else:
         return False
 
+#[TODO]: maybe just keep the wordlist open in memory to cut down a fair bit on unnessacary reads
+
 
 def banned_words(message):
     with open("data/banned_words.json") as f:
@@ -45,8 +47,8 @@ def banned_words(message):
         bypass = json.load(b)
     bad_words = words["banned_words"]
     bypass_words = bypass["bypassed_words"]
-    res = [ele for ele in bad_words if(ele in message.content.lower())]
-    byp = [ele for ele in bypass_words if(ele in message.content.lower())]
+    res = [ele for ele in bad_words if (ele in message.content.lower())]
+    byp = [ele for ele in bypass_words if (ele in message.content.lower())]
     if bool(byp) is True:
         return False
     elif bool(res) is True:
@@ -92,11 +94,14 @@ class Events(commands.Cog):
             a3 = discord.utils.get(message.author.roles, id=835960034331590666)
             a4 = discord.utils.get(message.author.roles, id=879381563740147763)
             a5 = discord.utils.get(message.author.roles, id=937415739147681852)
-            if (a1 or a2 or a3 or a4 or a5):
-                return True
-            elif message.author.guild.id == 795738345745547365:
-                return True
-            else:
+            try:
+                if (a1 or a2 or a3 or a4 or a5):
+                    return True
+                elif message.author.guild.id == 795738345745547365:
+                    return True
+                else:
+                    return False
+            except Exception:
                 return False
 
         def has_owner(message):
