@@ -101,7 +101,7 @@ class Events(commands.Cog):
                     return True
                 else:
                     return False
-            except Exception:
+            except Exception or AttributeError:
                 return False
 
         def has_owner(message):
