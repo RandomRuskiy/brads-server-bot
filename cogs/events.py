@@ -89,12 +89,12 @@ class Events(commands.Cog):
         time_difference = (datetime.datetime.utcnow() - self.last_timestamp).total_seconds()
 
         def has_admin_role(message):
-            a1 = discord.utils.get(message.author.roles, id=868107974655238185)
-            a2 = discord.utils.get(message.author.roles, id=842689593052889098)
-            a3 = discord.utils.get(message.author.roles, id=835960034331590666)
-            a4 = discord.utils.get(message.author.roles, id=879381563740147763)
-            a5 = discord.utils.get(message.author.roles, id=937415739147681852)
             try:
+                a1 = discord.utils.get(message.author.roles, id=868107974655238185)
+                a2 = discord.utils.get(message.author.roles, id=842689593052889098)
+                a3 = discord.utils.get(message.author.roles, id=835960034331590666)
+                a4 = discord.utils.get(message.author.roles, id=879381563740147763)
+                a5 = discord.utils.get(message.author.roles, id=937415739147681852)
                 if (a1 or a2 or a3 or a4 or a5):
                     return True
                 elif message.author.guild.id == 795738345745547365:
