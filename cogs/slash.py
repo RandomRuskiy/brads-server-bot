@@ -25,11 +25,11 @@ if DEBUG:
 if hostname == 'raspberrypi':
     guild_ids = [834037980883582996, 795738345745547365]
     bot_user = 867713807291908137
-    log_channel = 851170405356011520
-    member_channel = 873869752169271327
+    member_channel = 1172613820749983814
     mute_id = 879041072486035506
-    message_channel = 851170405356011520
-    voice_channel = 851170790367559720
+    message_channel = 1172609890934591600
+    log_channel = message_channel
+    voice_channel = 1172609620305526874
 elif hostname != 'raspberrypi':
     guild_ids = [720743461959237722]
     bot_user = 854401220537745408
