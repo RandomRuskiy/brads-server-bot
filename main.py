@@ -18,7 +18,7 @@ import asyncio
 import socket
 
 
-DEBUG = True
+DEBUG = False
 
 if socket.gethostname == "raspberrypi":
     work_dir = "/home/pi/code/brads-server-bot/"
