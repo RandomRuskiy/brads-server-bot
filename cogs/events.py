@@ -90,12 +90,12 @@ class Events(commands.Cog):
 
         def has_admin_role(message):
             try:
-                a1 = discord.utils.get(message.author.roles, id=868107974655238185)
-                a2 = discord.utils.get(message.author.roles, id=842689593052889098)
-                a3 = discord.utils.get(message.author.roles, id=835960034331590666)
-                a4 = discord.utils.get(message.author.roles, id=879381563740147763)
-                a5 = discord.utils.get(message.author.roles, id=937415739147681852)
-                if (a1 or a2 or a3 or a4 or a5):
+                a1 = discord.utils.get(message.author.roles, id=1171870439186898975)
+                a2 = discord.utils.get(message.author.roles, id=1171873889471709196)
+                a3 = discord.utils.get(message.author.roles, id=1171870745706631209)
+                a4 = discord.utils.get(message.author.roles, id=1171870945699434608)
+                #a5 = discord.utils.get(message.author.roles, id=937415739147681852)
+                if (a1 or a2 or a3 or a4):
                     return True
                 elif message.author.guild.id == 795738345745547365:
                     return True
