@@ -98,7 +98,7 @@ class Embeds(commands.Cog):
         embed.add_field(name="What is this link?", value="This Link will take you to a page which tells you all about Brads Discord Server such as: How to get onto the Minecraft Server, The Server Roles...", inline=True)
         embed.set_footer(text="Thank You for Joining The Server <3")
         await ctx.channel.purge(limit=1)
-        asyncio.sleep(1)
+        await asyncio.sleep(1)
         await ctx.send('@everyone')
         await ctx.send(embed=embed)
 
@@ -112,7 +112,7 @@ class Embeds(commands.Cog):
         embed.add_field(name='Click the blue text to apply for:', value='Admin or Moderator', inline=True)
         embed.set_footer(text='Please Note: You can only apply to become an Admin or Mod if you have The "Active Members" role, This doesn\'t guarantee you get the role but is required. also applying for Admin you have to have been a Moderator first.')
         await ctx.channel.purge(limit=1)
-        asyncio.sleep(0.1)
+        await asyncio.sleep(0.1)
         await ctx.send('<@&912755564755419157>')
         await ctx.send(embed=embed)
 
