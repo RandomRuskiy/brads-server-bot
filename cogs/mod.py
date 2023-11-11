@@ -195,6 +195,19 @@ class Mod(commands.Cog):
         file.close()
         await ctx.respond(f'Removed {word} from the banned words list.')
 
+    @client.slash_command(
+        name="purge",
+        description="purge x ammount of messages above",
+        guild_ids=guild_ids
+    )
+    @commands.has_permissions(manage_messages=True)
+    async def purge(self, ctx, ammount: int):
+        if ammount < 100:
+            await ctx.channel.purge(limit=ammount, bulk=True,)
+            await ctx.respond(f"{ammount} messages deleted.", ephemeral=True)
+        else:
+            await ctx.respond(f"{ammount} messages is too high! The limit it 100 messages.", ephemeral=True)
+
 
 def setup(bot):
     bot.add_cog(Mod(bot))
