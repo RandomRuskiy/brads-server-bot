@@ -12,7 +12,7 @@ import asyncio
 from cogs.slash import bot_user, member_channel, guild_ids
 import cogs.db
 from cogs.db import cluster, db, collection
-from __main__ import brad_guild
+#from __main__ import brad_guild
 from __main__ import client
 
 #client = commands.Bot(

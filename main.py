@@ -49,8 +49,8 @@ intents.message_content = True
 client = commands.Bot(command_prefix='£', intents=intents)
 TOKEN = os.getenv('TOKEN')
 
-global brad_guild
-brad_guild = None
+#global brad_guild
+#brad_guild = None
 
 extentions = ['cogs.Embeds',
               'cogs.Config',
@@ -87,7 +87,7 @@ async def on_ready():
     logger.info(
         msg="bot is ready"
     )
-    brad_guild = await client.fetch_guild(834037980883582996)
+    #brad_guild = await client.fetch_guild(834037980883582996)
 
 
 client.remove_command('help')
