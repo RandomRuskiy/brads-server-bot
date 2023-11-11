@@ -18,7 +18,7 @@ If your wanting to contribute code to the bot, clone the repo, do what you want 
 - [ ] Add support tickets
 - [ ] Giveaways
 - [ ] Notifications for YT upload and Twitch maybe TikTok too??
-- [ ] Message purge command
+- [x] Message purge command
 - [ ] Spam prevention 
 - [ ] Server, user and bot info command
 - [ ] Polls / voting (although I think discord is adding this natively so maybe i wait on this one)
