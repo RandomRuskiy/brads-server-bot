@@ -1,26 +1,19 @@
-import asyncio
 import csv
-from doctest import debug_script
-import os
 import random
 import subprocess
-import time
-import traceback
 import socket
 import json
 from main import DEBUG, logger
-from datetime import datetime
 from cogs.db import collection
 
 import discord
 from discord.ext import commands
 
-from discord import voice_client
-
 hostname = socket.gethostname()
 if DEBUG:
     logger.info(hostname)
 
+guild_ids = []
 
 if hostname == 'raspberrypi':
     guild_ids = [834037980883582996, 795738345745547365]
@@ -195,6 +188,7 @@ class Slash(commands.Cog):
     async def db_add(self, ctx, *, member: discord.Member):
         q = {"_id": member.id}
         join_date = int(member.joined_at.timestamp())
+        name = None
         if (collection.count_documents(q) == 0):
             post = {"_id": member.id, "username": member.name + member.discriminator, "server_join_date": join_date}
             collection.insert_one(post)
@@ -249,35 +243,13 @@ class Slash(commands.Cog):
             logger.info(e)
             await ctx.respond("Cannot dm member because they are off or something idk")
 
-    # errors go here
-
-    '''@setstatusslash.error
-    async def setstatusslash_error(self, ctx, error):
-        print(error)
-        if isinstance(error, commands.CommandOnCooldown):
-            await ctx.send(
-                f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.'
-            )
-
-        elif isinstance(error, commands.MissingRequiredArgument):
-            await ctx.send(
-                "Missing a required argument: You might want to specify the status"
-            )
-
-        elif isinstance(error, commands.MissingPermissions):
-            await ctx.send(
-                "Missing permissions: yo you arent part of the bot team to run this command"
-            )
-
-    @mentalhealthquote.error
-    async def mentalhealthquote_error(self, ctx, error):
-        print(error)
-        if isinstance(error, commands.CommandOnCooldown):
-            await ctx.send(
-                f'This command is on cooldown. Please wait {round(error.retry_after)} secconds until you retry.'
-            )'''
-
-# keep at bottom
+    @client.slash_command(
+        name="serverinfo",
+        description="View infomation about the server.",
+        guild_ids=guild_ids
+    )
+    async def serverinfo(self, ctx):
+        return
 
 
 def setup(bot):

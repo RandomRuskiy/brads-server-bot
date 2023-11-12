@@ -1,7 +1,6 @@
 import logging
 import os
-from socket import socket
-import sys
+import socket
 from pathlib import Path
 import json
 from datetime import datetime
@@ -9,19 +8,11 @@ from dotenv import load_dotenv
 
 import discord
 from discord.ext import commands
-from discord.ext.commands import BucketType, cooldown
-import subprocess
-import time
-import traceback
-import random
-import csv
-import asyncio
-import socket
 
 
 DEBUG = False
 
-if socket.gethostname == "raspberrypi":
+if socket.gethostname() == "raspberrypi":
     work_dir = "/home/pi/code/brads-server-bot/"
     os.chdir(work_dir)
 
