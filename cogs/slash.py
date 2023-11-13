@@ -261,7 +261,8 @@ class Slash(commands.Cog):
     @commands.cooldown(1, 30)
     async def userinfo(self, ctx, member: discord.Member):
         # [TODO]: Weekly message count, may require using a different DB than mongoDB, will have to see
-        rolesList = [role.name for role in member.roles].remove('@everyone')
+        rolesList = [role.mention for role in member.roles]
+        del rolesList[0]
         rolesFormatted = ', '.join(rolesList)
         embed = discord.Embed(color=0xFFFFFF, title=f"{member.display_name}'s Info")
         embed.set_author(name=member.name, icon_url=member.display_avatar)
