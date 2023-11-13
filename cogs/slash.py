@@ -5,6 +5,7 @@ import socket
 import json
 from main import DEBUG, logger
 from cogs.db import collection
+from lib.colours import BasicColours
 
 import discord
 from discord.ext import commands
@@ -233,9 +234,9 @@ class Slash(commands.Cog):
     )
     @commands.is_owner()
     async def dmuser(self, ctx, userid: discord.User, message: str):
-        #await ctx.interaction.response.defer()
-        #id = int(userid)
-        #user = await client.get_user(id)
+        # await ctx.interaction.response.defer()
+        # id = int(userid)
+        # user = await client.get_user(id)
         try:
             await userid.send(message)
             await ctx.respond("done")
@@ -249,7 +250,25 @@ class Slash(commands.Cog):
         guild_ids=guild_ids
     )
     async def serverinfo(self, ctx):
+        # [TODO]: member count,
         return
+
+    @client.slash_command(
+        name="userinfo",
+        description="Get infomation on a user.",
+        guild_ids=guild_ids
+    )
+    @commands.cooldown(1, 30)
+    async def userinfo(self, ctx, member: discord.Member):
+        # [TODO]: Weekly message count, may require using a different DB than mongoDB, will have to see
+        rolesList = [role.name for role in member.roles].remove('@everyone')
+        rolesFormatted = ', '.join(rolesList)
+        embed = discord.Embed(color=0xFFFFFF, title=f"{member.display_name}'s Info")
+        embed.set_author(name=member.name, icon_url=member.display_avatar)
+        embed.add_field(name='Account Age', value=f'<t:{int(member.created_at.timestamp())}:R>', inline=False)
+        embed.add_field(name='Server Join Date', value=f'<t:{int(member.joined_at.timestamp())}:R>', inline=False)
+        embed.add_field(name='Roles', value=str(rolesFormatted), inline=False)
+        await ctx.respond(embed=embed)
 
 
 def setup(bot):
