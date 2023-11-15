@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 from .slash import guild_ids
 import asyncio
+from lib.colours import BasicColours
 
 # im seeing how to do cogs which will help make it look neater and so we shouldnt have to restart the bot everytime we make/edit a command
 
@@ -129,6 +130,15 @@ class Embeds(commands.Cog):
         embed.add_field(name="Instagram", value="https://www.instagram.com/brad_l._.l_/", inline=False)
         embed.set_footer(text="To Donate to me or YoungMinds do £support to donate to Brad and £Donate for YoungMinds")
         await ctx.send('@everyone', embed=embed)
+
+    @commands.slash_command(
+            name="rules-embed"
+            )
+    @commands.is_owner()
+    async def rules_embed(self, ctx):
+        embed = discord.Embed(title="The Rules of BradVibesLive <3", description="1. No inviting Raiders or Any Toxic Members, You will be banned and They will be banned. No Ban Evasion either.\n\n2. No NSFW content\n\n3. Absolutely zero hate speech, racism, DDos threats, threats, or sexist remarks.\n\n4. No Slurs of any kind will be tolerated.\n\n5. Do not attempt to impersonate myself, a member of a staff team or anyone else for that matter.\n\n6. No mass pings or mentions of users or roles\n\n7. Do not post comments that are indecent, inappropriate, or discriminatory\n\n8. Do not ear-rape, or post seizure inducing content\n\n9. Do not spam, that includes but is not limited to: spam pings, spam images, spam emotes, spam gifs, or spam stickers\n\n10. try to keep everything in the correct channel!\n\n11. Treat everyone with respect and kindness, whether that be contextual, audio, video or photo\n\n12. Keep Messages In ENGLISH ONLY.\n\n13. Follow the Discord Rules and Terms of Service! (This includes at least being 13 To join!) https://discord.com/terms\n\n14. If something is common sense (example pinging @/everyone) or threatening others Even if it's not in the rules, you clearly shouldn't be doing that.\n\n15. Leaking someone personal information or doxing/death threats will result in insta ban.\n\n16. We are not responsible for what you choose to do outside of this server. Do not bring personal matters within the server, keep this place drama free.", colour=0x00b0f4)
+        await ctx.respond("ok", ephemeral=True)
+        await ctx.send(embed=embed)
 
     # errors go Here
 
